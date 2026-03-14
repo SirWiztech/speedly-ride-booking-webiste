@@ -1,0 +1,1585 @@
+/* Import Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #ff5e00 0%, #ff8c3a 100%);
+    min-height: 100vh;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Dashboard Container - Responsive */
+.dashboard-container {
+    width: 100%;
+    max-width: 1700px;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    position: relative;
+    min-height: 700px;
+}
+
+/* ========== MOBILE VIEW (Default) ========== */
+.mobile-view {
+    display: block;
+}
+
+.desktop-view {
+    display: none;
+}
+
+/* Status Bar */
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px 5px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+}
+
+.status-left {
+    font-weight: 600;
+}
+
+.status-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 500;
+}
+
+.status-right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Header Section */
+.header {
+    padding: 15px 25px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.user-info p {
+    font-size: 14px;
+    color: #666;
+    font-weight: 400;
+}
+
+.reward-badge {
+    background-color: #ff8c3a;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Balance Section */
+.balance-section {
+    padding: 0 25px 25px;
+}
+
+.balance-amount {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.balance-change {
+    color: #4CAF50;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Card Section */
+.card-section {
+    padding: 0 25px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-details {
+    flex: 1;
+}
+
+.card-number {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.card-expiry {
+    font-size: 14px;
+    color: #666;
+}
+
+.add-money-btn {
+    background-color: #ff5e00;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-money-btn:hover {
+    background-color: #e65500;
+    transform: translateY(-2px);
+}
+
+/* Quick Actions */
+.quick-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 25px 30px;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.action-btn:hover {
+    transform: translateY(-5px);
+}
+
+.action-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    color: #ff5e00;
+    transition: all 0.3s;
+}
+
+.action-btn:hover .action-icon {
+    background-color: #ff5e00;
+    color: white;
+}
+
+/* Transactions */
+.transactions-section {
+    padding: 0 25px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.see-all-btn {
+    color: #ff5e00;
+    font-size: 14px;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.see-all-btn:hover {
+    color: #e65500;
+    transform: translateX(5px);
+}
+
+.transaction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-bottom: 30px;
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s;
+}
+
+.transaction-item:hover {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 10px;
+    margin: -10px -5px;
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.transaction-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+.topup-icon {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+}
+
+.transfer-icon {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #F44336;
+}
+
+.received-icon {
+    background-color: rgba(33, 150, 243, 0.1);
+    color: #2196F3;
+}
+
+.transaction-details h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.transaction-details p {
+    font-size: 13px;
+    color: #888;
+}
+
+.transaction-amount {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.positive {
+    color: #4CAF50;
+}
+
+.negative {
+    color: #F44336;
+}
+
+/* Ride Booking Button */
+.ride-booking-btn {
+    background-color: #ff5e00;
+    color: white;
+    border: none;
+    padding: 16px 30px;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 25px 30px;
+    width: calc(100% - 50px);
+    transition: all 0.3s;
+}
+
+.ride-booking-btn:hover {
+    background-color: #e65500;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 94, 0, 0.2);
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #eee;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: #888;
+    font-size: 12px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: #ff5e00;
+    transform: translateY(-3px);
+}
+
+.nav-icon {
+    font-size: 20px;
+}
+
+/* ========== DESKTOP VIEW ========== */
+@media (min-width: 1024px) {
+    .mobile-view {
+        display: none;
+    }
+
+    .desktop-view {
+        display: flex;
+        height: 100%;
+        min-height: 800px;
+    }
+
+    body {
+        padding: 30px;
+    }
+
+    .dashboard-container {
+        max-width: 1200px;
+        height: auto;
+    }
+
+    /* Desktop Sidebar */
+    .desktop-sidebar {
+        width: 250px;
+        background-color: #fff;
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid #eee;
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: 700;
+        color: #ff5e00;
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .logo i {
+        font-size: 28px;
+    }
+
+    .desktop-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: auto;
+    }
+
+    .desktop-nav-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px 20px;
+        border-radius: 12px;
+        text-decoration: none;
+        color: #666;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+
+    .desktop-nav-item:hover,
+    .desktop-nav-item.active {
+        background-color: #fff5f0;
+        color: #ff5e00;
+    }
+
+    .desktop-nav-icon {
+        font-size: 20px;
+        width: 24px;
+        text-align: center;
+    }
+
+    .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 15px;
+        margin-top: 20px;
+    }
+
+    .profile-avatar {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #ff5e00 0%, #ff8c3a 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .profile-info h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 3px;
+    }
+
+    .profile-info p {
+        font-size: 13px;
+        color: #888;
+    }
+
+    /* Desktop Main Content */
+    .desktop-main {
+        flex: 1;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .desktop-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .desktop-title h1 {
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .desktop-title p {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .desktop-actions {
+        display: flex;
+        gap: 15px;
+    }
+
+    .notification-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        background-color: #f5f5f5;
+        border: none;
+        font-size: 20px;
+        color: #666;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+    }
+
+    .notification-btn:hover {
+        background-color: #ff5e00;
+        color: white;
+    }
+
+    /* Desktop Dashboard Grid */
+    .desktop-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    .desktop-card {
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        border: 1px solid #eee;
+    }
+
+    .desktop-card.large {
+        grid-column: span 2;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    
+
+    /* Desktop Balance Card */
+    .balance-card {
+        background: linear-gradient(135deg, #ff5e00 0%, #ff8c3a 100%);
+        color: white;
+    }
+
+    .balance-card .balance-amount {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+
+    .balance-card .balance-change {
+        color: white;
+        opacity: 0.9;
+    }
+
+    /* Desktop Card Section */
+    .card-display {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .card-visual {
+        width: 70px;
+        height: 50px;
+        background: linear-gradient(135deg, #333 0%, #666 100%);
+        border-radius: 8px;
+        position: relative;
+    }
+
+    .card-visuals {
+        width: 70px;
+        height: 50px;
+        background: linear-gradient(135deg, #ff5e00 0%, #666 100%);
+        border-radius: 8px;
+        position: relative;
+    }
+
+    .card-visual::after {
+        content: "";
+        position: absolute;
+        top: 15px;
+        right: 10px;
+        width: 30px;
+        height: 20px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+    }
+
+    /* Desktop Quick Actions */
+    .desktop-quick-actions {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+    }
+
+    .desktop-action-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #333;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 15px 10px;
+        border-radius: 12px;
+        transition: all 0.3s;
+    }
+
+    .desktop-action-btn:hover {
+        background-color: #f5f5f5;
+        transform: translateY(-5px);
+    }
+
+    .desktop-action-icon {
+        width: 60px;
+        height: 60px;
+        background-color: #f5f5f5;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        color: #ff5e00;
+        transition: all 0.3s;
+    }
+
+    .desktop-action-btn:hover .desktop-action-icon {
+        background-color: #ff5e00;
+        color: white;
+    }
+
+    /* Desktop Transactions */
+    .desktop-transactions {
+        max-height: 350px;
+        overflow-y: auto;
+        padding-right: 10px;
+    }
+
+    .desktop-transactions::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .desktop-transactions::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    .desktop-transactions::-webkit-scrollbar-thumb {
+        background: #ff8c3a;
+        border-radius: 10px;
+    }
+
+    /* Desktop Ride Booking Section */
+    .ride-booking-desktop {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 25px;
+        background: linear-gradient(135deg, #ff5e00 0%, #ff8c3a 100%);
+        border-radius: 20px;
+        color: white;
+        margin-top: 20px;
+    }
+
+    .ride-info h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .ride-info p {
+        opacity: 0.9;
+        margin-bottom: 15px;
+        max-width: 400px;
+    }
+
+    .ride-stats {
+        display: flex;
+        gap: 30px;
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+    .stat-value {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        font-size: 14px;
+        opacity: 0.8;
+    }
+
+    .book-ride-btn-desktop {
+        background-color: white;
+        color: #ff5e00;
+        border: none;
+        padding: 18px 35px;
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s;
+    }
+
+    .book-ride-btn-desktop:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* ========== TABLET VIEW ========== */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .dashboard-container {
+        max-width: 700px;
+    }
+
+    .mobile-view {
+        display: block;
+    }
+
+    .desktop-view {
+        display: none;
+    }
+
+    .quick-actions {
+        justify-content: space-around;
+        padding: 0 15px 30px;
+    }
+
+    .action-btn {
+        min-width: 70px;
+    }
+}
+
+/* ========== SMALL MOBILE ========== */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .dashboard-container {
+        border-radius: 20px;
+    }
+
+    .header,
+    .balance-section,
+    .card-section,
+    .quick-actions,
+    .transactions-section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .balance-amount {
+        font-size: 28px;
+    }
+
+    .quick-actions {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .action-btn {
+        width: 22%;
+    }
+
+    .ride-booking-btn {
+        margin: 20px 20px 30px;
+        width: calc(100% - 40px);
+    }
+}
+
+/* Payment Methods Styles */
+.payment-methods-card {
+    padding: 20px;
+}
+
+.payment-methods-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.payment-method-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px solid #eee;
+    background-color: #fafafa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.payment-method-item:hover {
+    border-color: #ff8c3a;
+    background-color: #fff5f0;
+}
+
+.payment-method-item.selected {
+    border-color: #ff5e00;
+    background-color: #fff5f0;
+    box-shadow: 0 4px 12px rgba(255, 94, 0, 0.1);
+}
+
+.payment-method-select {
+    margin-right: 15px;
+}
+
+.payment-radio {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.payment-method-item.selected .payment-radio {
+    border-color: #ff5e00;
+    background-color: #ff5e00;
+}
+
+.radio-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.payment-method-item.selected .radio-dot {
+    opacity: 1;
+}
+
+.payment-method-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 20px;
+    color: white;
+}
+
+.payment-method-icon.transfer-icon {
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+}
+
+.payment-method-icon.card-icon {
+    background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%);
+}
+
+.payment-method-icon.ussd-icon {
+    background: linear-gradient(135deg, #9C27B0 0%, #E91E63 100%);
+}
+
+.payment-method-details {
+    flex: 1;
+}
+
+.payment-method-details h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.payment-method-details p {
+    font-size: 13px;
+    color: #666;
+}
+
+.payment-method-action {
+    color: #999;
+    padding: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.payment-method-action:hover {
+    color: #ff5e00;
+}
+
+
+/* Mobile View Specific Styles */
+.mobile-balance-card {
+    background: linear-gradient(135deg, #ff5e00 0%, #ff8c3a 100%);
+    color: white;
+    padding: 20px;
+    margin: 0 20px 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(255, 94, 0, 0.2);
+}
+
+.balance-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.balance-card-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.mobile-balance-card .balance-amount {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.mobile-balance-card .balance-change {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Mobile Payment Methods */
+.mobile-payment-methods {
+    padding: 0 20px 20px;
+}
+
+.mobile-payment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.mobile-payment-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 2px solid #eee;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobile-payment-item.selected {
+    border-color: #ff5e00;
+    background-color: #fff5f0;
+}
+
+.payment-select {
+    margin-right: 12px;
+}
+
+.payment-radio {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-payment-item.selected .payment-radio {
+    border-color: #ff5e00;
+    background-color: #ff5e00;
+}
+
+.radio-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.payment-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: white;
+    font-size: 18px;
+}
+
+.payment-icon.transfer-icon {
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+}
+
+.payment-icon.card-icon {
+    background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%);
+}
+
+.payment-details {
+    flex: 1;
+}
+
+.payment-details h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.payment-details p {
+    font-size: 12px;
+    color: #666;
+}
+
+.payment-action {
+    color: #999;
+    padding: 5px;
+}
+
+/* Mobile Quick Actions Grid */
+.mobile-quick-actions-grid {
+    padding: 0 20px 20px;
+}
+
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.mobile-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 5px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.mobile-action-btn:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-2px);
+}
+
+.mobile-action-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+/* Mobile Ride Booking Section */
+.mobile-ride-booking {
+    background: linear-gradient(135deg, #ff5e00 0%, #ff8c3a 100%);
+    color: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.mobile-ride-info h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.mobile-ride-info p {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 15px;
+}
+
+.mobile-ride-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.mobile-stat-item {
+    text-align: center;
+}
+
+.mobile-stat-value {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
+
+.mobile-stat-label {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.mobile-book-ride-btn {
+    background-color: white;
+    color: #ff5e00;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobile-book-ride-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Bottom Navigation Updates */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #eee;
+}
+
+.bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: #888;
+    font-size: 11px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.bottom-nav .nav-item.active {
+    color: #ff5e00;
+}
+
+.nav-icon {
+    font-size: 18px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 380px) {
+    .quick-actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .mobile-action-btn {
+        padding: 12px 5px;
+    }
+    
+    .bottom-nav .nav-item {
+        font-size: 10px;
+    }
+    
+    .nav-icon {
+        font-size: 16px;
+    }
+}
+
+
+/* Mobile Action Buttons - Desktop Style */
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.mobile-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 20px 10px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+}
+
+.mobile-action-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+.mobile-action-btn:active {
+    transform: translateY(-2px);
+}
+
+.mobile-action-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+.mobile-action-btn:hover .mobile-action-icon {
+    transform: scale(1.1);
+}
+
+.mobile-action-btn span {
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+.mobile-action-btn:hover span {
+    color: #ff5e00;
+}
+
+/* Desktop-like color schemes */
+.add-wallet-icon {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+}
+
+.refunds-icon {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #F44336;
+}
+
+.pending-icon {
+    background-color: rgba(255, 152, 0, 0.1);
+    color: #FF9800;
+}
+
+.support-icon {
+    background-color: rgba(33, 150, 243, 0.1);
+    color: #2196F3;
+}
+
+.withdrawal-icon {
+    background-color: rgba(156, 39, 176, 0.1);
+    color: #9C27B0;
+}
+
+.payment-methods-icon {
+    background-color: rgba(255, 87, 34, 0.1);
+    color: #FF5722;
+}
+
+.history-icon {
+    background-color: rgba(96, 125, 139, 0.1);
+    color: #607D8B;
+}
+
+.promo-icon {
+    background-color: rgba(0, 150, 136, 0.1);
+    color: #009688;
+}
+
+/* Hover color effects */
+.mobile-action-btn:hover .add-wallet-icon {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.mobile-action-btn:hover .refunds-icon {
+    background-color: #F44336;
+    color: white;
+}
+
+.mobile-action-btn:hover .pending-icon {
+    background-color: #FF9800;
+    color: white;
+}
+
+.mobile-action-btn:hover .support-icon {
+    background-color: #2196F3;
+    color: white;
+}
+
+.mobile-action-btn:hover .withdrawal-icon {
+    background-color: #9C27B0;
+    color: white;
+}
+
+.mobile-action-btn:hover .payment-methods-icon {
+    background-color: #FF5722;
+    color: white;
+}
+
+.mobile-action-btn:hover .history-icon {
+    background-color: #607D8B;
+    color: white;
+}
+
+.mobile-action-btn:hover .promo-icon {
+    background-color: #009688;
+    color: white;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 480px) {
+    .quick-actions-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+    
+    .mobile-action-btn {
+        padding: 15px 8px;
+    }
+    
+    .mobile-action-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .mobile-action-btn span {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    .quick-actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .mobile-action-btn {
+        padding: 18px 10px;
+    }
+    
+    .mobile-action-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 22px;
+    }
+    
+    .mobile-action-btn span {
+        font-size: 13px;
+    }
+}
+
+/* Ensure buttons look exactly like desktop */
+.mobile-action-btn {
+    min-height: 130px;
+}
+
+/* For tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .quick-actions-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+    
+    .mobile-action-btn {
+        padding: 25px 15px;
+        min-height: 140px;
+    }
+    
+    .mobile-action-icon {
+        width: 65px;
+        height: 65px;
+        font-size: 26px;
+    }
+    
+    .mobile-action-btn span {
+        font-size: 14px;
+    }
+}
+
+/* Animation for click effect */
+@keyframes buttonClick {
+    0% { transform: translateY(-5px); }
+    50% { transform: translateY(-2px); }
+    100% { transform: translateY(-5px); }
+}
+
+.mobile-action-btn:active {
+    animation: buttonClick 0.2s ease;
+}
+
+
+/* Mobile Payment Methods - Enhanced */
+.mobile-payment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.mobile-payment-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 2px solid #eee;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.mobile-payment-item:hover {
+    border-color: #ff8c3a;
+    background-color: #fff5f0;
+    transform: translateY(-2px);
+}
+
+.mobile-payment-item.selected {
+    border-color: #ff5e00;
+    background-color: #fff5f0;
+    box-shadow: 0 4px 12px rgba(255, 94, 0, 0.1);
+}
+
+.payment-select {
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.payment-radio {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.mobile-payment-item.selected .payment-radio {
+    border-color: #ff5e00;
+    background-color: #ff5e00;
+}
+
+.radio-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+    display: none;
+}
+
+.mobile-payment-item.selected .radio-dot {
+    display: block;
+}
+
+.payment-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: white;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.payment-icon.transfer-icon {
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+}
+
+.payment-icon.card-icon {
+    background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%);
+}
+
+.payment-details {
+    flex: 1;
+    min-width: 0; /* Prevents text overflow */
+}
+
+.payment-details h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.payment-details p {
+    font-size: 12px;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.payment-action {
+    color: #999;
+    padding: 8px;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.payment-action:hover {
+    color: #ff5e00;
+    background-color: rgba(255, 94, 0, 0.1);
+}
+
+/* Context menu styles */
+.payment-context-menu {
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 1700px;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    position: relative;
+    min-height: 700px;
+}
