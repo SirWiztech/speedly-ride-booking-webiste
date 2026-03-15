@@ -24,7 +24,7 @@ $clientData = $clientResult->fetch_assoc();
 
 // Get wallet balance
 $walletQuery = "SELECT 
-    COALESCE(SUM(CASE WHEN transaction_type IN ('deposit', 'bonus', 'referral') THEN amount ELSE 0 END), 0) - 
+    COALESCE(SUM(CASE WHEN transaction_type IN ('deposit', 'bonus', 'referral','ride_refund') THEN amount ELSE 0 END), 0) - 
     COALESCE(SUM(CASE WHEN transaction_type IN ('withdrawal', 'ride_payment') THEN amount ELSE 0 END), 0) as balance 
     FROM wallet_transactions WHERE user_id = ?";
 $walletStmt = $conn->prepare($walletQuery);
@@ -56,7 +56,7 @@ $completedQuery = "SELECT
     FROM rides r 
     JOIN client_profiles cp ON r.client_id = cp.id 
     WHERE cp.user_id = ? AND r.status = 'completed'";
-    
+
 $completedStmt = $conn->prepare($completedQuery);
 $completedStmt->bind_param("ss", $user_id, $user_id);
 $completedStmt->execute();
@@ -86,13 +86,13 @@ if (!$client_profile_id) {
     $createStmt = $conn->prepare($createProfileQuery);
     $createStmt->bind_param("s", $user_id);
     $createStmt->execute();
-    
+
     // Redirect to refresh the page
     header("Location: client_dashboard.php");
     exit;
 }
 
-// Get recent rides with notification flags
+// Get recent rides with notification flags and proper address formatting
 $recentQuery = "SELECT 
     r.*, 
     u.full_name as driver_name,
@@ -100,7 +100,17 @@ $recentQuery = "SELECT
     dv.vehicle_model,
     dv.vehicle_color,
     dr.rating as user_rating,
-    DATE_FORMAT(r.created_at, '%M %d, %h:%i %p') as formatted_datetime,
+    DATE_FORMAT(r.created_at, '%M %d, %Y') as formatted_date,
+    DATE_FORMAT(r.created_at, '%h:%i %p') as formatted_time,
+    ROUND(r.distance_km, 1) as distance_km,
+    r.total_fare,
+    r.pickup_address,
+    r.destination_address,
+    r.pickup_latitude,
+    r.pickup_longitude,
+    r.destination_latitude,
+    r.destination_longitude,
+    r.status,
     CASE 
         WHEN r.driver_id IS NOT NULL AND r.status = 'pending' THEN 'private_ride'
         WHEN r.status = 'accepted' THEN 'ride_accepted'
@@ -121,7 +131,7 @@ $recentQuery = "SELECT
     WHERE r.client_id = ?
     ORDER BY r.created_at DESC 
     LIMIT 10";
-    
+
 $recentStmt = $conn->prepare($recentQuery);
 $recentStmt->bind_param("ss", $user_id, $client_profile_id);
 $recentStmt->execute();
@@ -190,35 +200,56 @@ if (!$userSettings) {
             color: white;
             background-color: <?php echo $tier_color; ?>;
         }
+
         .rating-star {
             transition: all 0.2s;
             cursor: pointer;
         }
+
         .rating-star:hover {
             transform: scale(1.2);
             color: #fbbf24;
         }
+
         .notification-pulse {
             animation: pulse 2s infinite;
         }
+
         @keyframes pulse {
             0% {
                 transform: scale(1);
             }
+
             50% {
                 transform: scale(1.1);
             }
+
             100% {
                 transform: scale(1);
             }
         }
+
         .ride-notification {
             border-left: 4px solid #ff5e00;
             background: #fff7ed;
             transition: all 0.3s;
         }
+
         .ride-notification:hover {
             background: #ffedd5;
+        }
+
+        .profile-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff5e00 0%, #ff8c3a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -239,7 +270,7 @@ if (!$userSettings) {
                 <button class="notification-btn mb-10 text-black bg-[#ff5e00] rounded-2xl p-2 relative" onclick="checkNotifications()">
                     <i class="fas fa-bell text-white"></i>
                     <?php if ($notificationCount > 0): ?>
-                    <span class="notification-badge notification-pulse"><?php echo $notificationCount; ?></span>
+                        <span class="notification-badge notification-pulse"><?php echo $notificationCount; ?></span>
                     <?php endif; ?>
                 </button>
             </div>
@@ -310,36 +341,40 @@ if (!$userSettings) {
                 </div>
                 <div class="transaction-list">
                     <?php if ($recentResult && $recentResult->num_rows > 0): ?>
-                        <?php while ($ride = $recentResult->fetch_assoc()): 
+                        <?php while ($ride = $recentResult->fetch_assoc()):
                             $hasNotification = $ride['notification_type'] !== null;
                             $notificationClass = $hasNotification ? 'ride-notification' : '';
+                            $pickup = $ride['pickup_address'] ?? 'Pickup location';
+                            $destination = $ride['destination_address'] ?? 'Destination';
+                            $date = $ride['formatted_date'] ?? date('M d, Y', strtotime($ride['created_at']));
+                            $time = $ride['formatted_time'] ?? date('h:i A', strtotime($ride['created_at']));
                         ?>
-                        <div class="transaction-item cursor-pointer hover:bg-gray-50 transition <?php echo $notificationClass; ?>" onclick="viewRideDetails('<?php echo $ride['id']; ?>')">
-                            <div class="transaction-info">
-                                <div class="transaction-icon" style="background: <?php 
-                                    echo $ride['status'] == 'completed' ? '#E8F5E9' : '#FFF3E0'; 
-                                ?>; color: <?php 
-                                    echo $ride['status'] == 'completed' ? '#2E7D32' : '#E65100'; 
-                                ?>;">
-                                    <i class="fas fa-<?php echo $ride['status'] == 'completed' ? 'check-circle' : 'clock'; ?>"></i>
+                            <div class="transaction-item cursor-pointer hover:bg-gray-50 transition <?php echo $notificationClass; ?>" onclick="viewRideDetails('<?php echo $ride['id']; ?>')">
+                                <div class="transaction-info">
+                                    <div class="transaction-icon" style="background: <?php
+                                                                                        echo $ride['status'] == 'completed' ? '#E8F5E9' : '#FFF3E0';
+                                                                                        ?>; color: <?php
+                                            echo $ride['status'] == 'completed' ? '#2E7D32' : '#E65100';
+                                            ?>;">
+                                        <i class="fas fa-<?php echo $ride['status'] == 'completed' ? 'check-circle' : 'clock'; ?>"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <h4><?php echo htmlspecialchars(substr($pickup, 0, 25) . '...'); ?></h4>
+                                        <p class="text-xs"><?php echo $date; ?> • <?php echo $time; ?></p>
+                                        <?php if ($ride['driver_name']): ?>
+                                            <p class="text-xs text-gray-500">Driver: <?php echo htmlspecialchars($ride['driver_name']); ?></p>
+                                        <?php endif; ?>
+                                        <?php if ($hasNotification): ?>
+                                            <p class="text-xs text-[#ff5e00] mt-1">
+                                                <i class="fas fa-info-circle"></i> <?php echo $ride['notification_message']; ?>
+                                            </p>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
-                                <div class="transaction-details">
-                                    <h4><?php echo htmlspecialchars(substr($ride['pickup_address'] ?? 'Ride', 0, 25) . '...'); ?></h4>
-                                    <p class="text-xs"><?php echo date('M d, h:i A', strtotime($ride['created_at'])); ?></p>
-                                    <?php if ($ride['driver_name']): ?>
-                                    <p class="text-xs text-gray-500">Driver: <?php echo htmlspecialchars($ride['driver_name']); ?></p>
-                                    <?php endif; ?>
-                                    <?php if ($hasNotification): ?>
-                                    <p class="text-xs text-[#ff5e00] mt-1">
-                                        <i class="fas fa-info-circle"></i> <?php echo $ride['notification_message']; ?>
-                                    </p>
-                                    <?php endif; ?>
+                                <div class="transaction-amount <?php echo $ride['status'] == 'completed' ? 'positive' : ''; ?>">
+                                    ₦<?php echo number_format($ride['total_fare'] ?? 0); ?>
                                 </div>
                             </div>
-                            <div class="transaction-amount <?php echo $ride['status'] == 'completed' ? 'positive' : ''; ?>">
-                                ₦<?php echo number_format($ride['total_fare'] ?? 0); ?>
-                            </div>
-                        </div>
                         <?php endwhile; ?>
                     <?php else: ?>
                         <div class="text-center py-8 text-gray-500">
@@ -369,14 +404,14 @@ if (!$userSettings) {
                 <!-- Desktop Navigation -->
                 <?php require_once './components/desktop-nav.php'; ?>
 
-                <!-- User Profile -->
+                <!-- User Profile - FIXED: Removed tier badge from username -->
                 <div class="user-profile cursor-pointer hover:bg-gray-100 transition" onclick="window.location.href='client_profile.php'">
                     <div class="profile-avatar">
                         <?php echo strtoupper(substr($user_name, 0, 1)); ?>
                     </div>
                     <div class="profile-info">
                         <h3><?php echo htmlspecialchars($user_name); ?></h3>
-                        <p><span class="tier-badge"><?php echo ucfirst($membership_tier); ?></span></p>
+                        <p class="text-sm text-gray-500">Client</p>
                     </div>
                 </div>
             </div>
@@ -397,7 +432,7 @@ if (!$userSettings) {
                         <button class="notification-btn bg-gray-100 p-3 rounded-xl relative hover:bg-gray-200 transition" onclick="checkNotifications()">
                             <i class="fas fa-bell text-gray-700 text-xl"></i>
                             <?php if ($notificationCount > 0): ?>
-                            <span class="notification-badge notification-pulse"><?php echo $notificationCount; ?></span>
+                                <span class="notification-badge notification-pulse"><?php echo $notificationCount; ?></span>
                             <?php endif; ?>
                         </button>
                     </div>
@@ -425,7 +460,7 @@ if (!$userSettings) {
                         <h3 class="text-lg font-medium text-gray-600">Membership</h3>
                         <div class="text-2xl font-bold mt-2 capitalize"><?php echo $membership_tier; ?></div>
                         <div class="mt-4 text-sm text-gray-500">
-                            <?php 
+                            <?php
                             if ($membership_tier == 'basic') {
                                 echo 'Earn points to reach Premium';
                             } else if ($membership_tier == 'premium') {
@@ -497,46 +532,48 @@ if (!$userSettings) {
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
-                                <?php 
+                                <?php
                                 if ($recentResult && $recentResult->num_rows > 0):
                                     $recentResult->data_seek(0);
-                                    while ($ride = $recentResult->fetch_assoc()): 
+                                    while ($ride = $recentResult->fetch_assoc()):
                                         $hasNotification = $ride['notification_type'] !== null;
+                                        $date = $ride['formatted_date'] ?? date('M d, Y', strtotime($ride['created_at']));
+                                        $time = $ride['formatted_time'] ?? date('h:i A', strtotime($ride['created_at']));
                                 ?>
-                                <tr class="hover:bg-gray-50 cursor-pointer <?php echo $hasNotification ? 'bg-orange-50' : ''; ?>" onclick="viewRideDetails('<?php echo $ride['id']; ?>')">
-                                    <td class="px-6 py-4 text-sm"><?php echo date('M d, h:i A', strtotime($ride['created_at'])); ?></td>
-                                    <td class="px-6 py-4 text-sm"><?php echo htmlspecialchars(substr($ride['pickup_address'] ?? 'N/A', 0, 30)); ?></td>
-                                    <td class="px-6 py-4 text-sm"><?php echo htmlspecialchars(substr($ride['destination_address'] ?? 'N/A', 0, 30)); ?></td>
-                                    <td class="px-6 py-4 text-sm"><?php echo htmlspecialchars($ride['driver_name'] ?? 'Pending'); ?></td>
-                                    <td class="px-6 py-4 text-sm font-medium">₦<?php echo number_format($ride['total_fare'] ?? 0); ?></td>
-                                    <td class="px-6 py-4">
-                                        <span class="px-2 py-1 text-xs rounded-full" style="background: <?php 
-                                            echo $ride['status'] == 'completed' ? '#E8F5E9' : '#FFF3E0'; 
-                                        ?>; color: <?php 
-                                            echo $ride['status'] == 'completed' ? '#2E7D32' : '#E65100'; 
-                                        ?>;">
-                                            <?php echo str_replace('_', ' ', ucwords($ride['status'] ?? 'unknown')); ?>
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <button class="text-[#ff5e00] hover:underline text-sm" onclick="event.stopPropagation(); viewRideDetails('<?php echo $ride['id']; ?>')">
-                                            View Details
-                                        </button>
-                                    </td>
-                                </tr>
-                                <?php 
+                                        <tr class="hover:bg-gray-50 cursor-pointer <?php echo $hasNotification ? 'bg-orange-50' : ''; ?>" onclick="viewRideDetails('<?php echo $ride['id']; ?>')">
+                                            <td class="px-6 py-4 text-sm"><?php echo $date . ' • ' . $time; ?></td>
+                                            <td class="px-6 py-4 text-sm"><?php echo htmlspecialchars(substr($ride['pickup_address'] ?? 'N/A', 0, 30)); ?></td>
+                                            <td class="px-6 py-4 text-sm"><?php echo htmlspecialchars(substr($ride['destination_address'] ?? 'N/A', 0, 30)); ?></td>
+                                            <td class="px-6 py-4 text-sm"><?php echo htmlspecialchars($ride['driver_name'] ?? 'Pending'); ?></td>
+                                            <td class="px-6 py-4 text-sm font-medium">₦<?php echo number_format($ride['total_fare'] ?? 0); ?></td>
+                                            <td class="px-6 py-4">
+                                                <span class="px-2 py-1 text-xs rounded-full" style="background: <?php
+                                                                                                                echo $ride['status'] == 'completed' ? '#E8F5E9' : '#FFF3E0';
+                                                                                                                ?>; color: <?php
+                                                    echo $ride['status'] == 'completed' ? '#2E7D32' : '#E65100';
+                                                    ?>;">
+                                                    <?php echo str_replace('_', ' ', ucwords($ride['status'] ?? 'unknown')); ?>
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <button class="text-[#ff5e00] hover:underline text-sm" onclick="event.stopPropagation(); viewRideDetails('<?php echo $ride['id']; ?>')">
+                                                    View Details
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <?php
                                     endwhile;
                                 else:
-                                ?>
-                                <tr>
-                                    <td colspan="7" class="px-6 py-8 text-center text-gray-500">
-                                        <i class="fas fa-car-side text-4xl mb-2 opacity-50"></i>
-                                        <p>No rides yet</p>
-                                        <button class="mt-4 bg-[#ff5e00] text-white px-6 py-2 rounded-xl text-sm font-medium" onclick="window.location.href='book-ride.php'">
-                                            Book Your First Ride
-                                        </button>
-                                    </td>
-                                </tr>
+                                    ?>
+                                    <tr>
+                                        <td colspan="7" class="px-6 py-8 text-center text-gray-500">
+                                            <i class="fas fa-car-side text-4xl mb-2 opacity-50"></i>
+                                            <p>No rides yet</p>
+                                            <button class="mt-4 bg-[#ff5e00] text-white px-6 py-2 rounded-xl text-sm font-medium" onclick="window.location.href='book-ride.php'">
+                                                Book Your First Ride
+                                            </button>
+                                        </td>
+                                    </tr>
                                 <?php endif; ?>
                             </tbody>
                         </table>
@@ -561,4 +598,5 @@ if (!$userSettings) {
 
     <script src="./JS/client_dashboard.js"></script>
 </body>
+
 </html>

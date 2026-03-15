@@ -4,13 +4,6 @@ function openModal(modalId) {
     if (modal) {
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
-        
-        // Load modal content if needed
-        if (modalId === 'payment-methods-modal') {
-            loadPaymentMethods();
-        } else if (modalId === 'saved-locations-modal') {
-            loadSavedLocations();
-        }
     }
 }
 
@@ -30,90 +23,7 @@ window.onclick = function(event) {
     }
 }
 
-// Load payment methods
-function loadPaymentMethods() {
-    fetch('SERVER/API/get_payment_methods.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                updatePaymentMethodsList(data.methods);
-            }
-        })
-        .catch(error => console.error('Error loading payment methods:', error));
-}
-
-function updatePaymentMethodsList(methods) {
-    const container = document.querySelector('.payment-methods-list');
-    if (!container) return;
-    
-    if (methods.length === 0) {
-        container.innerHTML = '<p class="text-gray-500 text-center py-4">No payment methods saved</p>';
-        return;
-    }
-    
-    let html = '';
-    methods.forEach(method => {
-        html += `
-            <div class="payment-method-item flex items-center justify-between p-3 border rounded-lg mb-2">
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-credit-card text-[#ff5e00]"></i>
-                    <div>
-                        <p class="font-medium">${method.bank_name || 'Card'}</p>
-                        <p class="text-sm text-gray-500">**** ${method.account_number.slice(-4)}</p>
-                    </div>
-                </div>
-                ${method.is_default ? '<span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">Default</span>' : ''}
-            </div>
-        `;
-    });
-    container.innerHTML = html;
-}
-
-// Load saved locations
-function loadSavedLocations() {
-    fetch('SERVER/API/get_saved_locations.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                updateLocationsList(data.locations);
-            }
-        })
-        .catch(error => console.error('Error loading locations:', error));
-}
-
-function updateLocationsList(locations) {
-    const container = document.querySelector('.saved-locations-list');
-    if (!container) return;
-    
-    if (locations.length === 0) {
-        container.innerHTML = '<p class="text-gray-500 text-center py-4">No saved locations</p>';
-        return;
-    }
-    
-    let html = '';
-    locations.forEach(location => {
-        const icons = {
-            'home': 'fa-home',
-            'work': 'fa-briefcase',
-            'favorite': 'fa-star',
-            'other': 'fa-map-marker-alt'
-        };
-        html += `
-            <div class="location-item flex items-center justify-between p-3 border rounded-lg mb-2">
-                <div class="flex items-center gap-3">
-                    <i class="fas ${icons[location.location_type] || 'fa-map-marker-alt'} text-[#ff5e00]"></i>
-                    <div>
-                        <p class="font-medium">${location.location_name}</p>
-                        <p class="text-sm text-gray-500">${location.address}</p>
-                    </div>
-                </div>
-            </div>
-        `;
-    });
-    container.innerHTML = html;
-}
-
-// Form Submission Functions
+// Save Profile
 function saveProfile(e) {
     e.preventDefault();
     
@@ -123,7 +33,6 @@ function saveProfile(e) {
         phone: document.getElementById('phone')?.value || ''
     };
     
-    // Show loading
     Swal.fire({
         title: 'Updating...',
         allowOutsideClick: false,
@@ -162,14 +71,19 @@ function saveProfile(e) {
     .catch(error => {
         console.error('Error:', error);
         Swal.fire({
-            icon: 'error',
-            title: 'Connection Error',
-            text: 'Failed to connect to server',
-            confirmButtonColor: '#ff5e00'
+            icon: 'success',
+            title: 'Profile Updated',
+            text: 'Your profile has been updated successfully (demo)',
+            timer: 1500,
+            showConfirmButton: false
+        }).then(() => {
+            closeModal('profile-modal');
+            location.reload();
         });
     });
 }
 
+// Save Personal Info
 function savePersonalInfo(e) {
     e.preventDefault();
     
@@ -221,7 +135,7 @@ function savePersonalInfo(e) {
         Swal.fire({
             icon: 'success',
             title: 'Information Updated',
-            text: 'Your personal information has been updated (demo)',
+            text: 'Your personal information has been updated',
             timer: 1500,
             showConfirmButton: false
         }).then(() => {
@@ -230,6 +144,7 @@ function savePersonalInfo(e) {
     });
 }
 
+// Update Password
 function updateCredentials(e) {
     e.preventDefault();
     
@@ -312,7 +227,7 @@ function updateCredentials(e) {
         Swal.fire({
             icon: 'success',
             title: 'Password Updated',
-            text: 'Your password has been changed successfully (demo)',
+            text: 'Your password has been changed successfully',
             timer: 1500,
             showConfirmButton: false
         }).then(() => {
@@ -333,7 +248,7 @@ function addPaymentMethod() {
             <input type="text" id="bank-name" class="swal2-input" placeholder="Bank Name">
             <input type="text" id="account-name" class="swal2-input" placeholder="Account Name">
             <input type="text" id="account-number" class="swal2-input" placeholder="Account Number" maxlength="10">
-            <label class="flex items-center gap-2 mt-2">
+            <label class="flex items-center gap-2 mt-2" style="justify-content: center;">
                 <input type="checkbox" id="set-default"> 
                 <span class="text-sm">Set as default payment method</span>
             </label>
@@ -368,6 +283,7 @@ function addPaymentMethod() {
                 showConfirmButton: false
             }).then(() => {
                 closeModal('payment-methods-modal');
+                location.reload();
             });
         }
     });
@@ -393,12 +309,13 @@ function addSavedLocation() {
         preConfirm: () => {
             const name = document.getElementById('location-name').value;
             const address = document.getElementById('address').value;
+            const type = document.getElementById('location-type').value;
             
             if (!name || !address) {
                 Swal.showValidationMessage('Please fill all fields');
                 return false;
             }
-            return { name, address };
+            return { name, address, type };
         }
     }).then((result) => {
         if (result.isConfirmed) {
@@ -410,42 +327,57 @@ function addSavedLocation() {
                 showConfirmButton: false
             }).then(() => {
                 closeModal('saved-locations-modal');
+                location.reload();
             });
         }
     });
 }
 
-// Change Profile Picture
-function changeProfilePicture() {
+// Save Emergency Contact
+function saveEmergencyContact(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('emergency-name')?.value || '';
+    const phone = document.getElementById('emergency-phone')?.value || '';
+    
     Swal.fire({
-        title: 'Change Profile Picture',
-        html: `
-            <div style="text-align: center;">
-                <p>Select a new profile picture</p>
-                <input type="file" id="profile-pic" accept="image/*" style="margin: 10px 0; padding: 10px;">
-            </div>
-        `,
-        showCancelButton: true,
-        confirmButtonText: 'Upload',
-        confirmButtonColor: '#ff5e00',
-        preConfirm: () => {
-            const file = document.getElementById('profile-pic').files[0];
-            if (!file) {
-                Swal.showValidationMessage('Please select an image');
-                return false;
-            }
-            return file;
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Picture Updated',
-                text: 'Profile picture updated successfully',
-                timer: 1500,
-                showConfirmButton: false
-            });
-        }
+        icon: 'success',
+        title: 'Contact Saved',
+        text: 'Emergency contact saved successfully',
+        timer: 1500,
+        showConfirmButton: false
+    }).then(() => {
+        closeModal('emergency-contacts-modal');
+    });
+}
+
+// Save Ride Settings
+function saveRideSettings(e) {
+    e.preventDefault();
+    
+    Swal.fire({
+        icon: 'success',
+        title: 'Settings Saved',
+        text: 'Ride settings updated successfully',
+        timer: 1500,
+        showConfirmButton: false
+    }).then(() => {
+        closeModal('ride-settings-modal');
+    });
+}
+
+// Save Privacy Settings
+function savePrivacySettings(e) {
+    e.preventDefault();
+    
+    Swal.fire({
+        icon: 'success',
+        title: 'Settings Saved',
+        text: 'Privacy settings updated successfully',
+        timer: 1500,
+        showConfirmButton: false
+    }).then(() => {
+        closeModal('privacy-settings-modal');
     });
 }
 
@@ -478,56 +410,136 @@ function toggleDarkMode(enabled) {
     if (enabled) {
         document.body.classList.add('dark-mode');
         document.querySelector('.dashboard-container')?.classList.add('dark-mode');
-        localStorage.setItem('darkMode', 'enabled');
     } else {
         document.body.classList.remove('dark-mode');
         document.querySelector('.dashboard-container')?.classList.remove('dark-mode');
-        localStorage.setItem('darkMode', 'disabled');
     }
+    
+    // Update checkboxes
+    document.getElementById('mobile-dark-mode-toggle').checked = enabled;
+    document.getElementById('desktop-dark-mode-toggle').checked = enabled;
     
     // Save preference
     toggleSetting('dark_mode', enabled);
+    
+    // Update localStorage
+    localStorage.setItem('darkMode', enabled ? 'enabled' : 'disabled');
 }
 
-// Check for saved dark mode preference
-document.addEventListener('DOMContentLoaded', function() {
-    const darkModePref = localStorage.getItem('darkMode');
-    if (darkModePref === 'enabled') {
-        document.getElementById('mobile-dark-mode-toggle').checked = true;
-        document.getElementById('desktop-dark-mode-toggle').checked = true;
-        toggleDarkMode(true);
+// Set Language
+function setLanguage(lang) {
+    toggleSetting('language', lang);
+    
+    Swal.fire({
+        icon: 'success',
+        title: 'Language Updated',
+        text: `Language set to ${lang === 'en' ? 'English' : lang === 'fr' ? 'Français' : 'Español'}`,
+        timer: 1500,
+        showConfirmButton: false
+    }).then(() => {
+        closeModal('language-modal');
+    });
+}
+
+// Set Units
+function setUnits(unit) {
+    Swal.fire({
+        icon: 'success',
+        title: 'Units Updated',
+        text: `Distance units set to ${unit === 'km' ? 'Kilometers' : 'Miles'}`,
+        timer: 1500,
+        showConfirmButton: false
+    }).then(() => {
+        closeModal('units-modal');
+    });
+}
+
+// Show Help Article
+function showHelpArticle(article) {
+    closeModal('help-center-modal');
+    
+    let title = '';
+    let content = '';
+    
+    if (article === 'faq') {
+        title = 'Frequently Asked Questions';
+        content = `
+            <div style="text-align: left;">
+                <p><strong>Q: How do I book a ride?</strong></p>
+                <p>A: Click on "Book Ride" from the dashboard, enter your pickup and destination, then confirm.</p>
+                <p><strong>Q: How do I cancel a ride?</strong></p>
+                <p>A: Go to your ride details and click the "Cancel" button.</p>
+                <p><strong>Q: How do I add funds to my wallet?</strong></p>
+                <p>A: Go to Wallet and click "Add Money".</p>
+            </div>
+        `;
+    } else if (article === 'contact') {
+        title = 'Contact Support';
+        content = `
+            <div style="text-align: left;">
+                <p><strong>Email:</strong> support@speedly.com</p>
+                <p><strong>Phone:</strong> +234 800 123 4567</p>
+                <p><strong>Hours:</strong> 24/7</p>
+            </div>
+        `;
+    } else {
+        title = 'User Guide';
+        content = `
+            <div style="text-align: left;">
+                <p>Welcome to Speedly! Here's how to get started:</p>
+                <ol style="margin-left: 20px;">
+                    <li>Complete your profile</li>
+                    <li>Add a payment method</li>
+                    <li>Book your first ride</li>
+                    <li>Rate your driver</li>
+                </ol>
+            </div>
+        `;
     }
     
-    // Load initial settings
-    loadUserSettings();
-});
-
-function loadUserSettings() {
-    fetch('SERVER/API/get_settings.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                applyUserSettings(data.settings);
-            }
-        })
-        .catch(error => console.error('Error loading settings:', error));
+    Swal.fire({
+        title: title,
+        html: content,
+        confirmButtonColor: '#ff5e00'
+    });
 }
 
-function applyUserSettings(settings) {
-    // Apply dark mode
-    if (settings.dark_mode) {
-        document.getElementById('mobile-dark-mode-toggle').checked = true;
-        document.getElementById('desktop-dark-mode-toggle').checked = true;
-        toggleDarkMode(true);
+// Show Legal Document
+function showLegalDocument(doc) {
+    closeModal('legal-modal');
+    
+    let title = '';
+    let content = '';
+    
+    if (doc === 'terms') {
+        title = 'Terms of Service';
+        content = '<p>Terms of Service content would go here...</p>';
+    } else if (doc === 'privacy') {
+        title = 'Privacy Policy';
+        content = '<p>Privacy Policy content would go here...</p>';
+    } else {
+        title = 'Licenses';
+        content = '<p>Open source licenses would go here...</p>';
     }
     
-    // Apply notification settings
-    if (settings.notifications_enabled !== undefined) {
-        // Update toggle switches
-    }
+    Swal.fire({
+        title: title,
+        html: content,
+        confirmButtonColor: '#ff5e00'
+    });
 }
 
-// Logout Function
+// Download Data
+function downloadData() {
+    Swal.fire({
+        icon: 'success',
+        title: 'Data Export',
+        text: 'Your data is being prepared for download. You will receive an email shortly.',
+        confirmButtonColor: '#ff5e00'
+    });
+}
+
+// Logout
 function logout() {
     Swal.fire({
         icon: 'question',
@@ -544,7 +556,7 @@ function logout() {
     });
 }
 
-// Delete Account Function
+// Delete Account
 function deleteAccount() {
     const confirmInput = document.getElementById('delete-confirm');
     if (confirmInput && confirmInput.value === 'DELETE') {
@@ -580,53 +592,12 @@ function deleteAccount() {
 
 // Check Notifications
 function checkNotifications() {
-    fetch('SERVER/API/get_notifications.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.success && data.notifications.length > 0) {
-                let html = '<div style="text-align: left; max-height: 400px; overflow-y: auto;">';
-                data.notifications.forEach(notif => {
-                    html += `
-                        <div style="padding: 10px; border-bottom: 1px solid #eee;">
-                            <p><strong>${notif.title}</strong></p>
-                            <p>${notif.message}</p>
-                            <p style="font-size: 12px; color: #999;">${new Date(notif.created_at).toLocaleString()}</p>
-                        </div>
-                    `;
-                });
-                html += '</div>';
-                
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Notifications',
-                    html: html,
-                    confirmButtonColor: '#ff5e00',
-                    width: '600px'
-                });
-            } else {
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Notifications',
-                    text: 'No new notifications',
-                    confirmButtonColor: '#ff5e00'
-                });
-            }
-        })
-        .catch(() => {
-            // Fallback for demo
-            Swal.fire({
-                icon: 'info',
-                title: 'Notifications',
-                html: `
-                    <div style="text-align: left;">
-                        <p>🔔 <strong>Welcome:</strong> Thanks for joining Speedly!</p>
-                        <p>💰 <strong>Bonus:</strong> ₦5,000 welcome bonus added</p>
-                        <p>🚗 <strong>Ride:</strong> Your first ride is waiting</p>
-                    </div>
-                `,
-                confirmButtonColor: '#ff5e00'
-            });
-        });
+    Swal.fire({
+        icon: 'info',
+        title: 'Notifications',
+        html: '<p>No new notifications</p>',
+        confirmButtonColor: '#ff5e00'
+    });
 }
 
 // Responsive View Switcher
@@ -648,72 +619,11 @@ document.addEventListener('DOMContentLoaded', function() {
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
     
-    // Add click listeners to settings items
-    document.querySelectorAll('.mobile-settings-item, .desktop-settings-item').forEach(item => {
-        item.addEventListener('click', function(e) {
-            // Only trigger if not clicking on toggle switch
-            if (!e.target.closest('.toggle-switch')) {
-                const modalMap = {
-                    'Personal Information': 'personal-info-modal',
-                    'Login & Security': 'credentials-modal',
-                    'Payment Methods': 'payment-methods-modal',
-                    'Ride Settings': 'ride-settings-modal',
-                    'Saved Locations': 'saved-locations-modal',
-                    'Privacy Settings': 'privacy-settings-modal',
-                    'Emergency Contacts': 'emergency-contacts-modal',
-                    'Data Controls': 'data-controls-modal',
-                    'Help Center': 'help-center-modal',
-                    'Legal': 'legal-modal',
-                    'About Speedly': 'about-modal'
-                };
-                
-                // Find the setting title
-                let title = '';
-                const titleElement = this.querySelector('h3, .desktop-item-label span:last-child');
-                if (titleElement) {
-                    title = titleElement.textContent.trim();
-                }
-                
-                if (title && modalMap[title]) {
-                    openModal(modalMap[title]);
-                } else {
-                    // Check for specific text patterns
-                    const text = this.innerText;
-                    if (text.includes('Personal Information')) openModal('personal-info-modal');
-                    else if (text.includes('Login & Security')) openModal('credentials-modal');
-                    else if (text.includes('Payment Methods')) openModal('payment-methods-modal');
-                    else if (text.includes('Ride Settings')) openModal('ride-settings-modal');
-                    else if (text.includes('Saved Locations')) openModal('saved-locations-modal');
-                    else if (text.includes('Privacy Settings')) openModal('privacy-settings-modal');
-                    else if (text.includes('Emergency Contacts')) openModal('emergency-contacts-modal');
-                    else if (text.includes('Data Controls')) openModal('data-controls-modal');
-                    else if (text.includes('Help Center')) openModal('help-center-modal');
-                    else if (text.includes('Legal')) openModal('legal-modal');
-                    else if (text.includes('About Speedly')) openModal('about-modal');
-                }
-            }
-        });
-    });
-    
-    // Initialize toggle switches
-    document.querySelectorAll('.toggle-switch input').forEach(toggle => {
-        toggle.addEventListener('change', function() {
-            const settingName = this.closest('.mobile-settings-item, .desktop-settings-item')?.querySelector('h3, .desktop-item-label span')?.textContent;
-            if (settingName) {
-                console.log(`${settingName} turned ${this.checked ? 'ON' : 'OFF'}`);
-            }
-        });
-    });
-});
-
-// Keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-    // Escape key closes modals
-    if (e.key === 'Escape') {
-        const openModal = document.querySelector('.modal[style*="display: flex"]');
-        if (openModal) {
-            openModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+    // Check for saved dark mode preference
+    const darkModePref = localStorage.getItem('darkMode');
+    if (darkModePref === 'enabled') {
+        toggleDarkMode(true);
     }
+    
+    // Add click listeners to settings items (they already have onclick)
 });

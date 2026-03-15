@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 require_once 'SERVER/API/db-connect.php';
 
@@ -21,10 +24,31 @@ $userStmt->execute();
 $userResult = $userStmt->get_result();
 $userData = $userResult->fetch_assoc();
 
-// Initialize variables to prevent warnings
+// Initialize variables
 $clientProfile = [];
 $savedLocations = [];
 $paymentMethods = [];
+$userSettings = [
+    'dark_mode' => 0,
+    'notifications_enabled' => 1,
+    'email_notifications' => 1,
+    'sms_notifications' => 0,
+    'language' => 'en',
+    'currency' => 'NGN'
+];
+
+// Get user settings
+$settingsQuery = "SELECT * FROM user_settings WHERE user_id = ?";
+$settingsStmt = $conn->prepare($settingsQuery);
+if ($settingsStmt) {
+    $settingsStmt->bind_param("s", $user_id);
+    $settingsStmt->execute();
+    $settingsResult = $settingsStmt->get_result();
+    $dbSettings = $settingsResult->fetch_assoc();
+    if ($dbSettings) {
+        $userSettings = array_merge($userSettings, $dbSettings);
+    }
+}
 
 // Get client profile data only if user is client
 if ($user_role == 'client') {
@@ -52,7 +76,7 @@ $paymentStmt->execute();
 $paymentResult = $paymentStmt->get_result();
 $paymentMethods = $paymentResult->fetch_all(MYSQLI_ASSOC);
 
-// Get notification count (for badge)
+// Get notification count
 $notifQuery = "SELECT COUNT(*) as count FROM notifications WHERE user_id = ? AND is_read = 0";
 $notifStmt = $conn->prepare($notifQuery);
 $notifStmt->bind_param("s", $user_id);
@@ -61,7 +85,7 @@ $notifResult = $notifStmt->get_result();
 $notifData = $notifResult->fetch_assoc();
 $notificationCount = $notifData['count'] ?? 0;
 
-// Set safe values for display
+// Safe values for display
 $membershipTier = isset($clientProfile['membership_tier']) ? ucfirst($clientProfile['membership_tier']) : 'Basic';
 $emergencyContactName = $clientProfile['emergency_contact_name'] ?? '';
 $emergencyContactPhone = $clientProfile['emergency_contact_phone'] ?? '';
@@ -82,31 +106,54 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Tailwind CSS - Warning is safe to ignore in development -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Critical fixes for desktop layout */
+        .dashboard-container {
+            width: 100%;
+            max-width: 1700px;
+            background-color: #fff;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+            min-height: 700px;
+            overflow: visible !important;
+        }
+        
+        @media (min-width: 1024px) {
+            .mobile-view {
+                display: none !important;
+            }
+            
+            .desktop-view {
+                display: flex !important;
+                flex-direction: row !important;
+                min-height: 800px;
+                width: 100%;
+            }
+            
+            .desktop-sidebar {
+                width: 280px !important;
+                background-color: #fff;
+                padding: 30px 20px;
+                border-right: 1px solid #eee;
+                flex-shrink: 0;
+            }
+            
+            .desktop-main {
+                flex: 1 !important;
+                padding: 30px;
+                background-color: #fafafa;
+                overflow-y: auto;
+            }
+        }
+    </style>
 </head>
-<style>
-.dashboard-container {
-        width: 100%;
-        max-width: 1700px;
-        background-color: #fff;
-        border-radius: 30px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        overflow: hidden;
-        position: relative;
-        min-height: 700px;
-    }
-
-
-</style>
-
 <body>
     <!-- Dashboard Container -->
     <div class="dashboard-container">
 
         <!-- MOBILE VIEW -->
         <div class="mobile-view">
-
             <!-- Mobile Header -->
             <div class="mobile-header">
                 <div class="user-info">
@@ -115,7 +162,9 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
                 </div>
                 <button class="notification-btn" onclick="checkNotifications()">
                     <i class="fas fa-bell"></i>
+                    <?php if ($notificationCount > 0): ?>
                     <span class="notification-badge"><?php echo $notificationCount; ?></span>
+                    <?php endif; ?>
                 </button>
             </div>
 
@@ -264,7 +313,7 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
                         </div>
                         <div class="mobile-item-action">
                             <label class="toggle-switch">
-                                <input type="checkbox" id="ride-updates-mobile" checked onchange="toggleNotification('ride_updates', this.checked)">
+                                <input type="checkbox" id="ride-updates-mobile" <?php echo $userSettings['notifications_enabled'] ? 'checked' : ''; ?> onchange="toggleNotification('notifications_enabled', this.checked)">
                                 <span class="toggle-slider"></span>
                             </label>
                         </div>
@@ -282,7 +331,7 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
                         </div>
                         <div class="mobile-item-action">
                             <label class="toggle-switch">
-                                <input type="checkbox" id="promotions-mobile" onchange="toggleNotification('promotions', this.checked)">
+                                <input type="checkbox" id="promotions-mobile" <?php echo $userSettings['email_notifications'] ? 'checked' : ''; ?> onchange="toggleNotification('email_notifications', this.checked)">
                                 <span class="toggle-slider"></span>
                             </label>
                         </div>
@@ -300,7 +349,7 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
                         </div>
                         <div class="mobile-item-action">
                             <label class="toggle-switch">
-                                <input type="checkbox" id="safety-mobile" checked onchange="toggleNotification('safety', this.checked)">
+                                <input type="checkbox" id="safety-mobile" <?php echo $userSettings['sms_notifications'] ? 'checked' : ''; ?> onchange="toggleNotification('sms_notifications', this.checked)">
                                 <span class="toggle-slider"></span>
                             </label>
                         </div>
@@ -367,7 +416,7 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
                         <p>Switch between light and dark theme</p>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" id="mobile-dark-mode-toggle" onchange="toggleDarkMode(this.checked)">
+                        <input type="checkbox" id="mobile-dark-mode-toggle" <?php echo $userSettings['dark_mode'] ? 'checked' : ''; ?> onchange="toggleDarkMode(this.checked)">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
@@ -444,7 +493,7 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
             <!-- Sidebar -->
             <div class="desktop-sidebar">
                 <div class="desktop-logo">
-                    <img src="main-assets/logo-no-background.png" alt="Speedly Logo" style="width: 100%; max-width: 150px;">
+                    <img src="main-assets/logo-no-background.png" alt="Speedly Logo">
                 </div>
 
                 <!-- Desktop Navigation -->
@@ -472,7 +521,9 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
                     </div>
                     <button class="desktop-notification-btn" onclick="checkNotifications()">
                         <i class="fas fa-bell"></i>
+                        <?php if ($notificationCount > 0): ?>
                         <span class="notification-badge"><?php echo $notificationCount; ?></span>
+                        <?php endif; ?>
                     </button>
                 </div>
 
@@ -596,7 +647,7 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
                                 </div>
                                 <div class="desktop-item-action">
                                     <label class="toggle-switch">
-                                        <input type="checkbox" id="ride-updates-desktop" checked onchange="toggleNotification('ride_updates', this.checked)">
+                                        <input type="checkbox" id="ride-updates-desktop" <?php echo $userSettings['notifications_enabled'] ? 'checked' : ''; ?> onchange="toggleNotification('notifications_enabled', this.checked)">
                                         <span class="toggle-slider"></span>
                                     </label>
                                 </div>
@@ -608,7 +659,7 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
                                 </div>
                                 <div class="desktop-item-action">
                                     <label class="toggle-switch">
-                                        <input type="checkbox" id="promotions-desktop" onchange="toggleNotification('promotions', this.checked)">
+                                        <input type="checkbox" id="promotions-desktop" <?php echo $userSettings['email_notifications'] ? 'checked' : ''; ?> onchange="toggleNotification('email_notifications', this.checked)">
                                         <span class="toggle-slider"></span>
                                     </label>
                                 </div>
@@ -620,7 +671,7 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
                                 </div>
                                 <div class="desktop-item-action">
                                     <label class="toggle-switch">
-                                        <input type="checkbox" id="safety-desktop" checked onchange="toggleNotification('safety', this.checked)">
+                                        <input type="checkbox" id="safety-desktop" <?php echo $userSettings['sms_notifications'] ? 'checked' : ''; ?> onchange="toggleNotification('sms_notifications', this.checked)">
                                         <span class="toggle-slider"></span>
                                     </label>
                                 </div>
@@ -679,7 +730,7 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
                                     <span>Language</span>
                                 </div>
                                 <div class="desktop-item-action">
-                                    <span style="color: #666; font-size: 14px;">English</span>
+                                    <span style="color: #666; font-size: 14px;"><?php echo strtoupper($userSettings['language']); ?></span>
                                 </div>
                             </div>
                             <div class="desktop-settings-item" onclick="openModal('units-modal')">
@@ -697,7 +748,7 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
                                     <span>Theme</span>
                                 </div>
                                 <div class="desktop-item-action">
-                                    <span style="color: #666; font-size: 14px;">Light</span>
+                                    <span style="color: #666; font-size: 14px;"><?php echo $userSettings['dark_mode'] ? 'Dark' : 'Light'; ?></span>
                                 </div>
                             </div>
                         </div>
@@ -747,7 +798,7 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
                             <p>Switch between light and dark theme for better visibility</p>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="desktop-dark-mode-toggle" onchange="toggleDarkMode(this.checked)">
+                            <input type="checkbox" id="desktop-dark-mode-toggle" <?php echo $userSettings['dark_mode'] ? 'checked' : ''; ?> onchange="toggleDarkMode(this.checked)">
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
@@ -766,9 +817,441 @@ $shareRideChecked = isset($ridePreferences['share_ride']) && $ridePreferences['s
         </div>
     </div>
 
-    <!-- MODALS (Keep all your modal HTML here) -->
-    <!-- ... -->
-    
+    <!-- MODALS -->
+
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Profile</h2>
+                <button class="modal-close-btn" onclick="closeModal('profile-modal')">&times;</button>
+            </div>
+            <form id="profile-form" onsubmit="saveProfile(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="full-name" value="<?php echo htmlspecialchars($user_name); ?>" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" value="<?php echo htmlspecialchars($user_email); ?>" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" value="<?php echo htmlspecialchars($userData['phone_number'] ?? ''); ?>" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('profile-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Personal Info Modal -->
+    <div id="personal-info-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Personal Information</h2>
+                <button class="modal-close-btn" onclick="closeModal('personal-info-modal')">&times;</button>
+            </div>
+            <form id="personal-info-form" onsubmit="savePersonalInfo(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="personal-name" value="<?php echo htmlspecialchars($user_name); ?>" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="personal-email" value="<?php echo htmlspecialchars($user_email); ?>" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="personal-phone" value="<?php echo htmlspecialchars($userData['phone_number'] ?? ''); ?>" required>
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <textarea id="personal-address" rows="3"><?php echo htmlspecialchars($homeAddress); ?></textarea>
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" id="personal-city" value="">
+                </div>
+                <div class="form-group">
+                    <label>State</label>
+                    <input type="text" id="personal-state" value="">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('personal-info-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Credentials Modal -->
+    <div id="credentials-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Change Password</h2>
+                <button class="modal-close-btn" onclick="closeModal('credentials-modal')">&times;</button>
+            </div>
+            <form id="credentials-form" onsubmit="updateCredentials(event)">
+                <div class="form-group">
+                    <label>Current Password</label>
+                    <input type="password" id="current-password" required>
+                </div>
+                <div class="form-group">
+                    <label>New Password</label>
+                    <input type="password" id="new-password" required minlength="8">
+                </div>
+                <div class="form-group">
+                    <label>Confirm New Password</label>
+                    <input type="password" id="confirm-password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('credentials-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Methods Modal -->
+    <div id="payment-methods-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Payment Methods</h2>
+                <button class="modal-close-btn" onclick="closeModal('payment-methods-modal')">&times;</button>
+            </div>
+            <div class="payment-methods-list" style="margin-bottom: 20px; max-height: 300px; overflow-y: auto;">
+                <?php if (count($paymentMethods) > 0): ?>
+                    <?php foreach ($paymentMethods as $method): ?>
+                    <div class="payment-method-item" data-id="<?php echo $method['id']; ?>">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-credit-card" style="color: #ff5e00;"></i>
+                            <div>
+                                <p class="font-medium"><?php echo htmlspecialchars($method['bank_name'] ?? 'Card'); ?></p>
+                                <p class="text-sm text-gray-500">**** <?php echo substr($method['account_number'] ?? '', -4); ?></p>
+                            </div>
+                        </div>
+                        <?php if ($method['is_default']): ?>
+                        <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">Default</span>
+                        <?php endif; ?>
+                    </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-center text-gray-500 py-4">No payment methods saved</p>
+                <?php endif; ?>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="addPaymentMethod()">
+                <i class="fas fa-plus"></i> Add New Payment Method
+            </button>
+        </div>
+    </div>
+
+    <!-- Saved Locations Modal -->
+    <div id="saved-locations-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Saved Locations</h2>
+                <button class="modal-close-btn" onclick="closeModal('saved-locations-modal')">&times;</button>
+            </div>
+            <div class="saved-locations-list" style="margin-bottom: 20px; max-height: 300px; overflow-y: auto;">
+                <?php if (count($savedLocations) > 0): ?>
+                    <?php foreach ($savedLocations as $location): ?>
+                    <div class="location-item">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-map-marker-alt" style="color: #ff5e00;"></i>
+                            <div>
+                                <p class="font-medium"><?php echo htmlspecialchars($location['location_name']); ?></p>
+                                <p class="text-sm text-gray-500"><?php echo htmlspecialchars($location['address']); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-center text-gray-500 py-4">No saved locations</p>
+                <?php endif; ?>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="addSavedLocation()">
+                <i class="fas fa-plus"></i> Add New Location
+            </button>
+        </div>
+    </div>
+
+    <!-- Emergency Contacts Modal -->
+    <div id="emergency-contacts-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Emergency Contacts</h2>
+                <button class="modal-close-btn" onclick="closeModal('emergency-contacts-modal')">&times;</button>
+            </div>
+            <form onsubmit="saveEmergencyContact(event)">
+                <div class="form-group">
+                    <label>Contact Name</label>
+                    <input type="text" id="emergency-name" value="<?php echo htmlspecialchars($emergencyContactName); ?>">
+                </div>
+                <div class="form-group">
+                    <label>Contact Phone</label>
+                    <input type="tel" id="emergency-phone" value="<?php echo htmlspecialchars($emergencyContactPhone); ?>">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('emergency-contacts-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Contact</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <div class="modal-header">
+                <h2>About Speedly</h2>
+                <button class="modal-close-btn" onclick="closeModal('about-modal')">&times;</button>
+            </div>
+            <div style="padding: 20px;">
+                <img src="main-assets/logo-no-background.png" alt="Speedly Logo" style="max-width: 150px; margin: 0 auto 20px;">
+                <h3 style="font-size: 20px; margin-bottom: 10px;">Speedly</h3>
+                <p style="color: #666; margin-bottom: 15px;">Version 2.5.1</p>
+                <p style="color: #888; font-size: 14px; margin-bottom: 20px;">© 2026 Speedly. All rights reserved.</p>
+                <button class="btn btn-primary" onclick="closeModal('about-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div id="delete-account-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="color: #ff4757;">Delete Account</h2>
+                <button class="modal-close-btn" onclick="closeModal('delete-account-modal')">&times;</button>
+            </div>
+            <div style="padding: 20px;">
+                <p style="margin-bottom: 20px; color: #666;">This action is permanent and cannot be undone. All your data will be permanently deleted.</p>
+                <div class="form-group">
+                    <label>Type "DELETE" to confirm</label>
+                    <input type="text" id="delete-confirm" placeholder="DELETE">
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-secondary" onclick="closeModal('delete-account-modal')">Cancel</button>
+                    <button class="btn" style="background: #ff4757; color: white;" onclick="deleteAccount()">Delete Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ride Settings Modal -->
+    <div id="ride-settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ride Settings</h2>
+                <button class="modal-close-btn" onclick="closeModal('ride-settings-modal')">&times;</button>
+            </div>
+            <form onsubmit="saveRideSettings(event)">
+                <div class="form-group">
+                    <label>Default Ride Type</label>
+                    <select id="default-ride-type">
+                        <option value="economy">Economy</option>
+                        <option value="comfort">Comfort</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Default Payment Method</label>
+                    <select id="default-payment">
+                        <option value="">Select payment method</option>
+                        <?php foreach ($paymentMethods as $method): ?>
+                        <option value="<?php echo $method['id']; ?>" <?php echo $method['is_default'] ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($method['bank_name'] ?? 'Card'); ?> - **** <?php echo substr($method['account_number'] ?? '', -4); ?>
+                        </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('ride-settings-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Privacy Settings Modal -->
+    <div id="privacy-settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Settings</h2>
+                <button class="modal-close-btn" onclick="closeModal('privacy-settings-modal')">&times;</button>
+            </div>
+            <form onsubmit="savePrivacySettings(event)">
+                <div class="form-group">
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" id="share-location" checked>
+                        <span>Share location for better ride experience</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" id="data-collection" checked>
+                        <span>Allow anonymous data collection</span>
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('privacy-settings-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Data Controls Modal -->
+    <div id="data-controls-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Data Controls</h2>
+                <button class="modal-close-btn" onclick="closeModal('data-controls-modal')">&times;</button>
+            </div>
+            <div style="padding: 10px;">
+                <button class="btn btn-secondary" style="width: 100%; margin-bottom: 15px;" onclick="downloadData()">
+                    <i class="fas fa-download"></i> Download My Data
+                </button>
+                <button class="btn" style="width: 100%; background: #ff4757; color: white;" onclick="openModal('delete-account-modal')">
+                    <i class="fas fa-trash"></i> Delete My Data
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Center Modal -->
+    <div id="help-center-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Help Center</h2>
+                <button class="modal-close-btn" onclick="closeModal('help-center-modal')">&times;</button>
+            </div>
+            <div style="padding: 10px;">
+                <div class="help-item" style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="showHelpArticle('faq')">
+                    <h4 style="font-weight: 600;">📚 Frequently Asked Questions</h4>
+                    <p style="color: #666; font-size: 13px;">Find answers to common questions</p>
+                </div>
+                <div class="help-item" style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="showHelpArticle('contact')">
+                    <h4 style="font-weight: 600;">📞 Contact Support</h4>
+                    <p style="color: #666; font-size: 13px;">support@speedly.com | +234 800 123 4567</p>
+                </div>
+                <div class="help-item" style="padding: 15px; cursor: pointer;" onclick="showHelpArticle('guide')">
+                    <h4 style="font-weight: 600;">📖 User Guide</h4>
+                    <p style="color: #666; font-size: 13px;">Learn how to use Speedly</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legal Modal -->
+    <div id="legal-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Legal</h2>
+                <button class="modal-close-btn" onclick="closeModal('legal-modal')">&times;</button>
+            </div>
+            <div style="padding: 10px;">
+                <div class="legal-item" style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="showLegalDocument('terms')">
+                    <h4 style="font-weight: 600;">Terms of Service</h4>
+                </div>
+                <div class="legal-item" style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="showLegalDocument('privacy')">
+                    <h4 style="font-weight: 600;">Privacy Policy</h4>
+                </div>
+                <div class="legal-item" style="padding: 15px; cursor: pointer;" onclick="showLegalDocument('licenses')">
+                    <h4 style="font-weight: 600;">Licenses</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Language Modal -->
+    <div id="language-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Select Language</h2>
+                <button class="modal-close-btn" onclick="closeModal('language-modal')">&times;</button>
+            </div>
+            <div style="padding: 10px;">
+                <div class="language-item" style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="setLanguage('en')">
+                    <div class="flex items-center justify-between">
+                        <span>🇬🇧 English</span>
+                        <?php if ($userSettings['language'] == 'en'): ?>
+                        <i class="fas fa-check" style="color: #ff5e00;"></i>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="language-item" style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="setLanguage('fr')">
+                    <div class="flex items-center justify-between">
+                        <span>🇫🇷 Français</span>
+                        <?php if ($userSettings['language'] == 'fr'): ?>
+                        <i class="fas fa-check" style="color: #ff5e00;"></i>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="language-item" style="padding: 15px; cursor: pointer;" onclick="setLanguage('es')">
+                    <div class="flex items-center justify-between">
+                        <span>🇪🇸 Español</span>
+                        <?php if ($userSettings['language'] == 'es'): ?>
+                        <i class="fas fa-check" style="color: #ff5e00;"></i>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Units Modal -->
+    <div id="units-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Distance Units</h2>
+                <button class="modal-close-btn" onclick="closeModal('units-modal')">&times;</button>
+            </div>
+            <div style="padding: 10px;">
+                <div class="unit-item" style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="setUnits('km')">
+                    <div class="flex items-center justify-between">
+                        <span>Kilometers (km)</span>
+                        <i class="fas fa-check" style="color: #ff5e00;"></i>
+                    </div>
+                </div>
+                <div class="unit-item" style="padding: 15px; cursor: pointer;" onclick="setUnits('mi')">
+                    <div class="flex items-center justify-between">
+                        <span>Miles (mi)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Modal -->
+    <div id="theme-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Theme</h2>
+                <button class="modal-close-btn" onclick="closeModal('theme-modal')">&times;</button>
+            </div>
+            <div style="padding: 10px;">
+                <div class="theme-item" style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="toggleDarkMode(false)">
+                    <div class="flex items-center justify-between">
+                        <span>☀️ Light Mode</span>
+                        <?php if (!$userSettings['dark_mode']): ?>
+                        <i class="fas fa-check" style="color: #ff5e00;"></i>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="theme-item" style="padding: 15px; cursor: pointer;" onclick="toggleDarkMode(true)">
+                    <div class="flex items-center justify-between">
+                        <span>🌙 Dark Mode</span>
+                        <?php if ($userSettings['dark_mode']): ?>
+                        <i class="fas fa-check" style="color: #ff5e00;"></i>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="JS/settings.js"></script>
 </body>
-</html>    
+</html>

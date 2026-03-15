@@ -1,0 +1,36 @@
+/* 1. Import Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* 2. Reset - No global padding! */
+* {
+    margin: 0;
+    padding: 0; /* Changed from 10px to 0 */
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    /* Refined gradient for a more modern look */
+    background: linear-gradient(135deg, #ff5e00 0%, #ff8c3a 100%);
+    min-height: 100vh;
+}
+
+/* 3. Logo Fix - Avoid absolute positioning for main nav logos */
+.logo-container {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+/* 4. Animation for background (Optional) */
+@keyframes gradient-move {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-move 5s ease infinite;
+}

@@ -154,9 +154,19 @@ function showDriverCancelledNotification(rideId) {
 
 // ========== RIDE DETAILS AND RATING FUNCTIONS ==========
 
-// View ride details
+// View ride details - FIXED VERSION
 function viewRideDetails(rideId) {
     console.log('Viewing ride details for ID:', rideId);
+    
+    if (!rideId) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Invalid Ride',
+            text: 'No ride ID provided',
+            confirmButtonColor: '#ff5e00'
+        });
+        return;
+    }
     
     // Show loading
     Swal.fire({
@@ -167,49 +177,73 @@ function viewRideDetails(rideId) {
         }
     });
     
-    // Fetch ride details
-    fetch(`SERVER/API/get_ride_details.php?ride_id=${rideId}`)
-        .then(response => response.json())
-        .then(data => {
-            Swal.close();
-            
-            if (data.success && data.ride) {
-                displayRideDetails(data.ride);
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: data.message || 'Failed to load ride details',
-                    confirmButtonColor: '#ff5e00'
-                });
-            }
-        })
-        .catch(error => {
-            Swal.close();
-            console.error('Error fetching ride details:', error);
+    // Fetch ride details - use the same URL that worked in the test
+    const url = `SERVER/API/get_ride_details.php?ride_id=${encodeURIComponent(rideId)}`;
+    console.log('Fetching from:', url);
+    
+    fetch(url, {
+        method: 'GET',
+        credentials: 'same-origin',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        Swal.close();
+        console.log('Response data:', data);
+        
+        if (data.success && data.ride) {
+            // Call the display function with the ride data
+            displayRideDetails(data.ride);
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Failed to load ride details. Please try again.',
+                text: data.message || 'Failed to load ride details',
                 confirmButtonColor: '#ff5e00'
             });
+        }
+    })
+    .catch(error => {
+        Swal.close();
+        console.error('Error fetching ride details:', error);
+        
+        Swal.fire({
+            icon: 'error',
+            title: 'Connection Error',
+            text: 'Failed to load ride details: ' + error.message,
+            confirmButtonColor: '#ff5e00'
         });
+    });
 }
 
-// Display ride details in modal
+// Display ride details in modal - FIXED VERSION
 function displayRideDetails(ride) {
+    console.log('Displaying ride details:', ride);
+    
     // Format date
-    const rideDate = ride.formatted_date || new Date(ride.created_at).toLocaleDateString();
-    const rideTime = ride.formatted_time || new Date(ride.created_at).toLocaleTimeString();
+    const rideDate = ride.formatted_date || (ride.created_at ? new Date(ride.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'N/A');
+    const rideTime = ride.formatted_time || (ride.created_at ? new Date(ride.created_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) : 'N/A');
+    
+    // Get status color
+    const statusColor = getStatusColor(ride.status);
     
     // Build HTML
     let html = `
-        <div style="text-align: left; max-height: 500px; overflow-y: auto; padding: 10px;">
+        <div style="text-align: left; max-height: 70vh; overflow-y: auto; padding: 10px;">
             <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <span style="font-size: 18px; font-weight: bold;">Ride Details</span>
-                    <span style="background: ${getStatusColor(ride.status)}; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
-                        ${ride.status_display || ride.status.charAt(0).toUpperCase() + ride.status.slice(1)}
+                    <span style="background: ${statusColor}; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                        ${ride.status_display || (ride.status ? ride.status.charAt(0).toUpperCase() + ride.status.slice(1).replace(/_/g, ' ') : 'Unknown')}
                     </span>
                 </div>
                 <p><strong>Ride #:</strong> ${ride.ride_number || 'N/A'}</p>
@@ -218,9 +252,17 @@ function displayRideDetails(ride) {
                 <p><strong>To:</strong> ${ride.destination_address || 'N/A'}</p>
                 <p><strong>Distance:</strong> ${ride.distance_km ? ride.distance_km.toFixed(1) + ' km' : 'N/A'}</p>
                 <p><strong>Fare:</strong> <span style="color: #4CAF50; font-weight: bold;">₦${ride.total_fare ? ride.total_fare.toLocaleString() : '0'}</span></p>
-                ${ride.trip_duration ? `<p><strong>Trip Duration:</strong> ${ride.trip_duration}</p>` : ''}
-            </div>
     `;
+    
+    // Add platform commission info if available
+    if (ride.platform_commission) {
+        html += `<p><strong>Platform Fee:</strong> ₦${ride.platform_commission.toLocaleString()}</p>`;
+    }
+    
+    // Add payment status
+    html += `<p><strong>Payment Status:</strong> <span style="color: ${ride.payment_status === 'paid' ? '#4CAF50' : '#FF9800'};">${ride.payment_status ? ride.payment_status.toUpperCase() : 'PENDING'}</span></p>`;
+    
+    html += `</div>`;
     
     // Driver info if available
     if (ride.driver_name) {
@@ -229,15 +271,23 @@ function displayRideDetails(ride) {
                 <h4 style="margin-bottom: 10px; color: #2E7D32;">Driver Information</h4>
                 <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
                     <div style="width: 50px; height: 50px; background: #4CAF50; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">
-                        ${ride.driver_name.charAt(0)}
+                        ${ride.driver_name ? ride.driver_name.charAt(0).toUpperCase() : 'D'}
                     </div>
                     <div>
-                        <p style="font-weight: bold; font-size: 16px;">${ride.driver_name}</p>
-                        <p style="color: #666;">${ride.vehicle || 'Vehicle not specified'}</p>
-                        ${ride.driver_phone ? `<p style="color: #666; font-size: 14px;"><i class="fas fa-phone"></i> ${ride.driver_phone}</p>` : ''}
+                        <p style="font-weight: bold; font-size: 16px; margin-bottom: 5px;">${ride.driver_name}</p>
+                        <p style="color: #666; margin-bottom: 3px;">${ride.vehicle_display || 'Vehicle not specified'}</p>
+                        ${ride.driver_phone ? `<p style="color: #666; font-size: 14px; margin-top: 5px;"><i class="fas fa-phone" style="margin-right: 5px;"></i> ${ride.driver_phone}</p>` : ''}
+                        ${ride.driver_total_rides !== undefined ? `<p style="color: #666; font-size: 13px; margin-top: 5px;"><i class="fas fa-road" style="margin-right: 5px;"></i> ${ride.driver_total_rides} rides completed</p>` : ''}
                     </div>
                 </div>
                 <p><strong>Driver Rating:</strong> ${formatRating(ride.driver_rating)}</p>
+            </div>
+        `;
+    } else {
+        html += `
+            <div style="background: #f5f5f5; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: center;">
+                <p style="color: #666;">No driver assigned yet</p>
+                <p style="font-size: 13px; color: #999;">Waiting for a driver to accept your ride</p>
             </div>
         `;
     }
@@ -260,22 +310,22 @@ function displayRideDetails(ride) {
                 </button>
             </div>
         `;
-    } else if (ride.my_rating) {
+    } else if (ride.user_rating) {
         html += `
             <div style="background: #e8f5e9; padding: 15px; border-radius: 10px;">
                 <h4 style="margin-bottom: 10px; color: #2E7D32;">Your Rating</h4>
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
                     <div style="color: #FFD700; font-size: 24px;">
-                        ${'★'.repeat(ride.my_rating)}${'☆'.repeat(5 - ride.my_rating)}
+                        ${'★'.repeat(ride.user_rating)}${'☆'.repeat(5 - ride.user_rating)}
                     </div>
-                    <span style="font-weight: bold;">${ride.my_rating}/5</span>
+                    <span style="font-weight: bold;">${ride.user_rating}/5</span>
                 </div>
-                ${ride.my_review ? `<p style="background: white; padding: 10px; border-radius: 8px;"><strong>Your review:</strong> ${ride.my_review}</p>` : ''}
+                ${ride.user_review ? `<p style="background: white; padding: 10px; border-radius: 8px;"><strong>Your review:</strong> ${ride.user_review}</p>` : ''}
             </div>
         `;
     }
     
-    // Add action buttons for active rides
+    // Add action buttons for active rides (pending, accepted, etc.)
     if (['pending', 'accepted', 'driver_assigned', 'driver_arrived', 'ongoing'].includes(ride.status)) {
         html += `
             <div style="display: flex; gap: 10px; margin-top: 15px;">
@@ -305,36 +355,38 @@ function displayRideDetails(ride) {
         confirmButtonText: 'Close',
         width: '600px',
         didOpen: () => {
-            // Add star rating functionality
+            // Add star rating functionality if rating section exists
             if (ride.can_rate) {
                 selectedRating = 0;
                 const stars = document.querySelectorAll('#ratingStars i');
                 
-                function highlightStars(rating) {
-                    stars.forEach((s, index) => {
-                        if (index < rating) {
-                            s.style.color = '#FFD700';
-                        } else {
-                            s.style.color = '#ddd';
-                        }
+                if (stars.length > 0) {
+                    function highlightStars(rating) {
+                        stars.forEach((s, index) => {
+                            if (index < rating) {
+                                s.style.color = '#FFD700';
+                            } else {
+                                s.style.color = '#ddd';
+                            }
+                        });
+                    }
+                    
+                    stars.forEach(star => {
+                        star.addEventListener('mouseenter', function() {
+                            const rating = parseInt(this.dataset.rating);
+                            highlightStars(rating);
+                        });
+                        
+                        star.addEventListener('mouseleave', function() {
+                            highlightStars(selectedRating);
+                        });
+                        
+                        star.addEventListener('click', function() {
+                            selectedRating = parseInt(this.dataset.rating);
+                            highlightStars(selectedRating);
+                        });
                     });
                 }
-                
-                stars.forEach(star => {
-                    star.addEventListener('mouseenter', function() {
-                        const rating = parseInt(this.dataset.rating);
-                        highlightStars(rating);
-                    });
-                    
-                    star.addEventListener('mouseleave', function() {
-                        highlightStars(selectedRating);
-                    });
-                    
-                    star.addEventListener('click', function() {
-                        selectedRating = parseInt(this.dataset.rating);
-                        highlightStars(selectedRating);
-                    });
-                });
             }
         }
     });
@@ -502,11 +554,36 @@ function getStatusColor(status) {
     return colors[status] || '#9E9E9E';
 }
 
-// Format rating stars
+// Format rating stars - FIXED VERSION
 function formatRating(rating) {
-    if (!rating) return 'No ratings yet';
-    const stars = '★'.repeat(Math.floor(rating)) + '☆'.repeat(5 - Math.floor(rating));
-    return `<span style="color: #FFD700;">${stars}</span> (${rating.toFixed(1)})`;
+    // Handle various input types
+    if (rating === null || rating === undefined || rating === '') {
+        return 'No ratings yet';
+    }
+    
+    // Convert to number if it's a string
+    const numRating = parseFloat(rating);
+    
+    // Check if it's a valid number
+    if (isNaN(numRating) || numRating === 0) {
+        return 'No ratings yet';
+    }
+    
+    const fullStars = Math.floor(numRating);
+    const halfStar = (numRating - fullStars) >= 0.5;
+    let stars = '';
+    
+    for (let i = 1; i <= 5; i++) {
+        if (i <= fullStars) {
+            stars += '★';
+        } else if (halfStar && i === fullStars + 1) {
+            stars += '½';
+        } else {
+            stars += '☆';
+        }
+    }
+    
+    return `<span style="color: #FFD700;">${stars}</span> (${numRating.toFixed(1)})`;
 }
 
 // ========== PAYMENT FUNCTIONS ==========

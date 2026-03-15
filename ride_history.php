@@ -25,7 +25,7 @@ if ($user_role == 'client') {
         COALESCE(SUM(total_fare), 0) as total_spent,
         COALESCE(AVG(dr.rating), 0) as avg_rating_given,
         COUNT(CASE WHEN r.status = 'completed' THEN 1 END) as completed_rides,
-        COUNT(CASE WHEN r.status IN ('pending', 'driver_assigned', 'driver_arrived', 'ongoing') THEN 1 END) as upcoming_rides
+        COUNT(CASE WHEN r.status IN ('pending', 'accepted', 'driver_assigned', 'driver_arrived', 'ongoing') THEN 1 END) as upcoming_rides
         FROM rides r
         JOIN client_profiles cp ON r.client_id = cp.id
         LEFT JOIN driver_ratings dr ON r.id = dr.ride_id AND dr.user_id = ?
@@ -39,7 +39,7 @@ if ($user_role == 'client') {
         $stats = $statsResult->fetch_assoc();
     }
     
-    // Get recent rides for client
+    // Get recent rides for client - FIXED with proper date formatting
     $ridesQuery = "SELECT 
         r.*,
         u.full_name as driver_name,
@@ -50,7 +50,15 @@ if ($user_role == 'client') {
         dr.rating as user_rating,
         dr.review as user_review,
         DATE_FORMAT(r.created_at, '%M %d, %Y') as formatted_date,
-        DATE_FORMAT(r.created_at, '%h:%i %p') as formatted_time
+        DATE_FORMAT(r.created_at, '%h:%i %p') as formatted_time,
+        DATE_FORMAT(r.created_at, '%Y-%m-%d') as date_only,
+        DATE_FORMAT(r.created_at, '%H:%i') as time_only,
+        ROUND(r.distance_km, 1) as distance_km,
+        r.total_fare,
+        r.ride_type,
+        r.status,
+        r.pickup_address,
+        r.destination_address
         FROM rides r
         LEFT JOIN driver_profiles dp ON r.driver_id = dp.id
         LEFT JOIN users u ON dp.user_id = u.id
@@ -75,7 +83,7 @@ if ($user_role == 'client') {
         COALESCE(SUM(driver_payout), 0) as total_earned,
         (SELECT COALESCE(AVG(rating), 0) FROM driver_ratings WHERE driver_id = (SELECT id FROM driver_profiles WHERE user_id = ?)) as avg_rating,
         COUNT(CASE WHEN r.status = 'completed' THEN 1 END) as completed_rides,
-        COUNT(CASE WHEN r.status IN ('pending', 'driver_assigned') THEN 1 END) as upcoming_rides
+        COUNT(CASE WHEN r.status IN ('pending', 'accepted') THEN 1 END) as upcoming_rides
         FROM rides r
         WHERE r.driver_id = (SELECT id FROM driver_profiles WHERE user_id = ?)";
     
@@ -87,13 +95,23 @@ if ($user_role == 'client') {
         $stats = $statsResult->fetch_assoc();
     }
     
-    // Get recent rides for driver
+    // Get recent rides for driver - FIXED with proper date formatting
     $ridesQuery = "SELECT 
         r.*,
         u.full_name as client_name,
         u.profile_picture_url as client_photo,
         DATE_FORMAT(r.created_at, '%M %d, %Y') as formatted_date,
-        DATE_FORMAT(r.created_at, '%h:%i %p') as formatted_time
+        DATE_FORMAT(r.created_at, '%h:%i %p') as formatted_time,
+        DATE_FORMAT(r.created_at, '%Y-%m-%d') as date_only,
+        DATE_FORMAT(r.created_at, '%H:%i') as time_only,
+        ROUND(r.distance_km, 1) as distance_km,
+        r.total_fare,
+        r.platform_commission,
+        r.driver_payout,
+        r.ride_type,
+        r.status,
+        r.pickup_address,
+        r.destination_address
         FROM rides r
         JOIN client_profiles cp ON r.client_id = cp.id
         JOIN users u ON cp.user_id = u.id
