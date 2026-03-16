@@ -134,7 +134,7 @@ function autoRequestOTP(email) {
     const formData = new FormData();
     formData.append('email', email);
     
-    fetch('SERVER/API/send_otp.php', {
+    fetch('/SERVER/API/send_otp.php', {
         method: 'POST',
         body: formData
     })
@@ -437,3 +437,5 @@ window.addEventListener('beforeunload', function() {
         clearInterval(timerInterval);
     }
 });
+
+

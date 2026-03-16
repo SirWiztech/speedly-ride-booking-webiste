@@ -1050,10 +1050,7 @@ $email = $driverData['email'] ?? '';
                             
                             <!-- Countdown Timer -->
                             <div class="mt-4 bg-yellow-50 p-3 rounded-lg text-center">
-                                <p class="text-sm text-yellow-700 mb-1">
-                                    <i class="fas fa-hourglass-half mr-1"></i> Time remaining to accept:
-                                </p>
-                                <div id="desktopCountdownTimer" class="text-3xl font-bold text-orange-600" data-created="<?php echo strtotime($nextRide['created_at']); ?>">30s</div>
+                               
                             </div>
                             
                             <div class="border-t mt-5 pt-4 flex gap-3">

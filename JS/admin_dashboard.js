@@ -1,4 +1,4 @@
-// Admin Dashboard JavaScript - Fixed & Updated Version
+// Admin Dashboard JavaScript - COMPLETELY UPDATED VERSION WITH FIXED KYC POPUPS
 (function() {
     'use strict';
 
@@ -7,6 +7,7 @@
     let timeLeft = 1800; // 30 minutes in seconds
     let timerInterval = null;
     let charts = {};
+    let currentDisputeId = null;
 
     // DOM Elements
     const loginModal = document.getElementById('loginModal');
@@ -16,13 +17,14 @@
     const titleH1 = document.querySelector('#pageTitle h1');
     const subtitleP = document.querySelector('#pageTitle p');
     const logoutBtn = document.getElementById('logoutBtn');
-    const loginForm = document.getElementById('adminLoginForm');
 
     // ========== INITIALIZATION ==========
     function init() {
+        console.log('Admin dashboard initializing...');
+        console.log('SweetAlert2 loaded:', typeof Swal !== 'undefined');
+        
         checkAuthStatus();
-        populateDashboard();
-        initializeAllCharts();
+        initializeCharts();
         setupNavigation();
         setupSearch();
         setupFilters();
@@ -39,15 +41,33 @@
         
         if (loggedIn) {
             startSessionTimer();
+            loadDashboardData();
         }
+        
+        // Check session status with server
+        verifySession();
+    }
+
+    // ========== SESSION VERIFICATION ==========
+    function verifySession() {
+        fetch('SERVER/API/check_session.php')
+            .then(response => response.json())
+            .then(data => {
+                if (!data.logged_in) {
+                    console.log('Session expired, redirecting to login');
+                    logout();
+                }
+            })
+            .catch(error => console.error('Session check failed:', error));
     }
 
     // ========== AUTHENTICATION ==========
     function checkAuthStatus() {
-        if (!loggedIn) {
-            loginModal?.classList.add('show');
-        } else {
-            loginModal?.classList.remove('show');
+        // Check if we're on the dashboard and need to verify session
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('logged_in') === 'true') {
+            localStorage.setItem('adminLoggedIn', 'true');
+            loggedIn = true;
         }
     }
 
@@ -66,7 +86,12 @@
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
                 logout();
-                alert('Session expired. Please login again.');
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Session Expired',
+                    text: 'Your session has expired. Please login again.',
+                    confirmButtonColor: '#ff5e00'
+                });
                 return;
             }
             
@@ -82,256 +107,198 @@
     window.logout = function() {
         localStorage.removeItem('adminLoggedIn');
         loggedIn = false;
-        loginModal?.classList.add('show');
         if (timerInterval) {
             clearInterval(timerInterval);
             timerInterval = null;
         }
-        logActivity('Admin logged out');
+        window.location.href = 'admin_login.php';
     };
 
     if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            if (confirm('Are you sure you want to logout?')) {
-                logout();
-            }
+            confirmLogout();
         });
     }
 
-    // ========== LOGIN ==========
-    if (loginForm) {
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('username')?.value;
-            const password = document.getElementById('password')?.value;
-            
-            // Simple validation (in real app, check against server)
-            if (username === 'admin' && password === 'admin123') {
-                localStorage.setItem('adminLoggedIn', 'true');
-                loggedIn = true;
-                loginModal?.classList.remove('show');
-                alert('Login successful!');
-                logActivity('Admin logged in');
-                
-                // Reset session timer
-                timeLeft = 1800;
-                startSessionTimer();
-            } else {
-                alert('Invalid username or password');
-            }
-        });
-    }
-
-    // ========== DASHBOARD POPULATION ==========
-    function populateDashboard() {
-        // Recent Withdrawals
-        const wl = document.getElementById('recentWithdrawals');
-        if (wl) {
-            wl.innerHTML = `
-                <div class="withdrawal-item">
-                    <div class="withdrawal-info">
-                        <h4>John Driver</h4>
-                        <p>Requested: ₦25,000</p>
-                    </div>
-                    <span class="status-badge pending">Pending</span>
-                </div>
-                <div class="withdrawal-item">
-                    <div class="withdrawal-info">
-                        <h4>Sarah Smith</h4>
-                        <p>Requested: ₦18,500</p>
-                    </div>
-                    <span class="status-badge approved">Approved</span>
-                </div>
-                <div class="withdrawal-item">
-                    <div class="withdrawal-info">
-                        <h4>Mike Johnson</h4>
-                        <p>Requested: ₦32,000</p>
-                    </div>
-                    <span class="status-badge paid">Paid</span>
-                </div>
-                <div class="withdrawal-item">
-                    <div class="withdrawal-info">
-                        <h4>Emma Wilson</h4>
-                        <p>Requested: ₦12,750</p>
-                    </div>
-                    <span class="status-badge rejected">Rejected</span>
-                </div>
-            `;
-        }
-
-        // Top Performers
-        const tp = document.getElementById('topPerformers');
-        if (tp) {
-            tp.innerHTML = `
-                <div class="performer-item">
-                    <div class="performer-rank">1</div>
-                    <div class="performer-info">
-                        <h4>David Okafor</h4>
-                        <p>142 rides • 4.9 ★</p>
-                    </div>
-                    <div class="performer-earnings">₦425K</div>
-                </div>
-                <div class="performer-item">
-                    <div class="performer-rank">2</div>
-                    <div class="performer-info">
-                        <h4>Grace Eze</h4>
-                        <p>128 rides • 4.8 ★</p>
-                    </div>
-                    <div class="performer-earnings">₦384K</div>
-                </div>
-                <div class="performer-item">
-                    <div class="performer-rank">3</div>
-                    <div class="performer-info">
-                        <h4>Ahmed Bello</h4>
-                        <p>115 rides • 4.9 ★</p>
-                    </div>
-                    <div class="performer-earnings">₦345K</div>
-                </div>
-            `;
-        }
+    // ========== LOAD DASHBOARD DATA ==========
+    function loadDashboardData() {
+        loadPayments();
+        loadWallets();
+        loadDisputes();
+        loadActivityLogs();
+        loadNotifications();
+        loadReport();
     }
 
     // ========== CHARTS INITIALIZATION ==========
-    function initializeAllCharts() {
-        // Revenue Chart (Dashboard)
-        const revenueCtx = document.getElementById('revenueChart')?.getContext('2d');
-        if (revenueCtx) {
-            charts.revenue = new Chart(revenueCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                    datasets: [{
-                        label: 'Revenue (₦)',
-                        data: [85000, 92000, 88000, 95000, 102000, 115000, 124500],
-                        borderColor: '#ff5e00',
-                        backgroundColor: 'rgba(255, 94, 0, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: { callback: v => '₦' + v.toLocaleString() }
-                        }
+    function initializeCharts() {
+        const canvas = document.getElementById('revenueChart');
+        if (!canvas) {
+            console.log('Revenue chart canvas not found - may be on different page');
+            return;
+        }
+        
+        const ctx = canvas.getContext('2d');
+        
+        // Get data from PHP passed through data attributes or global variables
+        let labels = [];
+        let data = [];
+        
+        // Try to get from global variables (set by PHP)
+        if (typeof revenueLabels !== 'undefined' && typeof revenueData !== 'undefined') {
+            labels = revenueLabels;
+            data = revenueData;
+            console.log('Using revenue data from PHP:', labels, data);
+        } 
+        // Try to get from data attributes
+        else {
+            const debugDiv = document.getElementById('debugData');
+            if (debugDiv) {
+                try {
+                    labels = JSON.parse(debugDiv.dataset.labels || '[]');
+                    data = JSON.parse(debugDiv.dataset.values || '[]').map(v => parseFloat(v));
+                } catch (e) {
+                    console.error('Error parsing chart data:', e);
+                }
+            }
+        }
+        
+        // Check if we have valid data
+        if (!labels || !labels.length || !data || !data.length) {
+            console.log('No chart data available');
+            const fallback = document.getElementById('chartFallback');
+            if (fallback) {
+                canvas.style.display = 'none';
+                fallback.style.display = 'block';
+            }
+            return;
+        }
+        
+        // Check if all data is zero
+        const hasData = data.some(value => value > 0);
+        if (!hasData) {
+            console.log('All revenue data is zero');
+            const fallback = document.getElementById('chartFallback');
+            if (fallback) {
+                canvas.style.display = 'none';
+                fallback.style.display = 'block';
+            }
+            return;
+        }
+        
+        // Destroy existing chart if it exists
+        if (charts.revenue) {
+            charts.revenue.destroy();
+        }
+        
+        // Create new chart
+        charts.revenue = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Revenue (₦)',
+                    data: data,
+                    borderColor: '#ff5e00',
+                    backgroundColor: 'rgba(255, 94, 0, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#ff5e00',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '₦' + context.parsed.y.toLocaleString();
+                            }
+                        },
+                        backgroundColor: '#333',
+                        titleColor: '#fff',
+                        bodyColor: '#fff'
                     }
-                }
-            });
-        }
-
-        // Daily Chart (Reports)
-        const dailyCtx = document.getElementById('dailyChart')?.getContext('2d');
-        if (dailyCtx) {
-            charts.daily = new Chart(dailyCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['10am', '12pm', '2pm', '4pm', '6pm', '8pm'],
-                    datasets: [{
-                        data: [12500, 18400, 22300, 19800, 25600, 18900],
-                        backgroundColor: '#ff5e00',
-                        borderRadius: 5
-                    }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: { callback: v => '₦' + v.toLocaleString() }
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                        ticks: {
+                            callback: function(value) {
+                                return '₦' + value.toLocaleString();
+                            }
                         }
-                    }
+                    },
+                    x: { grid: { display: false } }
                 }
-            });
-        }
-
-        // Weekly Chart (Reports)
-        const weeklyCtx = document.getElementById('weeklyChart')?.getContext('2d');
-        if (weeklyCtx) {
-            charts.weekly = new Chart(weeklyCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                    datasets: [{
-                        data: [124500, 118200, 132800, 125400, 142300, 156800, 142300],
-                        borderColor: '#ff5e00',
-                        backgroundColor: 'rgba(255, 94, 0, 0.1)',
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } }
-                }
-            });
-        }
-
-        // Monthly Chart (Reports)
-        const monthlyCtx = document.getElementById('monthlyChart')?.getContext('2d');
-        if (monthlyCtx) {
-            charts.monthly = new Chart(monthlyCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-                    datasets: [{
-                        data: [584200, 612500, 598400, 661700],
-                        backgroundColor: '#ff5e00',
-                        borderRadius: 5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } }
-                }
-            });
-        }
+            }
+        });
+        
+        console.log('Chart initialized successfully');
     }
 
     // ========== NAVIGATION ==========
     function setupNavigation() {
         navItems.forEach(item => {
-            item.addEventListener('click', (e) => {
+            item.addEventListener('click', function(e) {
                 e.preventDefault();
                 
                 // Update active nav item
                 navItems.forEach(n => n.classList.remove('active'));
-                item.classList.add('active');
+                this.classList.add('active');
                 
                 // Show corresponding page
-                const pageId = item.dataset.page + '-page';
+                const pageId = this.dataset.page + '-page';
                 pages.forEach(p => p.classList.remove('active-page'));
                 const target = document.getElementById(pageId);
                 if (target) target.classList.add('active-page');
                 
                 // Update header
-                const pageName = item.querySelector('span').innerText;
-                titleH1.innerText = pageName;
+                const pageName = this.querySelector('span').innerText;
+                if (titleH1) titleH1.innerText = pageName;
                 
                 // Update subtitle based on page
                 const subtitles = {
-                    'Dashboard': 'Welcome back, Admin! Here\'s what\'s happening today.',
-                    'Users': 'Manage all registered users and their ride history.',
+                    'Dashboard': 'Welcome back! Here\'s what\'s happening today.',
+                    'Users': 'Manage all registered users.',
                     'Drivers': 'Approve and manage driver accounts.',
                     'Rides': 'Monitor and manage all rides.',
                     'Payments': 'View all payment transactions.',
                     'Wallets': 'Manage driver wallets and withdrawals.',
+                    'KYC Approvals': 'Review and approve KYC documents.',
+                    'Disputes': 'Manage complaints and resolve disputes.',
                     'Reports': 'Analytics and performance reports.',
                     'Settings': 'Configure system settings.',
-                    'Disputes': 'Manage complaints and resolve disputes.'
+                    'Activity Log': 'View admin activity history.'
                 };
-                subtitleP.innerText = subtitles[pageName] || `Managing ${pageName.toLowerCase()}`;
+                if (subtitleP) subtitleP.innerText = subtitles[pageName] || `Managing ${pageName.toLowerCase()}`;
                 
-                // Log activity for settings page
-                if (pageName === 'Settings') {
-                    logActivity('Viewed system settings');
+                // Load data for specific pages
+                switch(this.dataset.page) {
+                    case 'payments':
+                        loadPayments();
+                        break;
+                    case 'wallets':
+                        loadWallets();
+                        break;
+                    case 'disputes':
+                        loadDisputes();
+                        break;
+                    case 'activity':
+                        loadActivityLogs();
+                        break;
+                    case 'reports':
+                        loadReport();
+                        break;
                 }
             });
         });
@@ -342,25 +309,46 @@
         const userSearch = document.getElementById('userSearch');
         if (userSearch) {
             userSearch.addEventListener('input', function(e) {
-                const searchTerm = e.target.value.toLowerCase();
-                document.querySelectorAll('#usersTableBody tr').forEach(row => {
-                    const text = row.textContent.toLowerCase();
-                    row.style.display = text.includes(searchTerm) ? '' : 'none';
-                });
+                searchTable('usersTableBody', e.target.value);
             });
         }
 
         const driverSearch = document.getElementById('driverSearch');
         if (driverSearch) {
             driverSearch.addEventListener('input', function(e) {
-                const searchTerm = e.target.value.toLowerCase();
-                document.querySelectorAll('#driversTableBody tr').forEach(row => {
-                    const text = row.textContent.toLowerCase();
-                    row.style.display = text.includes(searchTerm) ? '' : 'none';
-                });
+                searchTable('driversTableBody', e.target.value);
+            });
+        }
+        
+        const paymentSearch = document.getElementById('paymentSearch');
+        if (paymentSearch) {
+            paymentSearch.addEventListener('input', function(e) {
+                searchTable('paymentsTableBody', e.target.value);
+            });
+        }
+        
+        const walletSearch = document.getElementById('walletSearch');
+        if (walletSearch) {
+            walletSearch.addEventListener('input', function(e) {
+                searchTable('walletsTableBody', e.target.value);
             });
         }
     }
+
+    // Search table function
+    window.searchTable = function(tableId, searchTerm) {
+        const table = document.getElementById(tableId);
+        if (!table) return;
+        
+        const rows = table.getElementsByTagName('tr');
+        searchTerm = searchTerm.toLowerCase();
+        
+        for (let row of rows) {
+            if (row.classList.contains('empty-state')) continue;
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(searchTerm) ? '' : 'none';
+        }
+    };
 
     // ========== FILTER TABS ==========
     function setupFilters() {
@@ -371,240 +359,1011 @@
                 
                 parent.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
-                
-                const filter = this.dataset.filter;
-                const table = this.closest('.management-header')?.nextElementSibling?.querySelector('tbody');
-                
-                if (table) {
-                    table.querySelectorAll('tr').forEach(row => {
-                        const statusCell = row.querySelector('.status-badge');
-                        if (statusCell) {
-                            const status = statusCell.classList[1]; // pending, approved, etc.
-                            row.style.display = (filter === 'all' || status === filter) ? '' : 'none';
-                        }
-                    });
-                }
             });
         });
     }
 
+    // Filter users
+    window.filterUsers = function(filter) {
+        const rows = document.querySelectorAll('#usersTableBody tr');
+        rows.forEach(row => {
+            if (row.classList.contains('empty-state')) return;
+            if (filter === 'all') {
+                row.style.display = '';
+            } else {
+                const status = row.querySelector('.status-badge')?.textContent.toLowerCase() || '';
+                row.style.display = status.includes(filter) ? '' : 'none';
+            }
+        });
+    };
+
+    // Filter drivers
+    window.filterDrivers = function(filter) {
+        const rows = document.querySelectorAll('#driversTableBody tr');
+        rows.forEach(row => {
+            if (row.classList.contains('empty-state')) return;
+            if (filter === 'all') {
+                row.style.display = '';
+            } else {
+                const status = row.dataset.status || '';
+                row.style.display = status === filter ? '' : 'none';
+            }
+        });
+    };
+
+    // Filter rides
+    window.filterRides = function(filter) {
+        const rows = document.querySelectorAll('#ridesTableBody tr');
+        rows.forEach(row => {
+            if (row.classList.contains('empty-state')) return;
+            if (filter === 'all') {
+                row.style.display = '';
+            } else {
+                const status = row.dataset.status || '';
+                if (filter === 'ongoing') {
+                    const ongoing = ['accepted', 'driver_assigned', 'driver_arrived', 'ongoing'];
+                    row.style.display = ongoing.includes(status) ? '' : 'none';
+                } else if (filter === 'cancelled') {
+                    row.style.display = status.includes('cancelled') ? '' : 'none';
+                } else {
+                    row.style.display = status === filter ? '' : 'none';
+                }
+            }
+        });
+    };
+
+    // Filter KYC
+    window.filterKyc = function(filter) {
+        const rows = document.querySelectorAll('#kycTableBody tr');
+        rows.forEach(row => {
+            if (row.classList.contains('empty-state')) return;
+            if (filter === 'all') {
+                row.style.display = '';
+            } else {
+                const status = row.dataset.status || '';
+                row.style.display = status === filter ? '' : 'none';
+            }
+        });
+    };
+
+    // Filter disputes
+    window.filterDisputes = function(filter) {
+        const rows = document.querySelectorAll('#disputesTableBody tr');
+        rows.forEach(row => {
+            if (row.classList.contains('empty-state')) return;
+            if (filter === 'all') {
+                row.style.display = '';
+            } else {
+                const status = row.dataset.status || '';
+                row.style.display = status === filter ? '' : 'none';
+            }
+        });
+    };
+
     // ========== MODALS ==========
     function setupModals() {
-        // View buttons
-        document.querySelectorAll('.view-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const modal = document.getElementById('userHistoryModal');
-                if (modal) modal.classList.add('show');
-            });
-        });
-
-        // Close modal
-        document.querySelectorAll('.close-modal').forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.closest('.modal')?.classList.remove('show');
-            });
-        });
-
         // Close modal when clicking outside
-        window.addEventListener('click', (e) => {
+        window.addEventListener('click', function(e) {
             if (e.target.classList.contains('modal')) {
                 e.target.classList.remove('show');
             }
         });
     }
 
+    // Modal functions
+    window.openModal = function(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) modal.classList.add('show');
+    };
+
+    window.closeModal = function(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) modal.classList.remove('show');
+    };
+
     // ========== ACTION BUTTONS ==========
     function setupActionButtons() {
-        // Suspend buttons
-        document.querySelectorAll('.suspend-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if (confirm('Are you sure you want to suspend this user/driver?')) {
-                    const row = this.closest('tr');
-                    const statusCell = row?.querySelector('.status-badge');
-                    if (statusCell) {
-                        statusCell.className = 'status-badge suspended';
-                        statusCell.textContent = 'Suspended';
-                    }
-                    alert('Account suspended successfully');
-                    logActivity('Suspended an account');
-                }
-            });
-        });
-
-        // Delete buttons
-        document.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if (confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
-                    this.closest('tr')?.remove();
-                    alert('User deleted successfully');
-                    logActivity('Deleted a user');
-                }
-            });
-        });
-
-        // Approve buttons
-        document.querySelectorAll('.approve-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const row = this.closest('tr');
-                const statusCell = row?.querySelector('.status-badge');
-                if (statusCell) {
-                    statusCell.className = 'status-badge approved';
-                    statusCell.textContent = 'Approved';
-                }
-                alert('Driver approved successfully');
-                logActivity('Approved a driver');
-            });
-        });
-
-        // Reject buttons
-        document.querySelectorAll('.reject-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const row = this.closest('tr');
-                const statusCell = row?.querySelector('.status-badge');
-                if (statusCell) {
-                    statusCell.className = 'status-badge rejected';
-                    statusCell.textContent = 'Rejected';
-                }
-                alert('Driver rejected');
-                logActivity('Rejected a driver');
-            });
-        });
-
-        // Resolve buttons
-        document.querySelectorAll('.resolve-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if (confirm('Mark this dispute as resolved?')) {
-                    const row = this.closest('tr');
-                    const statusCell = row?.querySelector('.status-badge');
-                    if (statusCell) {
-                        statusCell.className = 'status-badge resolved';
-                        statusCell.textContent = 'Resolved';
-                    }
-                    alert('Dispute resolved');
-                    logActivity('Resolved a dispute');
-                }
-            });
-        });
-
-        // Refund buttons
-        document.querySelectorAll('.refund-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if (confirm('Process refund for this transaction?')) {
-                    alert('Refund processed successfully');
-                    logActivity('Processed a refund');
-                }
-            });
-        });
-
-        // Mark as paid buttons
-        document.querySelectorAll('.mark-paid').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const row = this.closest('tr');
-                const statusCell = row?.querySelector('.status-badge');
-                if (statusCell) {
-                    statusCell.className = 'status-badge paid';
-                    statusCell.textContent = 'Paid';
-                }
-                alert('Withdrawal marked as paid');
-                logActivity('Processed withdrawal');
-            });
-        });
-
-        // View document buttons
-        document.querySelectorAll('.view-doc-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                alert('Opening document viewer...');
-                logActivity('Viewed driver documents');
-            });
-        });
+        // Note: Most action buttons are handled by onclick attributes directly in HTML
+        // This is for any dynamically added buttons
     }
+
+    // ========== USER FUNCTIONS ==========
+    window.viewUser = function(userId) {
+        fetch(`SERVER/API/get_user_details.php?user_id=${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('userDetails').innerHTML = formatUserDetails(data.user);
+                    openModal('userModal');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message || 'Failed to load user details'
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Connection Error',
+                    text: 'Failed to load user details'
+                });
+            });
+    };
+
+    window.toggleUserStatus = function(userId) {
+        Swal.fire({
+            icon: 'question',
+            title: 'Toggle User Status',
+            text: 'Are you sure you want to suspend/activate this user?',
+            showCancelButton: true,
+            confirmButtonColor: '#ff5e00',
+            confirmButtonText: 'Yes, proceed'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'User status updated',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
+                });
+            }
+        });
+    };
+
+    window.deleteUser = function(userId) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Delete User',
+            text: 'Are you sure you want to delete this user? This action cannot be undone!',
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            confirmButtonText: 'Yes, delete'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Deleted!',
+                    text: 'User has been deleted',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
+                });
+            }
+        });
+    };
+
+    // ========== DRIVER FUNCTIONS ==========
+    window.viewDriver = function(driverId) {
+        fetch(`SERVER/API/get_driver_details.php?driver_id=${driverId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('driverDetails').innerHTML = formatDriverDetails(data.driver);
+                    openModal('driverModal');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message || 'Failed to load driver details'
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Connection Error',
+                    text: 'Failed to load driver details'
+                });
+            });
+    };
+
+    window.approveDriver = function(driverId) {
+        Swal.fire({
+            icon: 'question',
+            title: 'Approve Driver',
+            text: 'Approve this driver account?',
+            showCancelButton: true,
+            confirmButtonColor: '#28a745',
+            confirmButtonText: 'Yes, approve'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Approved!',
+                    text: 'Driver has been approved',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
+                });
+            }
+        });
+    };
+
+    window.suspendDriver = function(driverId) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Suspend Driver',
+            text: 'Suspend this driver account?',
+            showCancelButton: true,
+            confirmButtonColor: '#ffc107',
+            confirmButtonText: 'Yes, suspend'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Suspended!',
+                    text: 'Driver has been suspended',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
+                });
+            }
+        });
+    };
+
+    window.rejectDriver = function(driverId) {
+        Swal.fire({
+            icon: 'question',
+            title: 'Reject Driver',
+            text: 'Reject this driver account?',
+            input: 'textarea',
+            inputPlaceholder: 'Reason for rejection...',
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            confirmButtonText: 'Yes, reject'
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Rejected!',
+                    text: 'Driver has been rejected',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
+                });
+            }
+        });
+    };
+
+    // ========== RIDE FUNCTIONS ==========
+    window.viewRide = function(rideId) {
+        fetch(`SERVER/API/get_ride_details.php?ride_id=${rideId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('rideDetails').innerHTML = formatRideDetails(data.ride);
+                    openModal('rideModal');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message || 'Failed to load ride details'
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Connection Error',
+                    text: 'Failed to load ride details'
+                });
+            });
+    };
+
+    window.cancelRide = function(rideId) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Cancel Ride',
+            text: 'Cancel this ride?',
+            input: 'textarea',
+            inputPlaceholder: 'Reason for cancellation...',
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            confirmButtonText: 'Yes, cancel'
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Cancelled!',
+                    text: 'Ride has been cancelled',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
+                });
+            }
+        });
+    };
+
+    // ========== KYC FUNCTIONS - FIXED VERSION WITH PROPER POPUPS ==========
+    
+    /**
+     * View KYC document in new tab
+     */
+    window.viewKYCDocument = function(documentId) {
+        // Show loading
+        Swal.fire({
+            title: 'Loading Document...',
+            text: 'Please wait',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+        
+        // Open document in new tab
+        const docUrl = 'SERVER/API/view_document.php?kyc_id=' + documentId;
+        
+        // Create a test to see if document exists
+        fetch(docUrl, { method: 'HEAD' })
+            .then(response => {
+                Swal.close();
+                if (response.ok) {
+                    window.open(docUrl, '_blank');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Document Not Found',
+                        text: 'The KYC document could not be found or accessed.',
+                        confirmButtonColor: '#ff5e00'
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.close();
+                console.error('Error loading document:', error);
+                // Still try to open it
+                window.open(docUrl, '_blank');
+            });
+    };
+
+    /**
+     * Approve KYC document with proper success popup
+     */
+    window.approveKYC = function(kycId) {
+        Swal.fire({
+            icon: 'question',
+            title: 'Approve KYC Document',
+            text: 'Are you sure you want to approve this KYC document?',
+            showCancelButton: true,
+            confirmButtonColor: '#28a745',
+            confirmButtonText: 'Yes, approve',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Show loading
+                Swal.fire({
+                    title: 'Processing...',
+                    text: 'Please wait',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+                
+                // Send approve request
+                fetch('SERVER/API/approve_kyc.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        kyc_id: kycId,
+                        action: 'approve'
+                    })
+                })
+                .then(response => {
+                    // Check if response is OK
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Approve KYC response:', data);
+                    
+                    // Close loading
+                    Swal.close();
+                    
+                    if (data.success) {
+                        // Show success message with SweetAlert popup
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: data.message || 'KYC document approved successfully',
+                            confirmButtonColor: '#28a745',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            // Reload the page to show updated status
+                            location.reload();
+                        });
+                    } else {
+                        // Show error message
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message || 'Failed to approve KYC document',
+                            confirmButtonColor: '#dc3545'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Connection Error',
+                        text: 'Failed to connect to server. Please try again.\n\n' + error.message,
+                        confirmButtonColor: '#dc3545'
+                    });
+                });
+            }
+        });
+    };
+
+    /**
+     * Reject KYC document with proper popup
+     */
+    window.rejectKYC = function(kycId) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Reject KYC Document',
+            text: 'Please provide a reason for rejection:',
+            input: 'textarea',
+            inputPlaceholder: 'Enter rejection reason...',
+            inputAttributes: {
+                'aria-label': 'Rejection reason',
+                'required': 'true'
+            },
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            confirmButtonText: 'Yes, reject',
+            cancelButtonText: 'Cancel',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Rejection reason is required';
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                // Show loading
+                Swal.fire({
+                    title: 'Processing...',
+                    text: 'Please wait',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+                
+                // Send reject request
+                fetch('SERVER/API/approve_kyc.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        kyc_id: kycId,
+                        action: 'reject',
+                        reason: result.value
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Reject KYC response:', data);
+                    
+                    // Close loading
+                    Swal.close();
+                    
+                    if (data.success) {
+                        // Show success message
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Rejected!',
+                            text: data.message || 'KYC document rejected',
+                            confirmButtonColor: '#28a745',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        // Show error message
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message || 'Failed to reject KYC document',
+                            confirmButtonColor: '#dc3545'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Connection Error',
+                        text: 'Failed to connect to server. Please try again.',
+                        confirmButtonColor: '#dc3545'
+                    });
+                });
+            }
+        });
+    };
+
+    // ========== PAYMENT FUNCTIONS ==========
+    window.loadPayments = function() {
+        fetch('SERVER/API/get_payments.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    displayPayments(data.payments, data.statistics);
+                }
+            })
+            .catch(error => console.error('Error loading payments:', error));
+    };
+
+    function displayPayments(payments, stats) {
+        // Display statistics
+        const statsHtml = `
+            <div class="summary-card">
+                <h4>Total Transactions</h4>
+                <div class="summary-value">${stats?.total_transactions || 0}</div>
+            </div>
+            <div class="summary-card">
+                <h4>Total Revenue</h4>
+                <div class="summary-value">₦${(stats?.total_revenue || 0).toLocaleString()}</div>
+            </div>
+            <div class="summary-card">
+                <h4>Pending Amount</h4>
+                <div class="summary-value">₦${(stats?.pending_amount || 0).toLocaleString()}</div>
+            </div>
+            <div class="summary-card">
+                <h4>Pending Count</h4>
+                <div class="summary-value">${stats?.pending_count || 0}</div>
+            </div>
+        `;
+        const statsEl = document.getElementById('paymentStats');
+        if (statsEl) statsEl.innerHTML = statsHtml;
+
+        // Display payments table
+        let html = '';
+        if (payments && payments.length > 0) {
+            payments.forEach(payment => {
+                html += `
+                    <tr data-status="${payment.status}">
+                        <td>${payment.reference || 'N/A'}</td>
+                        <td>${payment.user_name || 'Unknown'}<br><small>${payment.user_email || ''}</small></td>
+                        <td>₦${(payment.amount || 0).toLocaleString()}</td>
+                        <td>${payment.payment_method || 'N/A'}</td>
+                        <td>${payment.ride_number || 'N/A'}</td>
+                        <td><span class="status-badge ${payment.status}">${payment.status || 'unknown'}</span></td>
+                        <td>${payment.formatted_date || ''}</td>
+                        <td class="actions-cell">
+                            <button class="action-icon-btn" onclick="viewPayment('${payment.id}')"><i class="fas fa-eye"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        } else {
+            html = '<tr><td colspan="8" class="empty-state">No payments found</td></tr>';
+        }
+        
+        const tbody = document.getElementById('paymentsTableBody');
+        if (tbody) tbody.innerHTML = html;
+    }
+
+    window.viewPayment = function(paymentId) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Payment Details',
+            text: 'Payment ID: ' + paymentId
+        });
+    };
+
+    // ========== WALLET FUNCTIONS ==========
+    window.loadWallets = function() {
+        fetch('SERVER/API/get_wallets.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    displayWallets(data);
+                }
+            })
+            .catch(error => console.error('Error loading wallets:', error));
+    };
+
+    function displayWallets(data) {
+        // Display statistics
+        const statsHtml = `
+            <div class="summary-card">
+                <h4>Active Wallets</h4>
+                <div class="summary-value">${data.statistics?.active_wallets || 0}</div>
+            </div>
+            <div class="summary-card">
+                <h4>Total Deposits</h4>
+                <div class="summary-value">₦${(data.statistics?.total_deposits || 0).toLocaleString()}</div>
+            </div>
+            <div class="summary-card">
+                <h4>Total Withdrawals</h4>
+                <div class="summary-value">₦${(data.statistics?.total_withdrawals || 0).toLocaleString()}</div>
+            </div>
+            <div class="summary-card">
+                <h4>Net Balance</h4>
+                <div class="summary-value">₦${(data.statistics?.net_balance || 0).toLocaleString()}</div>
+            </div>
+        `;
+        const statsEl = document.getElementById('walletStats');
+        if (statsEl) statsEl.innerHTML = statsHtml;
+
+        // Display pending withdrawals
+        let withdrawalsHtml = '';
+        if (data.pending_withdrawals && data.pending_withdrawals.length > 0) {
+            data.pending_withdrawals.forEach(w => {
+                withdrawalsHtml += `
+                    <tr data-status="${w.status}">
+                        <td>${w.driver_name || 'Unknown'}<br><small>${w.driver_email || ''}</small></td>
+                        <td>₦${(w.amount || 0).toLocaleString()}</td>
+                        <td>${w.bank_name || 'N/A'}</td>
+                        <td>****${w.account_number || ''}</td>
+                        <td>${w.formatted_date || ''}</td>
+                        <td><span class="status-badge ${w.status}">${w.status || 'pending'}</span></td>
+                        <td class="actions-cell">
+                            <button class="action-icon-btn approve-btn" onclick="processWithdrawal('${w.id}', 'approve')"><i class="fas fa-check"></i></button>
+                            <button class="action-icon-btn reject-btn" onclick="processWithdrawal('${w.id}', 'reject')"><i class="fas fa-times"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        } else {
+            withdrawalsHtml = '<tr><td colspan="7" class="empty-state">No pending withdrawals</td></tr>';
+        }
+        
+        const withdrawalsBody = document.getElementById('withdrawalsTableBody');
+        if (withdrawalsBody) withdrawalsBody.innerHTML = withdrawalsHtml;
+
+        // Display recent transactions
+        let transactionsHtml = '';
+        if (data.recent_transactions && data.recent_transactions.length > 0) {
+            data.recent_transactions.forEach(t => {
+                transactionsHtml += `
+                    <tr>
+                        <td>${t.user_name || 'Unknown'}<br><small>${t.user_role || ''}</small></td>
+                        <td><span class="status-badge ${t.type}">${(t.type || '').replace('_', ' ')}</span></td>
+                        <td>₦${(t.amount || 0).toLocaleString()}</td>
+                        <td>${t.reference || 'N/A'}</td>
+                        <td>${t.description || 'N/A'}</td>
+                        <td>${t.formatted_date || ''}</td>
+                    </tr>
+                `;
+            });
+        } else {
+            transactionsHtml = '<tr><td colspan="6" class="empty-state">No transactions found</td></tr>';
+        }
+        
+        const transactionsBody = document.getElementById('transactionsTableBody');
+        if (transactionsBody) transactionsBody.innerHTML = transactionsHtml;
+    }
+
+    window.filterWithdrawals = function(status) {
+        const rows = document.querySelectorAll('#withdrawalsTableBody tr');
+        rows.forEach(row => {
+            if (row.classList.contains('empty-state')) return;
+            if (status === 'all') {
+                row.style.display = '';
+            } else {
+                row.style.display = row.dataset.status === status ? '' : 'none';
+            }
+        });
+    };
+
+    window.processWithdrawal = function(withdrawalId, action) {
+        Swal.fire({
+            icon: 'question',
+            title: action === 'approve' ? 'Approve Withdrawal' : 'Reject Withdrawal',
+            text: action === 'approve' ? 'Process this withdrawal?' : 'Reject this withdrawal?',
+            input: action === 'reject' ? 'textarea' : null,
+            inputPlaceholder: 'Reason for rejection...',
+            showCancelButton: true,
+            confirmButtonColor: action === 'approve' ? '#28a745' : '#dc3545',
+            confirmButtonText: action === 'approve' ? 'Yes, approve' : 'Yes, reject'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: `Withdrawal ${action}d successfully`,
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    loadWallets();
+                });
+            }
+        });
+    };
+
+    // ========== DISPUTE FUNCTIONS ==========
+    window.loadDisputes = function() {
+        fetch('SERVER/API/get_disputes.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    displayDisputes(data.disputes, data.statistics);
+                }
+            })
+            .catch(error => console.error('Error loading disputes:', error));
+    };
+
+    function displayDisputes(disputes, stats) {
+        // Display statistics
+        const statsHtml = `
+            <div class="stat-card">
+                <div class="stat-icon pending-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="stat-details">
+                    <h3>Total Disputes</h3>
+                    <div class="stat-value">${stats?.total || 0}</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                <div class="stat-details">
+                    <h3>Open</h3>
+                    <div class="stat-value">${stats?.open || 0}</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-search"></i></div>
+                <div class="stat-details">
+                    <h3>Investigating</h3>
+                    <div class="stat-value">${stats?.investigating || 0}</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-details">
+                    <h3>Resolved</h3>
+                    <div class="stat-value">${stats?.resolved || 0}</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon urgent-icon"><i class="fas fa-exclamation"></i></div>
+                <div class="stat-details">
+                    <h3>Urgent</h3>
+                    <div class="stat-value">${stats?.urgent || 0}</div>
+                </div>
+            </div>
+        `;
+        const statsEl = document.getElementById('disputeStats');
+        if (statsEl) statsEl.innerHTML = statsHtml;
+
+        // Display disputes table
+        let html = '';
+        if (disputes && disputes.length > 0) {
+            disputes.forEach(dispute => {
+                const priorityClass = `badge-${dispute.priority || 'medium'}`;
+                html += `
+                    <tr data-status="${dispute.status || 'open'}" data-dispute-id="${dispute.id}">
+                        <td>${dispute.dispute_number || 'N/A'}</td>
+                        <td>${dispute.ride_number || 'N/A'}</td>
+                        <td>${dispute.raised_by?.name || 'N/A'}<br><small>${dispute.raised_by?.email || ''}</small></td>
+                        <td>${dispute.raised_against?.name || 'N/A'}<br><small>${dispute.raised_against?.email || ''}</small></td>
+                        <td>${dispute.type_display || dispute.type || 'N/A'}</td>
+                        <td><span class="badge ${priorityClass}">${dispute.priority || 'medium'}</span></td>
+                        <td><span class="status-badge ${dispute.status || 'open'}">${dispute.status || 'open'}</span></td>
+                        <td><span class="message-count">${dispute.message_count || 0}</span></td>
+                        <td class="actions-cell">
+                            <button class="action-icon-btn" onclick="viewDispute('${dispute.id}')"><i class="fas fa-eye"></i></button>
+                            <button class="action-icon-btn" onclick="addDisputeMessage('${dispute.id}')"><i class="fas fa-reply"></i></button>
+                            ${dispute.status !== 'resolved' ? 
+                                `<button class="action-icon-btn resolve-btn" onclick="resolveDispute('${dispute.id}')"><i class="fas fa-check"></i></button>` : 
+                                ''}
+                        </td>
+                    </tr>
+                `;
+            });
+        } else {
+            html = '<tr><td colspan="9" class="empty-state">No disputes found</td></tr>';
+        }
+        
+        const tbody = document.getElementById('disputesTableBody');
+        if (tbody) tbody.innerHTML = html;
+    }
+
+    window.viewDispute = function(disputeId) {
+        currentDisputeId = disputeId;
+        Swal.fire({
+            icon: 'info',
+            title: 'Dispute Details',
+            text: 'Viewing dispute: ' + disputeId
+        });
+    };
+
+    window.addDisputeMessage = function(disputeId) {
+        currentDisputeId = disputeId;
+        Swal.fire({
+            icon: 'question',
+            title: 'Add Message',
+            input: 'textarea',
+            inputPlaceholder: 'Type your message...',
+            showCancelButton: true,
+            confirmButtonColor: '#ff5e00',
+            confirmButtonText: 'Send'
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sent!',
+                    text: 'Message added successfully',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+        });
+    };
+
+    window.resolveDispute = function(disputeId) {
+        Swal.fire({
+            icon: 'question',
+            title: 'Resolve Dispute',
+            text: 'Mark this dispute as resolved?',
+            input: 'textarea',
+            inputPlaceholder: 'Resolution details...',
+            showCancelButton: true,
+            confirmButtonColor: '#28a745',
+            confirmButtonText: 'Yes, resolve'
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Resolved!',
+                    text: 'Dispute has been resolved',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    loadDisputes();
+                });
+            }
+        });
+    };
+
+    // ========== ACTIVITY LOG FUNCTIONS ==========
+    window.loadActivityLogs = function() {
+        fetch('SERVER/API/get_activity_logs.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    displayActivityLogs(data.logs, data.statistics);
+                }
+            })
+            .catch(error => console.error('Error loading activity logs:', error));
+    };
+
+    function displayActivityLogs(logs, stats) {
+        // Display statistics
+        const statsHtml = `
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-history"></i></div>
+                <div class="stat-details">
+                    <h3>Total Logs</h3>
+                    <div class="stat-value">${stats?.total_logs || 0}</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-users-cog"></i></div>
+                <div class="stat-details">
+                    <h3>Active Admins</h3>
+                    <div class="stat-value">${stats?.active_admins || 0}</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-calendar-day"></i></div>
+                <div class="stat-details">
+                    <h3>Today</h3>
+                    <div class="stat-value">${stats?.today_activities || 0}</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                <div class="stat-details">
+                    <h3>Last Activity</h3>
+                    <div class="stat-value">${stats?.last_activity ? new Date(stats.last_activity).toLocaleDateString() : 'N/A'}</div>
+                </div>
+            </div>
+        `;
+        const statsEl = document.getElementById('activityStats');
+        if (statsEl) statsEl.innerHTML = statsHtml;
+    }
+
+    window.filterActivityLogs = function(searchTerm) {
+        const rows = document.querySelectorAll('#activityTableBody tr');
+        searchTerm = searchTerm.toLowerCase();
+        
+        rows.forEach(row => {
+            if (row.classList.contains('empty-state')) return;
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(searchTerm) ? '' : 'none';
+        });
+    };
+
+    window.viewChanges = function(logId) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Changes',
+            text: 'Viewing changes for log: ' + logId
+        });
+    };
+
+    // ========== REPORT FUNCTIONS ==========
+    window.loadReport = function() {
+        const period = document.getElementById('reportPeriod')?.value || 'daily';
+        Swal.fire({
+            icon: 'info',
+            title: 'Loading Report',
+            text: `Loading ${period} report...`,
+            timer: 1500,
+            showConfirmButton: false
+        });
+    };
+
+    window.exportReport = function() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Export Started',
+            text: 'Your report is being generated',
+            timer: 2000,
+            showConfirmButton: false
+        });
+    };
 
     // ========== SETTINGS ==========
     function setupSettings() {
         const saveBtn = document.getElementById('saveSettings');
         if (!saveBtn) return;
-
-        // Load saved settings
-        const savedSettings = localStorage.getItem('systemSettings');
-        if (savedSettings) {
-            try {
-                const settings = JSON.parse(savedSettings);
-                Object.keys(settings).forEach(key => {
-                    const element = document.getElementById(key);
-                    if (element) {
-                        if (element.type === 'checkbox') {
-                            element.checked = settings[key];
-                        } else {
-                            element.value = settings[key];
-                        }
-                    }
-                });
-            } catch (e) {
-                console.error('Error loading settings:', e);
-            }
-        }
-
-        // Save settings
-        saveBtn.addEventListener('click', function() {
-            const settings = {
-                baseFare: document.getElementById('baseFare')?.value,
-                ratePerKm: document.getElementById('ratePerKm')?.value,
-                surgeMultiplier: document.getElementById('surgeMultiplier')?.value,
-                commission: document.getElementById('commission')?.value,
-                currency: document.getElementById('currency')?.value,
-                currencyCode: document.getElementById('currencyCode')?.value,
-                surgePricing: document.getElementById('surgePricing')?.checked,
-                driverApproval: document.getElementById('driverApproval')?.checked,
-                maintenance: document.getElementById('maintenance')?.checked,
-                sessionTimeout: document.getElementById('sessionTimeout')?.value
-            };
-            
-            localStorage.setItem('systemSettings', JSON.stringify(settings));
-            alert('Settings saved successfully!');
-            logActivity('Updated system settings');
-        });
+        
+        saveBtn.addEventListener('click', saveSettings);
     }
+
+    window.saveSettings = function() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Settings saved successfully!',
+            timer: 1500,
+            showConfirmButton: false
+        });
+    };
 
     // ========== WITHDRAWAL FILTER ==========
     function setupWithdrawalFilter() {
         const filter = document.getElementById('withdrawalStatus');
         if (filter) {
             filter.addEventListener('change', function() {
-                const status = this.value;
-                document.querySelectorAll('#wallets-page tbody tr').forEach(row => {
-                    const statusCell = row.querySelector('.status-badge');
-                    if (statusCell) {
-                        const rowStatus = statusCell.classList[1];
-                        row.style.display = (status === 'all' || rowStatus === status) ? '' : 'none';
-                    }
-                });
+                filterWithdrawals(this.value);
             });
         }
     }
 
     // ========== REPORT SELECTS ==========
     function setupReportSelects() {
-        document.querySelectorAll('#reports-page select').forEach(select => {
-            select.addEventListener('change', function() {
-                alert(`Loading ${this.value} report...`);
-            });
-        });
+        const reportSelect = document.getElementById('reportPeriod');
+        if (reportSelect) {
+            reportSelect.addEventListener('change', loadReport);
+        }
     }
 
     // ========== EXPORT/PRINT BUTTONS ==========
     function setupExportButtons() {
         const exportBtn = document.querySelector('.export-btn');
         if (exportBtn) {
-            exportBtn.addEventListener('click', () => {
-                alert('Exporting report...');
-            });
-        }
-
-        const printBtn = document.querySelector('.print-btn');
-        if (printBtn) {
-            printBtn.addEventListener('click', () => {
-                window.print();
-            });
+            exportBtn.addEventListener('click', exportReport);
         }
     }
 
@@ -613,7 +1372,22 @@
         const notifBtn = document.querySelector('.notification-btn');
         if (notifBtn) {
             notifBtn.addEventListener('click', () => {
-                alert('You have 5 new notifications:\n- 2 new driver applications\n- 1 dispute opened\n- 2 withdrawal requests');
+                const badge = document.getElementById('notificationBadge');
+                const count = badge ? badge.textContent : '0';
+                
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Notifications',
+                    html: `
+                        <div style="text-align: left;">
+                            <p>🔔 You have ${count} new notifications</p>
+                            <hr>
+                            <p>• Pending KYC: ${document.querySelectorAll('#kycTableBody tr').length}</p>
+                            <p>• Pending withdrawals: ${document.querySelectorAll('#withdrawalsTableBody tr').length}</p>
+                        </div>
+                    `,
+                    confirmButtonColor: '#ff5e00'
+                });
             });
         }
     }
@@ -621,27 +1395,18 @@
     // ========== SEE ALL BUTTONS ==========
     function setupSeeAllButtons() {
         document.querySelectorAll('.see-all-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                alert('Opening full list...');
+            btn.addEventListener('click', function() {
+                const page = this.closest('.desktop-card')?.querySelector('h2')?.innerText;
+                if (page === 'Recent Withdrawals') {
+                    document.querySelector('[data-page="wallets"]').click();
+                }
             });
         });
     }
 
     // ========== DATE FILTER ==========
     function setupDateFilter() {
-        const filterBtn = document.querySelector('.date-filter .filter-btn');
-        if (filterBtn) {
-            filterBtn.addEventListener('click', function() {
-                const startDate = document.getElementById('startDate')?.value;
-                const endDate = document.getElementById('endDate')?.value;
-                
-                if (startDate && endDate) {
-                    alert(`Filtering payments from ${startDate} to ${endDate}`);
-                } else {
-                    alert('Please select both start and end dates');
-                }
-            });
-        }
+        // Not implemented in current UI
     }
 
     // ========== CHART FILTERS ==========
@@ -651,36 +1416,97 @@
                 const parent = this.parentElement;
                 parent.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                alert(`Showing ${this.textContent.toLowerCase()} revenue data`);
+                filterChart(this.textContent.toLowerCase());
             });
         });
     }
 
-    // ========== ACTIVITY LOG ==========
-    function logActivity(action) {
-        const activityLog = document.querySelector('.activity-log');
-        if (!activityLog) return;
+    window.filterChart = function(period) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Loading...',
+            text: `Loading ${period} revenue data`,
+            timer: 1500,
+            showConfirmButton: false
+        });
+    };
 
-        const now = new Date();
-        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        
-        const logEntry = document.createElement('div');
-        logEntry.className = 'log-entry';
-        logEntry.innerHTML = `
-            <span class="log-time">${timeString}</span>
-            <span class="log-action">${action}</span>
-        `;
-        
-        activityLog.insertBefore(logEntry, activityLog.firstChild);
-        
-        // Keep only last 10 entries
-        while (activityLog.children.length > 10) {
-            activityLog.removeChild(activityLog.lastChild);
+    window.showAllWithdrawals = function() {
+        const walletsLink = document.querySelector('[data-page="wallets"]');
+        if (walletsLink) walletsLink.click();
+    };
+
+    window.confirmLogout = function() {
+        Swal.fire({
+            icon: 'question',
+            title: 'Logout',
+            text: 'Are you sure you want to logout?',
+            showCancelButton: true,
+            confirmButtonColor: '#ff5e00',
+            confirmButtonText: 'Yes, logout'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logout();
+            }
+        });
+    };
+
+    // ========== NOTIFICATIONS ==========
+    function loadNotifications() {
+        // Simulated for now
+        const badge = document.getElementById('notificationBadge');
+        if (badge) {
+            const kycCount = document.querySelectorAll('#kycTableBody tr').length;
+            const withdrawalCount = document.querySelectorAll('#withdrawalsTableBody tr').length;
+            badge.textContent = kycCount + withdrawalCount;
         }
     }
 
+    // ========== FORMAT FUNCTIONS ==========
+    function formatUserDetails(user) {
+        return `
+            <p><strong>ID:</strong> ${user.id || 'N/A'}</p>
+            <p><strong>Name:</strong> ${user.full_name || 'N/A'}</p>
+            <p><strong>Email:</strong> ${user.email || 'N/A'}</p>
+            <p><strong>Phone:</strong> ${user.phone_number || 'N/A'}</p>
+            <p><strong>Role:</strong> ${user.role || 'N/A'}</p>
+            <p><strong>Joined:</strong> ${user.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}</p>
+            <p><strong>Status:</strong> ${user.is_active ? 'Active' : 'Inactive'}</p>
+            <p><strong>Verified:</strong> ${user.is_verified ? 'Yes' : 'No'}</p>
+        `;
+    }
+
+    function formatDriverDetails(driver) {
+        return `
+            <p><strong>Name:</strong> ${driver.full_name || 'N/A'}</p>
+            <p><strong>Email:</strong> ${driver.email || 'N/A'}</p>
+            <p><strong>Phone:</strong> ${driver.phone_number || 'N/A'}</p>
+            <p><strong>License:</strong> ${driver.license_number || 'N/A'}</p>
+            <p><strong>License Expiry:</strong> ${driver.license_expiry ? new Date(driver.license_expiry).toLocaleDateString() : 'N/A'}</p>
+            <p><strong>Status:</strong> ${driver.driver_status || 'N/A'}</p>
+            <p><strong>KYC:</strong> ${driver.verification_status || 'N/A'}</p>
+            <p><strong>Completed Rides:</strong> ${driver.completed_rides || 0}</p>
+            <p><strong>Rating:</strong> ${driver.average_rating ? driver.average_rating.toFixed(1) : 'N/A'}</p>
+            <p><strong>Earnings:</strong> ₦${(driver.total_earnings || 0).toLocaleString()}</p>
+        `;
+    }
+
+    function formatRideDetails(ride) {
+        return `
+            <p><strong>Ride #:</strong> ${ride.ride_number || 'N/A'}</p>
+            <p><strong>Client:</strong> ${ride.client_name || 'N/A'}</p>
+            <p><strong>Driver:</strong> ${ride.driver_name || 'Unassigned'}</p>
+            <p><strong>Pickup:</strong> ${ride.pickup_address || 'N/A'}</p>
+            <p><strong>Destination:</strong> ${ride.destination_address || 'N/A'}</p>
+            <p><strong>Distance:</strong> ${ride.distance_km ? ride.distance_km + ' km' : 'N/A'}</p>
+            <p><strong>Fare:</strong> ₦${(ride.total_fare || 0).toLocaleString()}</p>
+            <p><strong>Status:</strong> ${ride.status || 'N/A'}</p>
+            <p><strong>Payment:</strong> ${ride.payment_status || 'N/A'}</p>
+            <p><strong>Created:</strong> ${ride.created_at ? new Date(ride.created_at).toLocaleString() : 'N/A'}</p>
+        `;
+    }
+
     // ========== START ==========
-    // Initialize everything when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {

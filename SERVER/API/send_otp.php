@@ -17,6 +17,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
+// Enable error logging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $email = $_POST['email'] ?? '';
@@ -56,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $deleteStmt->close();
 
     // Save new OTP
-    $insertStmt = $conn->prepare("INSERT INTO password_resets (user_id, token, expires_at) VALUES (?, ?, ?)");
+    $insertStmt = $conn->prepare("INSERT INTO password_resets (id, user_id, token, expires_at) VALUES (UUID(), ?, ?, ?)");
     $insertStmt->bind_param("sss", $user['id'], $otp, $expires);
     $insertStmt->execute();
     $insertStmt->close();
@@ -65,14 +69,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail = new PHPMailer(true);
 
     try {
-        // Server settings - Using port 465 as 587 was blocked
+        // Server settings
         $mail->SMTPDebug = SMTP::DEBUG_OFF;
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
         $mail->Username   = 'ojimabojames@gmail.com';
-        $mail->Password   = 'nlnnjiwsdxyvesuh'; // App password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // SSL for port 465
+        $mail->Password   = 'sewp zxyw putm cvht';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
         
         // SSL options for local development
@@ -127,9 +131,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'message' => 'OTP sent successfully to your email'
         ]);
     } catch (Exception $e) {
+        error_log("PHPMailer Error: " . $mail->ErrorInfo);
         echo json_encode([
             'status' => 'error',
-            'message' => 'Failed to send email. Error: ' . $mail->ErrorInfo
+            'message' => 'Failed to send email. Please try again.'
         ]);
     }
 
@@ -141,4 +146,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'message' => 'Invalid request method'
     ]);
 }
-?> 
+?>

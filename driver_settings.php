@@ -166,427 +166,11 @@ if ($totalStmt) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link src='stylesheet' href="./CSS/client_dashboard.css" >
+    <link rel="stylesheet" href="./CSS/driver_settings.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel='stylesheet' href="./CSS/driver_dashboard.css" >
     
-    <style>
-        /* Keep all your existing CSS styles here - they're fine */
-        * {
-            font-family: 'Poppins', sans-serif;
-        }
-        body {
-            background: #f5f7fa;
-        }
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-        }
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .3s;
-            border-radius: 24px;
-        }
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 20px;
-            width: 20px;
-            left: 2px;
-            bottom: 2px;
-            background-color: white;
-            transition: .3s;
-            border-radius: 50%;
-        }
-        input:checked + .toggle-slider {
-            background-color: #ff5e00;
-        }
-        input:checked + .toggle-slider:before {
-            transform: translateX(26px);
-        }
-        .settings-section {
-            background: white;
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-        .settings-section:hover {
-            box-shadow: 0 8px 25px rgba(255,94,0,0.1);
-        }
-        .settings-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        .settings-header i {
-            font-size: 24px;
-            color: #ff5e00;
-            background: #fff2e5;
-            padding: 10px;
-            border-radius: 12px;
-        }
-        .settings-header h2 {
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-        }
-        .settings-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .settings-item:hover {
-            background: #f9f9f9;
-            padding-left: 10px;
-            padding-right: 10px;
-            border-radius: 10px;
-        }
-        .settings-item:last-child {
-            border-bottom: none;
-        }
-        .settings-item-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .settings-item-icon {
-            width: 45px;
-            height: 45px;
-            background: #fff2e5;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ff5e00;
-            font-size: 20px;
-        }
-        .settings-item-details h3 {
-            font-weight: 600;
-            margin-bottom: 4px;
-            font-size: 15px;
-            color: #333;
-        }
-        .settings-item-details p {
-            font-size: 13px;
-            color: #888;
-        }
-        .settings-item-action {
-            color: #999;
-        }
-        .settings-item-value {
-            font-size: 13px;
-            color: #ff5e00;
-            font-weight: 500;
-            margin-right: 10px;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #ff5e00 0%, #ff8c3a 100%);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(255,94,0,0.3);
-        }
-        .btn-secondary {
-            background: #f5f5f5;
-            color: #666;
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-        }
-        .btn-secondary:hover {
-            background: #e8e8e8;
-        }
-        .btn-danger {
-            background: #fee2e2;
-            color: #dc2626;
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-        }
-        .btn-danger:hover {
-            background: #fecaca;
-        }
-        .status-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        .status-verified {
-            background: #d4edda;
-            color: #155724;
-        }
-        .status-pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-        .status-online {
-            background: #d4edda;
-            color: #155724;
-        }
-        .status-offline {
-            background: #f8f9fa;
-            color: #6c757d;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-        .modal.show {
-            display: flex;
-        }
-        .modal-content {
-            background: white;
-            border-radius: 24px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: modalSlideIn 0.3s ease;
-        }
-        @keyframes modalSlideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        .modal-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid #f0f0f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            background: white;
-            border-radius: 24px 24px 0 0;
-        }
-        .modal-header h3 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #333;
-        }
-        .modal-header button {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #999;
-            transition: color 0.3s;
-        }
-        .modal-header button:hover {
-            color: #ff5e00;
-        }
-        .modal-body {
-            padding: 24px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            color: #555;
-            margin-bottom: 8px;
-        }
-        .form-control {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        .form-control:focus {
-            outline: none;
-            border-color: #ff5e00;
-            box-shadow: 0 0 0 3px rgba(255,94,0,0.1);
-        }
-        .form-control[readonly] {
-            background: #f9f9f9;
-            cursor: not-allowed;
-        }
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 24px;
-        }
-        .bank-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 15px;
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .bank-card:hover {
-            transform: translateY(-3px);
-        }
-        .bank-card.default {
-            border: 3px solid #ffd700;
-        }
-        .bank-card .default-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ffd700;
-            color: #333;
-            padding: 4px 8px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-        .bank-card .bank-name {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        .bank-card .account-number {
-            font-size: 16px;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-        }
-        .bank-card .account-name {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        .notification-toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            border-radius: 12px;
-            color: white;
-            font-weight: 500;
-            z-index: 9999;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            animation: slideInRight 0.3s ease;
-        }
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        .quick-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .stat-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 15px;
-            border-radius: 16px;
-            text-align: center;
-        }
-        .stat-card .stat-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: #ff5e00;
-        }
-        .stat-card .stat-label {
-            font-size: 12px;
-            color: #666;
-            margin-top: 5px;
-        }
-        .profile-avatar-large {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #ff5e00 0%, #ff8c3a 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 40px;
-            font-weight: 600;
-            margin: 0 auto 20px;
-            border: 4px solid white;
-            box-shadow: 0 5px 20px rgba(255,94,0,0.3);
-        }
-        .upload-area {
-            border: 2px dashed #ff5e00;
-            padding: 20px;
-            text-align: center;
-            border-radius: 12px;
-            background: #fff2e5;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .upload-area:hover {
-            background: #ffe5d5;
-        }
-        .upload-area i {
-            font-size: 40px;
-            color: #ff5e00;
-            margin-bottom: 10px;
-        }
-        .hidden-input {
-            display: none;
-        }
-    </style>
 </head>
 <body>
     <!-- REST OF YOUR HTML CONTENT (keep everything exactly as is) -->
@@ -895,28 +479,32 @@ if ($totalStmt) {
         </div>
 
         <!-- Desktop View -->
-        <div class="desktop-view hidden lg:block">
-            <div class="flex min-h-screen">
-                <!-- Sidebar -->
-                <div class="w-72 bg-white shadow-xl fixed h-full">
-                    <div class="p-6">
-                        <img src="./main-assets/logo-no-background.png" alt="Speedly Logo" class="h-42 mb-8">
+                <!-- Desktop View - FIXED -->
+        <div class="desktop-view " >
+            <div class="flex min-h-screen justify-between p-3" >
+                <!-- Sidebar - Fixed width with scroll -->
+                <div>
+                    <div class="p-6 h-full flex flex-col">
+                        <!-- Logo -->
+                        <div class="mb-8">
+                            <img src="./main-assets/logo-no-background.png" alt="Speedly Logo" class="logo-image" style="max-width: 150px;">
+                        </div>
                         
                         <!-- Desktop Navigation -->
                         <?php require_once './components/desktop-driver-nav.php'; ?>
 
-                        <!-- User Profile -->
-                        <div class="absolute bottom-6 left-6 right-6">
-                            <div class="flex items-center gap-3 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition" onclick="window.location.href='driver_profile.php'">
-                                <div class="w-12 h-12 bg-gradient-to-r from-[#ff5e00] to-[#ff8c3a] rounded-full flex items-center justify-center text-white text-xl font-bold">
+                        <!-- User Profile - Now at bottom with proper spacing -->
+                        <div class="mt-auto pt-6">
+                            <div class="desktop-user-profile" onclick="window.location.href='driver_profile.php'">
+                                <div class="desktop-profile-avatar-sidebar">
                                     <?php echo strtoupper(substr($user_name, 0, 1)); ?>
                                 </div>
-                                <div class="flex-1">
-                                    <h3 class="font-semibold"><?php echo htmlspecialchars($user_name); ?></h3>
-                                    <p class="text-sm text-gray-500" id="desktopStatusText"><?php echo $verification_status == 'approved' ? 'Verified Driver' : 'Pending Verification'; ?></p>
+                                <div class="desktop-profile-info">
+                                    <h3><?php echo htmlspecialchars($user_name); ?></h3>
+                                    <p id="desktopStatusText"><?php echo $verification_status == 'approved' ? 'Verified Driver' : 'Pending Verification'; ?></p>
                                 </div>
                                 <span class="status-badge <?php echo $driver_status == 'online' ? 'status-online' : 'status-offline'; ?>" id="desktopStatusBadge">
-                                    <?php echo $driver_status == 'online' ? '● ONLINE' : '○ OFFLINE'; ?>
+                                    <?php echo $driver_status == 'online' ? '●' : '○'; ?>
                                 </span>
                             </div>
                         </div>
@@ -924,242 +512,247 @@ if ($totalStmt) {
                 </div>
 
                 <!-- Main Content -->
-                <div class="flex-1 ml-72 p-8">
+                <div style="margin-right: 250px;" >
                     <!-- Header -->
-                    <div class="flex justify-between items-center mb-8">
-                        <div>
-                            <h1 class="text-3xl font-bold">Driver Settings</h1>
-                            <p class="text-gray-500 mt-1">Manage your driver account, vehicle, and preferences</p>
+                    <div class="desktop-header">
+                        <div class="desktop-title">
+                            <h1>Driver Settings</h1>
+                            <p>Manage your driver account, vehicle, and preferences</p>
                         </div>
-                        <button class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center relative hover:bg-gray-200 transition" onclick="checkNotifications()">
-                            <i class="fas fa-bell text-gray-700 text-xl"></i>
+                        <button class="desktop-notification-btn" onclick="checkNotifications()">
+                            <i class="fas fa-bell"></i>
                             <?php if ($notificationCount > 0): ?>
-                            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center"><?php echo $notificationCount; ?></span>
+                            <span class="notification-badge"><?php echo $notificationCount; ?></span>
                             <?php endif; ?>
                         </button>
                     </div>
 
                     <!-- Driver Status Card -->
-                    <div class="bg-gradient-to-r from-[#ff5e00] to-[#ff8c3a] rounded-2xl p-8 mb-8 text-white">
-                        <div class="flex items-center gap-8">
-                            <div class="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center text-4xl font-bold backdrop-blur">
-                                <?php echo strtoupper(substr($user_name, 0, 1)); ?>
-                            </div>
-                            <div class="flex-1">
-                                <h2 class="text-3xl font-bold"><?php echo htmlspecialchars($user_name); ?></h2>
-                                <p class="text-white/90 mt-1"><?php echo htmlspecialchars($user_email); ?> • <?php echo htmlspecialchars($phone_number); ?></p>
-                                <div class="flex items-center gap-3 mt-4">
-                                    <span class="bg-white/20 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur">
-                                        <?php echo $verification_status == 'approved' ? '✓ Verified Driver' : '⏳ Pending Verification'; ?>
-                                    </span>
-                                    <span class="bg-white/20 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur flex items-center gap-2" id="desktopStatusDisplay">
-                                        <?php if ($driver_status == 'online'): ?>
-                                            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                                            Online
-                                        <?php else: ?>
-                                            <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                                            Offline
-                                        <?php endif; ?>
-                                    </span>
-                                </div>
-                            </div>
-                            <button class="bg-white text-[#ff5e00] px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition" onclick="openModal('driver-profile-modal')">
-                                <i class="fas fa-edit mr-2"></i> Edit Profile
-                            </button>
+                    <div class="driver-status-card">
+                        <div class="driver-avatar-large">
+                            <?php echo strtoupper(substr($user_name, 0, 1)); ?>
                         </div>
+                        <div class="driver-info">
+                            <h2><?php echo htmlspecialchars($user_name); ?></h2>
+                            <p><?php echo htmlspecialchars($user_email); ?> • <?php echo htmlspecialchars($phone_number); ?></p>
+                            <div class="driver-badges">
+                                <span class="driver-badge">
+                                    <?php echo $verification_status == 'approved' ? '✓ Verified Driver' : '⏳ Pending Verification'; ?>
+                                </span>
+                                <span class="driver-badge" id="desktopStatusDisplay">
+                                    <?php if ($driver_status == 'online'): ?>
+                                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse" style="display: inline-block; width: 8px; height: 8px; background: #4ade80; border-radius: 50%;"></span>
+                                        Online
+                                    <?php else: ?>
+                                        <span class="w-2 h-2 bg-gray-400 rounded-full" style="display: inline-block; width: 8px; height: 8px; background: #9ca3af; border-radius: 50%;"></span>
+                                        Offline
+                                    <?php endif; ?>
+                                </span>
+                            </div>
+                        </div>
+                        <button class="driver-edit-btn" onclick="openModal('driver-profile-modal')">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </button>
                     </div>
 
                     <!-- Driver Settings Grid -->
-                    <div class="grid grid-cols-3 gap-6">
+                    <div class="desktop-settings-grid">
                         <!-- Driver Account -->
-                        <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
-                            <div class="flex items-center gap-3 mb-6">
-                                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-[#ff5e00]">
-                                    <i class="fas fa-id-card text-2xl"></i>
-                                </div>
-                                <h3 class="text-lg font-semibold">Driver Account</h3>
+                        <div class="desktop-settings-card">
+                            <div class="desktop-card-header">
+                                <i class="fas fa-id-card"></i>
+                                <h3>Driver Account</h3>
                             </div>
-                            <div class="space-y-2">
-                                <button class="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-xl transition group" onclick="openModal('driver-profile-modal')">
-                                    <div class="flex items-center gap-3">
-                                        <i class="fas fa-user text-gray-400 w-5 group-hover:text-[#ff5e00]"></i>
+                            <div class="desktop-settings-list">
+                                <div class="desktop-settings-item" onclick="openModal('driver-profile-modal')">
+                                    <div class="desktop-item-label">
+                                        <i class="fas fa-user"></i>
                                         <span>Driver Profile</span>
                                     </div>
-                                    <i class="fas fa-chevron-right text-gray-400 group-hover:text-[#ff5e00]"></i>
-                                </button>
-                                <button class="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-xl transition group" onclick="openModal('license-modal')">
-                                    <div class="flex items-center gap-3">
-                                        <i class="fas fa-id-card text-gray-400 w-5 group-hover:text-[#ff5e00]"></i>
+                                    <div class="desktop-item-action">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                                <div class="desktop-settings-item" onclick="openModal('license-modal')">
+                                    <div class="desktop-item-label">
+                                        <i class="fas fa-id-card"></i>
                                         <span>License Info</span>
                                     </div>
-                                    <div class="flex items-center gap-2">
-                                        <span class="text-sm text-gray-500"><?php echo $license_number ? 'Added' : 'Not added'; ?></span>
-                                        <i class="fas fa-chevron-right text-gray-400 group-hover:text-[#ff5e00]"></i>
+                                    <div class="desktop-item-action">
+                                        <span class="text-sm text-gray-500 mr-2"><?php echo $license_number ? 'Added' : 'Not added'; ?></span>
+                                        <i class="fas fa-chevron-right"></i>
                                     </div>
-                                </button>
-                                <button class="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-xl transition group" onclick="openModal('bank-details-modal')">
-                                    <div class="flex items-center gap-3">
-                                        <i class="fas fa-university text-gray-400 w-5 group-hover:text-[#ff5e00]"></i>
+                                </div>
+                                <div class="desktop-settings-item" onclick="openModal('bank-details-modal')">
+                                    <div class="desktop-item-label">
+                                        <i class="fas fa-university"></i>
                                         <span>Bank Details</span>
                                     </div>
-                                    <div class="flex items-center gap-2">
+                                    <div class="desktop-item-action">
                                         <?php if ($bankDetails): ?>
-                                            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">Saved</span>
+                                            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full mr-2">Saved</span>
                                         <?php endif; ?>
-                                        <i class="fas fa-chevron-right text-gray-400 group-hover:text-[#ff5e00]"></i>
+                                        <i class="fas fa-chevron-right"></i>
                                     </div>
-                                </button>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Vehicle -->
-                        <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
-                            <div class="flex items-center gap-3 mb-6">
-                                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-[#ff5e00]">
-                                    <i class="fas fa-car text-2xl"></i>
-                                </div>
-                                <h3 class="text-lg font-semibold">Vehicle</h3>
+                        <div class="desktop-settings-card">
+                            <div class="desktop-card-header">
+                                <i class="fas fa-car"></i>
+                                <h3>Vehicle</h3>
                             </div>
-                            <div class="space-y-2">
-                                <button class="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-xl transition group" onclick="openModal('vehicle-modal')">
-                                    <div class="flex items-center gap-3">
-                                        <i class="fas fa-truck text-gray-400 w-5 group-hover:text-[#ff5e00]"></i>
+                            <div class="desktop-settings-list">
+                                <div class="desktop-settings-item" onclick="openModal('vehicle-modal')">
+                                    <div class="desktop-item-label">
+                                        <i class="fas fa-truck"></i>
                                         <span>Vehicle Details</span>
                                     </div>
-                                    <?php if ($vehicle_model): ?>
-                                        <span class="text-sm text-gray-500"><?php echo $plate_number; ?></span>
-                                    <?php endif; ?>
-                                </button>
-                                <button class="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-xl transition group" onclick="openModal('insurance-modal')">
-                                    <div class="flex items-center gap-3">
-                                        <i class="fas fa-shield-alt text-gray-400 w-5 group-hover:text-[#ff5e00]"></i>
+                                    <div class="desktop-item-action">
+                                        <?php if ($vehicle_model): ?>
+                                            <span class="text-sm text-gray-500 mr-2"><?php echo $plate_number; ?></span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="desktop-settings-item" onclick="openModal('insurance-modal')">
+                                    <div class="desktop-item-label">
+                                        <i class="fas fa-shield-alt"></i>
                                         <span>Insurance</span>
                                     </div>
-                                    <?php if ($insurance_expiry): ?>
-                                        <span class="text-sm text-gray-500"><?php echo date('M Y', strtotime($insurance_expiry)); ?></span>
-                                    <?php endif; ?>
-                                </button>
+                                    <div class="desktop-item-action">
+                                        <?php if ($insurance_expiry): ?>
+                                            <span class="text-sm text-gray-500 mr-2"><?php echo date('M Y', strtotime($insurance_expiry)); ?></span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Driving Preferences -->
-                        <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
-                            <div class="flex items-center gap-3 mb-6">
-                                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-[#ff5e00]">
-                                    <i class="fas fa-sliders-h text-2xl"></i>
-                                </div>
-                                <h3 class="text-lg font-semibold">Driving Preferences</h3>
+                        <div class="desktop-settings-card">
+                            <div class="desktop-card-header">
+                                <i class="fas fa-sliders-h"></i>
+                                <h3>Driving Preferences</h3>
                             </div>
-                            <div class="space-y-2">
-                                <button class="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-xl transition group" onclick="openModal('schedule-modal')">
-                                    <div class="flex items-center gap-3">
-                                        <i class="fas fa-clock text-gray-400 w-5 group-hover:text-[#ff5e00]"></i>
+                            <div class="desktop-settings-list">
+                                <div class="desktop-settings-item" onclick="openModal('schedule-modal')">
+                                    <div class="desktop-item-label">
+                                        <i class="fas fa-clock"></i>
                                         <span>Work Schedule</span>
                                     </div>
-                                    <i class="fas fa-chevron-right text-gray-400 group-hover:text-[#ff5e00]"></i>
-                                </button>
-                                <button class="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-xl transition group" onclick="openModal('earnings-modal')">
-                                    <div class="flex items-center gap-3">
-                                        <i class="fas fa-chart-line text-gray-400 w-5 group-hover:text-[#ff5e00]"></i>
+                                    <div class="desktop-item-action">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                                <div class="desktop-settings-item" onclick="openModal('earnings-modal')">
+                                    <div class="desktop-item-label">
+                                        <i class="fas fa-chart-line"></i>
                                         <span>Earnings Settings</span>
                                     </div>
-                                    <i class="fas fa-chevron-right text-gray-400 group-hover:text-[#ff5e00]"></i>
-                                </button>
+                                    <div class="desktop-item-action">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Driver Notifications -->
-                        <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
-                            <div class="flex items-center gap-3 mb-6">
-                                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-[#ff5e00]">
-                                    <i class="fas fa-bell text-2xl"></i>
-                                </div>
-                                <h3 class="text-lg font-semibold">Notifications</h3>
+                        <div class="desktop-settings-card">
+                            <div class="desktop-card-header">
+                                <i class="fas fa-bell"></i>
+                                <h3>Notifications</h3>
                             </div>
-                            <div class="space-y-3">
-                                <div class="flex items-center justify-between p-2">
-                                    <div class="flex items-center gap-3">
-                                        <i class="fas fa-car text-gray-400 w-5"></i>
-                                        <span class="text-sm">New Ride Requests</span>
+                            <div class="desktop-settings-list">
+                                <div class="desktop-settings-item">
+                                    <div class="desktop-item-label">
+                                        <i class="fas fa-car"></i>
+                                        <span>New Ride Requests</span>
                                     </div>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" id="desktop-ride-requests" <?php echo $notificationSettings['ride_requests'] ? 'checked' : ''; ?> onchange="toggleSetting('ride_requests', this.checked)">
-                                        <span class="toggle-slider"></span>
-                                    </label>
+                                    <div class="desktop-item-action">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="desktop-ride-requests" <?php echo $notificationSettings['ride_requests'] ? 'checked' : ''; ?> onchange="toggleSetting('ride_requests', this.checked)">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="flex items-center justify-between p-2">
-                                    <div class="flex items-center gap-3">
-                                        <i class="fas fa-money-bill text-gray-400 w-5"></i>
-                                        <span class="text-sm">Earnings Updates</span>
+                                <div class="desktop-settings-item">
+                                    <div class="desktop-item-label">
+                                        <i class="fas fa-money-bill"></i>
+                                        <span>Earnings Updates</span>
                                     </div>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" id="desktop-earnings" <?php echo $notificationSettings['earnings_notif'] ? 'checked' : ''; ?> onchange="toggleSetting('earnings_notif', this.checked)">
-                                        <span class="toggle-slider"></span>
-                                    </label>
+                                    <div class="desktop-item-action">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="desktop-earnings" <?php echo $notificationSettings['earnings_notif'] ? 'checked' : ''; ?> onchange="toggleSetting('earnings_notif', this.checked)">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="flex items-center justify-between p-2">
-                                    <div class="flex items-center gap-3">
-                                        <i class="fas fa-volume-up text-gray-400 w-5"></i>
-                                        <span class="text-sm">Sound Alerts</span>
+                                <div class="desktop-settings-item">
+                                    <div class="desktop-item-label">
+                                        <i class="fas fa-volume-up"></i>
+                                        <span>Sound Alerts</span>
                                     </div>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" id="desktop-sound" <?php echo $notificationSettings['sound_alerts'] ? 'checked' : ''; ?> onchange="toggleSetting('sound_alerts', this.checked)">
-                                        <span class="toggle-slider"></span>
-                                    </label>
+                                    <div class="desktop-item-action">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="desktop-sound" <?php echo $notificationSettings['sound_alerts'] ? 'checked' : ''; ?> onchange="toggleSetting('sound_alerts', this.checked)">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Driver Support -->
-                        <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
-                            <div class="flex items-center gap-3 mb-6">
-                                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-[#ff5e00]">
-                                    <i class="fas fa-question-circle text-2xl"></i>
-                                </div>
-                                <h3 class="text-lg font-semibold">Driver Support</h3>
+                        <div class="desktop-settings-card">
+                            <div class="desktop-card-header">
+                                <i class="fas fa-question-circle"></i>
+                                <h3>Driver Support</h3>
                             </div>
-                            <div class="space-y-2">
-                                <button class="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-xl transition group" onclick="openModal('help-modal')">
-                                    <div class="flex items-center gap-3">
-                                        <i class="fas fa-headset text-gray-400 w-5 group-hover:text-[#ff5e00]"></i>
+                            <div class="desktop-settings-list">
+                                <div class="desktop-settings-item" onclick="openModal('help-modal')">
+                                    <div class="desktop-item-label">
+                                        <i class="fas fa-headset"></i>
                                         <span>Help Center</span>
                                     </div>
-                                    <i class="fas fa-chevron-right text-gray-400 group-hover:text-[#ff5e00]"></i>
-                                </button>
-                                <button class="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-xl transition group" onclick="openModal('about-modal')">
-                                    <div class="flex items-center gap-3">
-                                        <i class="fas fa-info-circle text-gray-400 w-5 group-hover:text-[#ff5e00]"></i>
+                                    <div class="desktop-item-action">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                                <div class="desktop-settings-item" onclick="openModal('about-modal')">
+                                    <div class="desktop-item-label">
+                                        <i class="fas fa-info-circle"></i>
                                         <span>About Speedly</span>
                                     </div>
-                                    <span class="text-sm text-gray-400">v2.5.1</span>
-                                </button>
+                                    <div class="desktop-item-action">
+                                        <span class="text-sm text-gray-400">v2.5.1</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Danger Zone -->
-                        <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition col-span-3 mt-4 border-2 border-red-100">
-                            <div class="flex items-center gap-3 mb-6">
-                                <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-red-600">
-                                    <i class="fas fa-exclamation-triangle text-2xl"></i>
-                                </div>
-                                <h3 class="text-lg font-semibold text-red-600">Danger Zone</h3>
-                            </div>
-                            <div class="flex gap-4">
-                                <button class="px-6 py-3 border-2 border-gray-300 rounded-xl font-medium hover:bg-gray-50 transition flex items-center gap-2" onclick="logout()">
-                                    <i class="fas fa-sign-out-alt"></i>
-                                    Log Out
-                                </button>
-                                <button class="px-6 py-3 bg-red-50 text-red-600 rounded-xl font-medium hover:bg-red-100 transition flex items-center gap-2" onclick="openModal('delete-modal')">
-                                    <i class="fas fa-trash-alt"></i>
-                                    Delete Account
-                                </button>
-                            </div>
+                    <!-- Danger Zone -->
+                    <div class="danger-zone">
+                        <div class="danger-header">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Danger Zone</h3>
+                        </div>
+                        <div class="danger-actions">
+                            <button class="btn-outline" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Log Out
+                            </button>
+                            <button class="btn-danger-outline" onclick="openModal('delete-modal')">
+                                <i class="fas fa-trash-alt"></i>
+                                Delete Account
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
     <!-- MODALS (keep all your existing modals) -->
 

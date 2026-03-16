@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Include database connection - FIXED PATH
-require_once __DIR__ . '/SERVER/API/db-connect.php';
+require_once __DIR__ . '/db-connect.php';
 
 // Enable error reporting for debugging
 error_reporting(E_ALL);
@@ -98,9 +98,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Determine dashboard redirect
         if ($user['role'] == 'driver') {
-            $dashboard = 'driver_dashboard.php';
+            $dashboard = '/SPEEDLY/driver_dashboard.php';
         } else {
-            $dashboard = 'client_dashboard.php';
+            $dashboard = '/SPEEDLY/client_dashboard.php';
         }
         
         echo json_encode([

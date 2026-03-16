@@ -305,69 +305,6 @@ if (empty($token)) {
             color: #ff5e00;
             text-decoration: underline;
         }
-
-        .alert {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 10px;
-            background: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 1000;
-            animation: slideInRight 0.3s ease;
-            max-width: 350px;
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .alert-success {
-            border-left: 4px solid #28a745;
-        }
-
-        .alert-error {
-            border-left: 4px solid #dc3545;
-        }
-
-        .alert-warning {
-            border-left: 4px solid #ffc107;
-        }
-
-        .alert-info {
-            border-left: 4px solid #17a2b8;
-        }
-
-        .alert i {
-            font-size: 20px;
-        }
-
-        .alert-success i {
-            color: #28a745;
-        }
-
-        .alert-error i {
-            color: #dc3545;
-        }
-
-        .alert-warning i {
-            color: #ffc107;
-        }
-
-        .alert-info i {
-            color: #17a2b8;
-        }
     </style>
 </head>
 <body>
@@ -432,291 +369,239 @@ if (empty($token)) {
         </form>
     </div>
 
-    <!-- Alert container for notifications -->
-    <div id="alertContainer"></div>
-
     <script>
-        // Toggle password visibility with animation
-        function togglePassword(fieldId) {
-            const field = document.getElementById(fieldId);
-            const icon = field.nextElementSibling;
-            
-            // Add animation
-            icon.style.transform = 'scale(0.9)';
-            setTimeout(() => {
-                icon.style.transform = 'scale(1)';
-            }, 100);
-            
-            if (field.type === 'password') {
-                field.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-                icon.title = 'Hide password';
-            } else {
-                field.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-                icon.title = 'Show password';
-            }
-        }
+// Toggle password visibility function
+window.togglePassword = function(fieldId) {
+    const field = document.getElementById(fieldId);
+    if (!field) return;
+    
+    const type = field.getAttribute('type') === 'password' ? 'text' : 'password';
+    field.setAttribute('type', type);
+    
+    // Toggle icon
+    const icon = event.target;
+    icon.classList.toggle('fa-eye');
+    icon.classList.toggle('fa-eye-slash');
+}
 
-        // Show/Hide all passwords
-        document.getElementById('showAllPasswords').addEventListener('change', function(e) {
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing form...');
+    
+    // Check if form exists
+    const resetForm = document.getElementById('resetPasswordForm');
+    if (!resetForm) {
+        console.error('Reset password form not found!');
+        return;
+    }
+    
+    // Show all passwords checkbox
+    const showAllCheckbox = document.getElementById('showAllPasswords');
+    if (showAllCheckbox) {
+        showAllCheckbox.addEventListener('change', function() {
             const passwordField = document.getElementById('password');
             const confirmField = document.getElementById('confirm_password');
-            const type = e.target.checked ? 'text' : 'password';
+            const type = this.checked ? 'text' : 'password';
             
-            passwordField.type = type;
-            confirmField.type = type;
+            if (passwordField) passwordField.setAttribute('type', type);
+            if (confirmField) confirmField.setAttribute('type', type);
             
-            // Update icons
+            // Update toggle icons
             document.querySelectorAll('.toggle-password').forEach(icon => {
                 if (type === 'text') {
                     icon.classList.remove('fa-eye');
                     icon.classList.add('fa-eye-slash');
-                    icon.title = 'Hide password';
                 } else {
                     icon.classList.remove('fa-eye-slash');
                     icon.classList.add('fa-eye');
-                    icon.title = 'Show password';
                 }
             });
         });
+    }
 
-        // Password strength checker
-        const password = document.getElementById('password');
-        const confirmPassword = document.getElementById('confirm_password');
-        const strengthBar = document.getElementById('strengthBar');
-        const strengthText = document.getElementById('strengthText');
-
-        function checkPasswordStrength() {
-            const value = password.value;
-            let strength = 0;
+    // Password strength checker
+    const passwordField = document.getElementById('password');
+    if (passwordField) {
+        passwordField.addEventListener('input', function() {
+            const password = this.value;
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+            
+            if (!strengthBar || !strengthText) return;
             
             // Check requirements
-            const hasLength = value.length >= 8;
-            const hasUppercase = /[A-Z]/.test(value);
-            const hasLowercase = /[a-z]/.test(value);
-            const hasNumber = /[0-9]/.test(value);
-            const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
+            const hasLength = password.length >= 8;
+            const hasUpper = /[A-Z]/.test(password);
+            const hasLower = /[a-z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            const hasSpecial = /[!@#$%^&*]/.test(password);
             
             // Update requirement icons
-            updateRequirement('length', hasLength, 'At least 8 characters');
-            updateRequirement('uppercase', hasUppercase, 'At least 1 uppercase letter');
-            updateRequirement('lowercase', hasLowercase, 'At least 1 lowercase letter');
-            updateRequirement('number', hasNumber, 'At least 1 number');
-            updateRequirement('special', hasSpecial, 'At least 1 special character');
+            const lengthEl = document.getElementById('length');
+            const upperEl = document.getElementById('uppercase');
+            const lowerEl = document.getElementById('lowercase');
+            const numberEl = document.getElementById('number');
+            const specialEl = document.getElementById('special');
+            
+            if (lengthEl) {
+                lengthEl.className = hasLength ? 'valid' : 'invalid';
+                lengthEl.innerHTML = `<i class="fas ${hasLength ? 'fa-check-circle' : 'fa-times-circle'}"></i> At least 8 characters`;
+            }
+            
+            if (upperEl) {
+                upperEl.className = hasUpper ? 'valid' : 'invalid';
+                upperEl.innerHTML = `<i class="fas ${hasUpper ? 'fa-check-circle' : 'fa-times-circle'}"></i> At least 1 uppercase letter`;
+            }
+            
+            if (lowerEl) {
+                lowerEl.className = hasLower ? 'valid' : 'invalid';
+                lowerEl.innerHTML = `<i class="fas ${hasLower ? 'fa-check-circle' : 'fa-times-circle'}"></i> At least 1 lowercase letter`;
+            }
+            
+            if (numberEl) {
+                numberEl.className = hasNumber ? 'valid' : 'invalid';
+                numberEl.innerHTML = `<i class="fas ${hasNumber ? 'fa-check-circle' : 'fa-times-circle'}"></i> At least 1 number`;
+            }
+            
+            if (specialEl) {
+                specialEl.className = hasSpecial ? 'valid' : 'invalid';
+                specialEl.innerHTML = `<i class="fas ${hasSpecial ? 'fa-check-circle' : 'fa-times-circle'}"></i> At least 1 special character (!@#$%^&*)`;
+            }
             
             // Calculate strength
-            if (hasLength) strength += 20;
-            if (hasUppercase) strength += 20;
-            if (hasLowercase) strength += 20;
-            if (hasNumber) strength += 20;
-            if (hasSpecial) strength += 20;
+            const strength = [hasLength, hasUpper, hasLower, hasNumber, hasSpecial].filter(Boolean).length;
             
             // Update strength bar
-            strengthBar.style.width = strength + '%';
+            const width = (strength / 5) * 100;
+            strengthBar.style.width = width + '%';
             
-            if (strength < 40) {
-                strengthBar.style.background = '#dc3545';
-                strengthText.textContent = 'Weak';
-                strengthText.style.color = '#dc3545';
-            } else if (strength < 80) {
-                strengthBar.style.background = '#ffc107';
-                strengthText.textContent = 'Medium';
-                strengthText.style.color = '#ffc107';
-            } else {
-                strengthBar.style.background = '#28a745';
-                strengthText.textContent = 'Strong';
-                strengthText.style.color = '#28a745';
+            let color = '#dc3545';
+            let text = 'Very Weak';
+            
+            if (strength === 5) {
+                color = '#28a745';
+                text = 'Strong';
+            } else if (strength === 4) {
+                color = '#ffc107';
+                text = 'Good';
+            } else if (strength === 3) {
+                color = '#ff8c3a';
+                text = 'Fair';
             }
-        }
-
-        function updateRequirement(id, isValid, text) {
-            const element = document.getElementById(id);
-            element.className = isValid ? 'valid' : 'invalid';
-            element.innerHTML = `<i class="fas fa-${isValid ? 'check-circle' : 'times-circle'}"></i> ${text}`;
-        }
-
-        // Check if passwords match
-        function checkPasswordMatch() {
-            const match = password.value === confirmPassword.value && password.value !== '';
-            updateRequirement('match', match, 'Passwords match');
-            return match;
-        }
-
-        password.addEventListener('input', function() {
-            checkPasswordStrength();
-            checkPasswordMatch();
+            
+            strengthBar.style.backgroundColor = color;
+            strengthText.textContent = 'Password Strength: ' + text;
+            strengthText.style.color = color;
         });
+    }
 
-        confirmPassword.addEventListener('input', checkPasswordMatch);
+    // Check password match
+    const confirmField = document.getElementById('confirm_password');
+    if (confirmField) {
+        confirmField.addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirm = this.value;
+            const matchElement = document.getElementById('match');
+            
+            if (!matchElement) return;
+            
+            if (password === confirm && password !== '') {
+                matchElement.className = 'valid';
+                matchElement.innerHTML = '<i class="fas fa-check-circle"></i> Passwords match';
+            } else {
+                matchElement.className = 'invalid';
+                matchElement.innerHTML = '<i class="fas fa-times-circle"></i> Passwords match';
+            }
+        });
+    }
 
-        // Show alert function
-        function showAlert(type, message) {
-            const alertContainer = document.getElementById('alertContainer');
-            alertContainer.innerHTML = '';
-            
-            const alert = document.createElement('div');
-            alert.className = `alert alert-${type}`;
-            
-            const icon = type === 'success' ? 'fa-check-circle' :
-                        type === 'error' ? 'fa-exclamation-circle' :
-                        type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle';
-            
-            alert.innerHTML = `
-                <i class="fas ${icon}"></i>
-                <span>${message}</span>
-            `;
-            
-            alertContainer.appendChild(alert);
-            
-            setTimeout(() => {
-                alert.remove();
-            }, 5000);
+    // Form submission
+    resetForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+        const token = document.getElementById('token').value;
+        const submitBtn = document.getElementById('submitBtn');
+        
+        // Validate password
+        if (password.length < 8) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Invalid Password',
+                text: 'Password must be at least 8 characters long',
+                confirmButtonColor: '#ff5e00'
+            });
+            return;
         }
-
-        // Form submission
-        document.getElementById('resetPasswordForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        
+        // Check if passwords match
+        if (password !== confirmPassword) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Passwords Do Not Match',
+                text: 'Please make sure your passwords match',
+                confirmButtonColor: '#ff5e00'
+            });
+            return;
+        }
+        
+        // Disable button
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+        
+        // Create FormData
+        const formData = new FormData();
+        formData.append('token', token);
+        formData.append('password', password);
+        
+        console.log('Sending request with token:', token);
+        
+        // Send AJAX request to update-password.php
+        fetch('SERVER/API/update-password.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            console.log('Response status:', response.status);
+            return response.json();
+        })
+        .then(data => {
+            console.log('Response data:', data);
             
-            const passwordValue = document.getElementById('password').value;
-            const confirmPasswordValue = document.getElementById('confirm_password').value;
-            const token = document.getElementById('token').value;
-            const submitBtn = document.getElementById('submitBtn');
-            
-            // Check if token exists
-            if (!token) {
+            if (data.status === 'success') {
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Invalid Reset Link',
-                    text: 'The password reset link is invalid. Please request a new one.',
+                    icon: 'success',
+                    title: 'Password Updated!',
+                    text: 'Your password has been successfully reset. You can now login with your new password.',
                     confirmButtonColor: '#ff5e00'
                 }).then(() => {
-                    window.location.href = 'forgot-password.php';
+                    window.location.href = 'form.php';
                 });
-                return;
-            }
-            
-            // Validate passwords match
-            if (passwordValue !== confirmPasswordValue) {
+            } else {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Passwords Do Not Match',
-                    text: 'Please make sure both passwords are the same.',
-                    confirmButtonColor: '#ff5e00'
-                });
-                
-                // Highlight fields
-                document.getElementById('password').classList.add('error');
-                document.getElementById('confirm_password').classList.add('error');
-                
-                setTimeout(() => {
-                    document.getElementById('password').classList.remove('error');
-                    document.getElementById('confirm_password').classList.remove('error');
-                }, 500);
-                
-                return;
-            }
-            
-            // Validate password strength
-            const hasLength = passwordValue.length >= 8;
-            const hasUppercase = /[A-Z]/.test(passwordValue);
-            const hasLowercase = /[a-z]/.test(passwordValue);
-            const hasNumber = /[0-9]/.test(passwordValue);
-            const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(passwordValue);
-            
-            if (!hasLength || !hasUppercase || !hasLowercase || !hasNumber || !hasSpecial) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Weak Password',
-                    html: 'Please meet all password requirements:<br>' +
-                          (hasLength ? '✅' : '❌') + ' At least 8 characters<br>' +
-                          (hasUppercase ? '✅' : '❌') + ' At least 1 uppercase letter<br>' +
-                          (hasLowercase ? '✅' : '❌') + ' At least 1 lowercase letter<br>' +
-                          (hasNumber ? '✅' : '❌') + ' At least 1 number<br>' +
-                          (hasSpecial ? '✅' : '❌') + ' At least 1 special character',
-                    confirmButtonColor: '#ff5e00'
-                });
-                
-                document.getElementById('password').classList.add('error');
-                setTimeout(() => {
-                    document.getElementById('password').classList.remove('error');
-                }, 500);
-                
-                return;
-            }
-            
-            // Disable button
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resetting Password...';
-            
-            // Send AJAX request
-            const formData = new FormData();
-            formData.append('token', token);
-            formData.append('password', passwordValue);
-            
-            fetch('SERVER/API/update-password.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Password Reset Successful!',
-                        html: data.message,
-                        timer: 3000,
-                        showConfirmButton: true,
-                        confirmButtonColor: '#ff5e00',
-                        timerProgressBar: true
-                    }).then(() => {
-                        window.location.href = 'form.php';
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Reset Failed',
-                        text: data.message,
-                        confirmButtonColor: '#ff5e00'
-                    });
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fas fa-sync-alt" style="margin-right: 10px;"></i>Reset Password';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Connection Error',
-                    text: 'Unable to connect to the server. Please check your internet connection and try again.',
+                    title: 'Error',
+                    text: data.message || 'Failed to update password',
                     confirmButtonColor: '#ff5e00'
                 });
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-sync-alt" style="margin-right: 10px;"></i>Reset Password';
-            });
-        });
-
-        // Handle enter key
-        document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && document.activeElement.tagName !== 'BUTTON') {
-                e.preventDefault();
-                document.getElementById('submitBtn').click();
             }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Connection Error',
+                text: error.message || 'Unable to connect to the server. Please try again.',
+                confirmButtonColor: '#ff5e00'
+            });
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-sync-alt" style="margin-right: 10px;"></i>Reset Password';
         });
-
-        // Clean up on page unload
-        window.addEventListener('beforeunload', function() {
-            // Clear any sensitive data from memory
-            document.getElementById('password').value = '';
-            document.getElementById('confirm_password').value = '';
-        });
-    </script>
+    });
+});
+</script>
 </body>
-</html>  
+</html>

@@ -204,90 +204,92 @@
     </div>
 
     <script>
-        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const submitBtn = document.getElementById('submitBtn');
-            
-            // Validate email
-            if (!email) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Email Required',
-                    text: 'Please enter your email address',
-                    confirmButtonColor: '#ff5e00'
-                });
-                return;
-            }
-            
-            // Email format validation
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email)) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Invalid Email',
-                    text: 'Please enter a valid email address',
-                    confirmButtonColor: '#ff5e00'
-                });
-                return;
-            }
-            
-            // Disable button to prevent double submission
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            
-            // Send AJAX request
-            const formData = new FormData();
-            formData.append('email', email);
-            
-            // UPDATED: Changed from send_otp.php to send-reset-link.php
-            fetch('SERVER/API/send-reset-link.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Reset Link Sent!',
-                        html: data.message,
-                        timer: 3000,
-                        showConfirmButton: true,
-                        confirmButtonColor: '#ff5e00'
-                    }).then(() => {
-                        // UPDATED: Redirect to login page instead of verify-otp
-                        window.location.href = 'form.php';
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: data.message,
-                        confirmButtonColor: '#ff5e00'
-                    });
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right: 10px;"></i>Send Reset Link';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Connection Error',
-                    text: 'Please check your internet connection and try again.',
-                    confirmButtonColor: '#ff5e00'
-                });
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right: 10px;"></i>Send Reset Link';
-            });
+document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value;
+    const submitBtn = document.getElementById('submitBtn');
+    
+    // Validate email
+    if (!email) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Email Required',
+            text: 'Please enter your email address',
+            confirmButtonColor: '#ff5e00'
         });
-    </script>
+        return;
+    }
+    
+    // Email format validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Invalid Email',
+            text: 'Please enter a valid email address',
+            confirmButtonColor: '#ff5e00'
+        });
+        return;
+    }
+    
+    // Disable button
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    
+    // Create FormData
+    const formData = new FormData();
+    formData.append('email', email);
+    
+    // Send AJAX request
+    fetch('SERVER/API/send-reset-link.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        if (!response.ok) {
+            throw new Error('Network response was not ok: ' + response.status);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Response data:', data);
+        
+        if (data.status === 'success') {
+            // Show success message
+            Swal.fire({
+                icon: 'success',
+                title: 'Reset Link Sent!',
+                text: 'Please check your email for the password reset link.',
+                confirmButtonColor: '#ff5e00'
+            }).then(() => {
+                // Redirect to login page
+                window.location.href = 'form.php';
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message || 'Failed to send reset link',
+                confirmButtonColor: '#ff5e00'
+            });
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Reset Link';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Connection Error',
+            text: 'Unable to connect to the server. Please try again.',
+            confirmButtonColor: '#ff5e00'
+        });
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Reset Link';
+    });
+});
+</script>
 </body>
 </html>     

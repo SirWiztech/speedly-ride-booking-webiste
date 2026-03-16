@@ -1,6 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
+// Start session
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Include database connection
 include 'db-connect.php';
 
@@ -80,14 +85,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Generate UUID for id
         $id = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
 
-        // ✅ BCRYPT HASHING - This is the key part!
+        // BCRYPT HASHING
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
         // Log the hash for debugging (remove in production)
         error_log("Password hash created: " . $hashed_password);
 
         // Determine verification status
-        $is_verified = ($role == 'client') ? 1 : 0; // Clients auto-verified, drivers need KYC
+        $is_verified = 0; // All users start unverified until OTP is confirmed
 
         // Insert user with proper column names
         $sql = "INSERT INTO users (
@@ -117,26 +122,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         );
 
         if ($stmt->execute()) {
-
-            // Auto login after registration
-            $_SESSION['user_id'] = $id;
-            $_SESSION['username'] = $username;
-            $_SESSION['fullname'] = $full_name;
-            $_SESSION['email'] = $email;
-            $_SESSION['role'] = $role;
-            $_SESSION['logged_in'] = true;
-
-            // Determine redirect page - ADD /SPEEDLY/ to the paths
-            if ($role == 'driver') {
-                $redirect = '/SPEEDLY/verify_otp.php';
-            } else {
-                $redirect = '/SPEEDLY/verify_otp.php';
-            }
-
+            
+            // Store email in session for OTP verification
+            $_SESSION['pending_email'] = $email;
+            $_SESSION['pending_user_id'] = $id;
+            $_SESSION['pending_role'] = $role;
+            
+            // Generate and send OTP
+            $otp = sprintf("%06d", mt_rand(1, 999999));
+            $expires = date('Y-m-d H:i:s', strtotime('+10 minutes'));
+            
+            // Delete any existing OTPs for this user
+            $deleteStmt = $conn->prepare("DELETE FROM password_resets WHERE user_id = ?");
+            $deleteStmt->bind_param("s", $id);
+            $deleteStmt->execute();
+            $deleteStmt->close();
+            
+            // Save new OTP
+            $insertStmt = $conn->prepare("INSERT INTO password_resets (user_id, token, expires_at) VALUES (?, ?, ?)");
+            $insertStmt->bind_param("sss", $id, $otp, $expires);
+            $insertStmt->execute();
+            $insertStmt->close();
+            
+            // Send OTP via email (you can implement this later)
+            // For now, we'll just return success with redirect
+            
             echo json_encode([
                 'status' => 'success',
-                'message' => 'Registration successful! Welcome to Speedly!',
-                'redirect' => $redirect,
+                'message' => 'Registration successful! Please verify your email.',
+                'redirect' => '/SPEEDLY/verify-otp.php?email=' . urlencode($email),
                 'user' => [
                     'id' => $id,
                     'name' => $full_name,
@@ -163,5 +177,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'status' => 'error',
         'message' => 'Invalid request method'
     ]);
-}  
-
+}
+?>

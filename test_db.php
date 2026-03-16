@@ -1,90 +1,108 @@
 <?php
-// test_api_direct.php
-$ride_id = $_GET['ride_id'] ?? '189f185b15d83fc10982d181a7e80df5';
+session_start();
+require_once __DIR__ . '/SERVER/API/db-connect.php';
+
+// Display session info
+echo "<h1>KYC API Test</h1>";
+echo "<h2>Session Information:</h2>";
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
+
+// Check if admin is logged in
+$isAdmin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
+echo "<p>Admin logged in: " . ($isAdmin ? '✅ YES' : '❌ NO') . "</p>";
+
+if ($isAdmin) {
+    $admin_id = $_SESSION['admin_id'] ?? $_SESSION['user_id'] ?? 'Not set';
+    echo "<p>Admin ID: " . $admin_id . "</p>";
+}
+
+// Get pending KYC documents
+echo "<h2>Pending KYC Documents:</h2>";
+$query = "
+    SELECT dk.id, u.full_name, dk.document_type, dk.verification_status
+    FROM driver_kyc_documents dk
+    JOIN driver_profiles dp ON dk.driver_id = dp.id
+    JOIN users u ON dp.user_id = u.id
+    WHERE dk.verification_status = 'pending'
+    LIMIT 5
+";
+$result = $conn->query($query);
+
+if ($result && $result->num_rows > 0) {
+    echo "<table border='1' cellpadding='8'>";
+    echo "<tr><th>ID</th><th>Driver</th><th>Document Type</th><th>Status</th><th>Action</th></tr>";
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . substr($row['id'], 0, 8) . "...</td>";
+        echo "<td>" . htmlspecialchars($row['full_name']) . "</td>";
+        echo "<td>" . $row['document_type'] . "</td>";
+        echo "<td>" . $row['verification_status'] . "</td>";
+        echo "<td><button onclick='testApprove(\"" . $row['id'] . "\")'>Test Approve</button></td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+} else {
+    echo "<p>No pending KYC documents found.</p>";
+}
+
+// Get approved KYC documents
+echo "<h2>Recently Approved KYC:</h2>";
+$approved = $conn->query("
+    SELECT dk.id, u.full_name, dk.document_type, dk.verified_at
+    FROM driver_kyc_documents dk
+    JOIN driver_profiles dp ON dk.driver_id = dp.id
+    JOIN users u ON dp.user_id = u.id
+    WHERE dk.verification_status = 'approved'
+    ORDER BY dk.verified_at DESC
+    LIMIT 5
+");
+
+if ($approved && $approved->num_rows > 0) {
+    echo "<table border='1' cellpadding='8'>";
+    echo "<tr><th>ID</th><th>Driver</th><th>Document Type</th><th>Approved At</th></tr>";
+    while ($row = $approved->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . substr($row['id'], 0, 8) . "...</td>";
+        echo "<td>" . htmlspecialchars($row['full_name']) . "</td>";
+        echo "<td>" . $row['document_type'] . "</td>";
+        echo "<td>" . $row['verified_at'] . "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+} else {
+    echo "<p>No approved KYC documents found.</p>";
+}
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Direct API Test</title>
-    <style>
-        body { font-family: Arial; padding: 20px; }
-        .success { color: green; }
-        .error { color: red; }
-        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow: auto; }
-        button { padding: 10px 20px; background: #ff5e00; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    </style>
-</head>
-<body>
-    <h1>Direct API Test</h1>
+
+<script>
+function testApprove(kycId) {
+    if (!confirm('Test approve this KYC document?')) return;
     
-    <p>Ride ID: <strong><?php echo $ride_id; ?></strong></p>
+    console.log('Testing approve for KYC ID:', kycId);
     
-    <button onclick="testDirectFetch()">Test Direct Fetch</button>
-    <button onclick="testWithCredentials()">Test with Credentials</button>
-    <button onclick="testRelativePath()">Test Relative Path</button>
-    
-    <div id="result" style="margin-top: 20px;"></div>
-    
-    <script>
-    function testDirectFetch() {
-        const rideId = '<?php echo $ride_id; ?>';
-        const url = `SERVER/API/get_ride_details.php?ride_id=${rideId}`;
-        
-        document.getElementById('result').innerHTML = '<p>Fetching: ' + url + '</p>';
-        
-        fetch(url)
-            .then(response => {
-                document.getElementById('result').innerHTML += '<p>Status: ' + response.status + ' ' + response.statusText + '</p>';
-                return response.text();
-            })
-            .then(text => {
-                document.getElementById('result').innerHTML += '<h3>Raw Response:</h3><pre>' + text + '</pre>';
-                try {
-                    const json = JSON.parse(text);
-                    document.getElementById('result').innerHTML += '<h3>Parsed JSON:</h3><pre>' + JSON.stringify(json, null, 2) + '</pre>';
-                } catch (e) {
-                    document.getElementById('result').innerHTML += '<p class="error">Failed to parse JSON: ' + e.message + '</p>';
-                }
-            })
-            .catch(error => {
-                document.getElementById('result').innerHTML += '<p class="error">Fetch error: ' + error.message + '</p>';
-            });
-    }
-    
-    function testWithCredentials() {
-        const rideId = '<?php echo $ride_id; ?>';
-        const url = `SERVER/API/get_ride_details.php?ride_id=${rideId}`;
-        
-        fetch(url, {
-            credentials: 'include',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
+    fetch('SERVER/API/approve_kyc.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            kyc_id: kycId,
+            action: 'approve'
         })
-        .then(response => response.text())
-        .then(text => {
-            document.getElementById('result').innerHTML = '<h3>With Credentials:</h3><pre>' + text + '</pre>';
-        })
-        .catch(error => {
-            document.getElementById('result').innerHTML = '<p class="error">Error: ' + error.message + '</p>';
-        });
-    }
-    
-    function testRelativePath() {
-        const rideId = '<?php echo $ride_id; ?>';
-        const url = `/SPEEDLY/SERVER/API/get_ride_details.php?ride_id=${rideId}`;
-        
-        document.getElementById('result').innerHTML = '<p>Fetching absolute path: ' + url + '</p>';
-        
-        fetch(url)
-            .then(response => response.text())
-            .then(text => {
-                document.getElementById('result').innerHTML = '<h3>Absolute Path:</h3><pre>' + text + '</pre>';
-            })
-            .catch(error => {
-                document.getElementById('result').innerHTML = '<p class="error">Error: ' + error.message + '</p>';
-            });
-    }
-    </script>
-</body>
-</html>
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response:', data);
+        alert(JSON.stringify(data, null, 2));
+        if (data.success) {
+            location.reload();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error: ' + error.message);
+    });
+}
+</script>

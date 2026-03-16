@@ -6,152 +6,214 @@ header('Content-Type: application/json');
 
 // Enable error logging
 error_log("=== Approve KYC Request Started ===");
+error_log("Session data: " . json_encode($_SESSION));
 
-// Check if user is logged in and is admin
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    error_log("User not logged in");
-    echo json_encode(['success' => false, 'message' => 'Please login first']);
+// Check if admin is logged in - FIXED: Check for admin_logged_in instead of logged_in
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    error_log("Admin not logged in. Session: " . json_encode($_SESSION));
+    echo json_encode(['success' => false, 'message' => 'Please login as admin first']);
     exit;
 }
 
-if ($_SESSION['role'] !== 'admin') {
-    error_log("User is not admin. Role: " . $_SESSION['role']);
-    echo json_encode(['success' => false, 'message' => 'Unauthorized access. Admin only.']);
+// Get admin ID from session
+$admin_id = $_SESSION['admin_id'] ?? $_SESSION['user_id'] ?? null;
+if (!$admin_id) {
+    error_log("Admin ID not found in session");
+    echo json_encode(['success' => false, 'message' => 'Admin ID not found']);
     exit;
 }
 
-$admin_id = $_SESSION['user_id'];
-$data = json_decode(file_get_contents('php://input'), true);
+error_log("Admin ID: " . $admin_id);
 
-if (!$data || !isset($data['driver_id']) || !isset($data['action'])) {
-    error_log("Invalid input: " . file_get_contents('php://input'));
-    echo json_encode(['success' => false, 'message' => 'Invalid input. Driver ID and action required.']);
+// Get POST data
+$input = json_decode(file_get_contents('php://input'), true);
+
+if (!$input) {
+    $input = $_POST;
+}
+
+if (!$input || !isset($input['kyc_id'])) {
+    error_log("KYC ID not provided. Input: " . json_encode($input));
+    echo json_encode(['success' => false, 'message' => 'KYC document ID is required']);
     exit;
 }
 
-$driver_id = $data['driver_id'];
-$action = $data['action'];
-$reason = isset($data['reason']) ? $data['reason'] : '';
+$kyc_id = $input['kyc_id'];
+$action = $input['action'] ?? 'approve'; // Default to approve
+$reason = $input['reason'] ?? '';
 
-if (!in_array($action, ['approve', 'reject'])) {
-    error_log("Invalid action: " . $action);
-    echo json_encode(['success' => false, 'message' => 'Invalid action. Must be approve or reject.']);
-    exit;
-}
-
-error_log("Processing KYC " . $action . " for driver_id: " . $driver_id . " by admin: " . $admin_id);
+error_log("Processing KYC ID: " . $kyc_id . ", Action: " . $action);
 
 // Begin transaction
 $conn->begin_transaction();
 
 try {
+    // Get KYC document details
+    $stmt = $conn->prepare("
+        SELECT dk.*, dp.id as driver_profile_id, dp.user_id as driver_user_id
+        FROM driver_kyc_documents dk
+        JOIN driver_profiles dp ON dk.driver_id = dp.id
+        WHERE dk.id = ?
+    ");
+    $stmt->bind_param("s", $kyc_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows === 0) {
+        throw new Exception("KYC document not found");
+    }
+    
+    $kyc = $result->fetch_assoc();
+    $driver_profile_id = $kyc['driver_profile_id'];
+    $driver_user_id = $kyc['driver_user_id'];
+    
+    error_log("Found KYC document for driver profile: " . $driver_profile_id . ", user: " . $driver_user_id);
+    
     if ($action === 'approve') {
-        // Update driver profile verification status
-        $stmt = $conn->prepare("UPDATE driver_profiles SET verification_status = 'approved', updated_at = NOW() WHERE id = ?");
-        $stmt->bind_param("s", $driver_id);
-        $stmt->execute();
+        // Update the specific KYC document
+        $updateStmt = $conn->prepare("
+            UPDATE driver_kyc_documents 
+            SET verification_status = 'approved', 
+                verified_by = ?, 
+                verified_at = NOW() 
+            WHERE id = ?
+        ");
+        $updateStmt->bind_param("ss", $admin_id, $kyc_id);
+        $updateStmt->execute();
         
-        if ($stmt->affected_rows === 0) {
-            throw new Exception("Driver profile not found");
+        // Check if all required documents are approved
+        $checkStmt = $conn->prepare("
+            SELECT 
+                COUNT(*) as total_docs,
+                SUM(CASE WHEN verification_status = 'approved' THEN 1 ELSE 0 END) as approved_docs
+            FROM driver_kyc_documents 
+            WHERE driver_id = ?
+        ");
+        $checkStmt->bind_param("s", $driver_profile_id);
+        $checkStmt->execute();
+        $checkResult = $checkStmt->get_result();
+        $checkData = $checkResult->fetch_assoc();
+        
+        error_log("Driver has " . $checkData['approved_docs'] . " approved out of " . $checkData['total_docs'] . " documents");
+        
+        // If all documents are approved, update driver profile and approval queue
+        if ($checkData['total_docs'] > 0 && $checkData['approved_docs'] == $checkData['total_docs']) {
+            // Update driver profile verification status
+            $profileStmt = $conn->prepare("
+                UPDATE driver_profiles 
+                SET verification_status = 'approved', 
+                    updated_at = NOW() 
+                WHERE id = ?
+            ");
+            $profileStmt->bind_param("s", $driver_profile_id);
+            $profileStmt->execute();
+            
+            // Update approval queue
+            $queueStmt = $conn->prepare("
+                UPDATE driver_approval_queue 
+                SET status = 'approved', 
+                    reviewed_by = ?, 
+                    reviewed_at = NOW() 
+                WHERE driver_id = ? AND status = 'pending'
+            ");
+            $queueStmt->bind_param("ss", $admin_id, $driver_profile_id);
+            $queueStmt->execute();
+            
+            error_log("Driver fully approved. Profile updated.");
+            
+            // Create notification for driver
+            $notif_id = bin2hex(random_bytes(16));
+            $notif_title = 'KYC Approved';
+            $notif_msg = 'Your KYC verification has been approved. You can now go online and start accepting rides.';
+            $notifStmt = $conn->prepare("
+                INSERT INTO notifications (id, user_id, type, title, message, created_at) 
+                VALUES (?, ?, 'system', ?, ?, NOW())
+            ");
+            $notifStmt->bind_param("ssss", $notif_id, $driver_user_id, $notif_title, $notif_msg);
+            $notifStmt->execute();
         }
         
-        // Update all driver documents status
-        $stmt = $conn->prepare("UPDATE driver_kyc_documents SET verification_status = 'approved', verified_by = ?, verified_at = NOW() WHERE driver_id = ?");
-        $stmt->bind_param("ss", $admin_id, $driver_id);
-        $stmt->execute();
+        $message = 'KYC document approved successfully';
         
-        // Update approval queue
-        $stmt = $conn->prepare("UPDATE driver_approval_queue SET status = 'approved', reviewed_by = ?, reviewed_at = NOW() WHERE driver_id = ? AND status = 'pending'");
-        $stmt->bind_param("ss", $admin_id, $driver_id);
-        $stmt->execute();
-        
-        // Get user_id from driver_profile
-        $stmt = $conn->prepare("SELECT user_id FROM driver_profiles WHERE id = ?");
-        $stmt->bind_param("s", $driver_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $driver = $result->fetch_assoc();
-        $user_id = $driver['user_id'];
-        
-        // Create notification for driver
-        $notif_id = bin2hex(random_bytes(16));
-        $title = 'KYC Approved';
-        $message = 'Your KYC verification has been approved. You can now go online and start accepting rides.';
-        $stmt = $conn->prepare("INSERT INTO notifications (id, user_id, type, title, message, created_at) VALUES (?, ?, 'system', ?, ?, NOW())");
-        $stmt->bind_param("ssss", $notif_id, $user_id, $title, $message);
-        $stmt->execute();
-        
-        error_log("KYC approved successfully for driver: " . $driver_id);
-        
-    } elseif ($action === 'reject') {
-        // Validate rejection reason
+    } else if ($action === 'reject') {
         if (empty($reason)) {
             throw new Exception("Rejection reason is required");
         }
         
-        // Update driver profile verification status
-        $stmt = $conn->prepare("UPDATE driver_profiles SET verification_status = 'rejected', updated_at = NOW() WHERE id = ?");
-        $stmt->bind_param("s", $driver_id);
-        $stmt->execute();
+        // Update the KYC document
+        $updateStmt = $conn->prepare("
+            UPDATE driver_kyc_documents 
+            SET verification_status = 'rejected', 
+                verified_by = ?, 
+                verified_at = NOW(),
+                rejection_reason = ?
+            WHERE id = ?
+        ");
+        $updateStmt->bind_param("sss", $admin_id, $reason, $kyc_id);
+        $updateStmt->execute();
         
-        if ($stmt->affected_rows === 0) {
-            throw new Exception("Driver profile not found");
-        }
-        
-        // Update all driver documents status
-        $stmt = $conn->prepare("UPDATE driver_kyc_documents SET verification_status = 'rejected', verified_by = ?, verified_at = NOW(), rejection_reason = ? WHERE driver_id = ?");
-        $stmt->bind_param("sss", $admin_id, $reason, $driver_id);
-        $stmt->execute();
+        // Update driver profile status to rejected
+        $profileStmt = $conn->prepare("
+            UPDATE driver_profiles 
+            SET verification_status = 'rejected', 
+                updated_at = NOW() 
+            WHERE id = ?
+        ");
+        $profileStmt->bind_param("s", $driver_profile_id);
+        $profileStmt->execute();
         
         // Update approval queue
-        $stmt = $conn->prepare("UPDATE driver_approval_queue SET status = 'rejected', reviewed_by = ?, reviewed_at = NOW() WHERE driver_id = ? AND status = 'pending'");
-        $stmt->bind_param("ss", $admin_id, $driver_id);
-        $stmt->execute();
-        
-        // Get user_id from driver_profile
-        $stmt = $conn->prepare("SELECT user_id FROM driver_profiles WHERE id = ?");
-        $stmt->bind_param("s", $driver_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $driver = $result->fetch_assoc();
-        $user_id = $driver['user_id'];
+        $queueStmt = $conn->prepare("
+            UPDATE driver_approval_queue 
+            SET status = 'rejected', 
+                reviewed_by = ?, 
+                reviewed_at = NOW() 
+            WHERE driver_id = ? AND status = 'pending'
+        ");
+        $queueStmt->bind_param("ss", $admin_id, $driver_profile_id);
+        $queueStmt->execute();
         
         // Create notification for driver
         $notif_id = bin2hex(random_bytes(16));
-        $title = 'KYC Rejected';
-        $message = 'Your KYC verification was rejected. Reason: ' . $reason;
-        $stmt = $conn->prepare("INSERT INTO notifications (id, user_id, type, title, message, created_at) VALUES (?, ?, 'system', ?, ?, NOW())");
-        $stmt->bind_param("ssss", $notif_id, $user_id, $title, $message);
-        $stmt->execute();
+        $notif_title = 'KYC Rejected';
+        $notif_msg = 'Your KYC verification was rejected. Reason: ' . $reason;
+        $notifStmt = $conn->prepare("
+            INSERT INTO notifications (id, user_id, type, title, message, created_at) 
+            VALUES (?, ?, 'system', ?, ?, NOW())
+        ");
+        $notifStmt->bind_param("ssss", $notif_id, $driver_user_id, $notif_title, $notif_msg);
+        $notifStmt->execute();
         
-        error_log("KYC rejected for driver: " . $driver_id . ". Reason: " . $reason);
+        $message = 'KYC document rejected';
     }
     
     // Log admin activity
     $log_id = bin2hex(random_bytes(16));
-    $action_desc = $action === 'approve' ? 'approved' : 'rejected';
-    $log_stmt = $conn->prepare("INSERT INTO admin_activity_logs (id, admin_id, action, entity_type, entity_id, old_values, new_values, created_at) VALUES (?, ?, ?, 'driver', ?, '{}', ?, NOW())");
-    $new_values = json_encode(['verification_status' => $action === 'approve' ? 'approved' : 'rejected', 'reason' => $reason]);
-    $log_stmt->bind_param("sssss", $log_id, $admin_id, $action_desc, $driver_id, $new_values);
-    $log_stmt->execute();
+    $log_action = $action === 'approve' ? 'approve_kyc' : 'reject_kyc';
+    $logStmt = $conn->prepare("
+        INSERT INTO admin_activity_logs (id, admin_id, action, entity_type, entity_id, created_at) 
+        VALUES (?, ?, ?, 'kyc_document', ?, NOW())
+    ");
+    $logStmt->bind_param("ssss", $log_id, $admin_id, $log_action, $kyc_id);
+    $logStmt->execute();
     
     // Commit transaction
     $conn->commit();
     
     echo json_encode([
         'success' => true,
-        'message' => 'KYC ' . ($action === 'approve' ? 'approved' : 'rejected') . ' successfully'
+        'message' => $message
     ]);
     
 } catch (Exception $e) {
     $conn->rollback();
-    error_log("Error processing KYC: " . $e->getMessage());
+    error_log("Error in approve_kyc.php: " . $e->getMessage());
     echo json_encode([
         'success' => false,
-        'message' => 'Error processing request: ' . $e->getMessage()
+        'message' => 'Error: ' . $e->getMessage()
     ]);
 }
 
-error_log("=== Approve KYC Request Completed ===");
 $conn->close();
-?> 
+error_log("=== Approve KYC Request Completed ===");
+?>
