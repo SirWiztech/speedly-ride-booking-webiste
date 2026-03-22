@@ -1,28 +1,67 @@
 <?php
 session_start();
+
 require_once 'SERVER/API/db-connect.php';
 
-// Check if user is logged in
+// Check if user is logged in FIRST
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: form.php");
     exit;
 }
 
+// Now define user_id (AFTER login check)
 $user_id = $_SESSION['user_id'];
 $user_name = $_SESSION['fullname'];
 $user_role = $_SESSION['role'] ?? 'client';
 
-// Get wallet balance - FIXED to include ride_refund
+// Check for payment status from redirect (AFTER user_id is defined)
+if (isset($_GET['payment_status']) && $_GET['payment_status'] === 'completed') {
+    $reference = $_GET['reference'] ?? '';
+
+    if (!empty($reference)) {
+        $verifyQuery = "SELECT status FROM payment_gateway_transactions 
+                        WHERE transaction_reference = ? AND user_id = ?";
+        $verifyStmt = $conn->prepare($verifyQuery);
+        $verifyStmt->bind_param("ss", $reference, $user_id);
+        $verifyStmt->execute();
+        $verifyResult = $verifyStmt->get_result();
+        $transaction = $verifyResult->fetch_assoc();
+
+        if ($transaction && $transaction['status'] === 'success') {
+            echo "<script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Deposit Successful!',
+                    text: 'Your wallet has been credited.',
+                    confirmButtonColor: '#ff5e00'
+                });
+            </script>";
+        } elseif ($transaction && $transaction['status'] === 'failed') {
+            echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Deposit Failed',
+                    text: 'Your payment could not be processed.',
+                    confirmButtonColor: '#ff5e00'
+                });
+            </script>";
+        }
+    }
+}
+
+// Get wallet balance - include ride_refund
 $walletQuery = "SELECT 
     COALESCE(SUM(CASE WHEN transaction_type IN ('deposit', 'bonus', 'referral', 'ride_refund') THEN amount ELSE 0 END), 0) - 
     COALESCE(SUM(CASE WHEN transaction_type IN ('withdrawal', 'ride_payment') THEN amount ELSE 0 END), 0) as balance 
-    FROM wallet_transactions WHERE user_id = ?";
+    FROM wallet_transactions WHERE user_id = ? AND status = 'completed'";
 $walletStmt = $conn->prepare($walletQuery);
 $walletStmt->bind_param("s", $user_id);
 $walletStmt->execute();
 $walletResult = $walletStmt->get_result();
 $walletData = $walletResult->fetch_assoc();
 $walletBalance = $walletData['balance'] ?? 0;
+
+// Rest of your wallet.php code continues...
 
 // Get recent transactions with ride details
 $transQuery = "SELECT wt.*, 
@@ -63,6 +102,7 @@ $statsResult = $statsStmt->get_result();
 $statsData = $statsResult->fetch_assoc();
 $rideCount = $statsData['ride_count'] ?? 0;
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -104,10 +144,10 @@ $rideCount = $statsData['ride_count'] ?? 0;
                 <div class="balance-card-header">
                     <h2>Total Balance</h2>
                     <?php if ($rideCount > 10): ?>
-                    <div class="reward-badge whitespace-nowrap" style="font-size: 70%; background-color: green;">
-                        <i class="fas fa-gift"></i>
-                        <span>Reward Available</span>
-                    </div>
+                        <div class="reward-badge whitespace-nowrap" style="font-size: 70%; background-color: green;">
+                            <i class="fas fa-gift"></i>
+                            <span>Reward Available</span>
+                        </div>
                     <?php endif; ?>
                 </div>
                 <div class="balance-amount">₦<?php echo number_format($walletBalance, 2); ?></div>
@@ -123,27 +163,27 @@ $rideCount = $statsData['ride_count'] ?? 0;
                     <h3 class="section-title">Payment Methods</h3>
                     <button class="see-all-btn" onclick="addPaymentMethod()">+ Add New</button>
                 </div>
-                
+
                 <div class="mobile-payment-list">
                     <?php if ($hasPaymentMethods): ?>
                         <?php while ($method = $paymentResult->fetch_assoc()): ?>
-                        <div class="mobile-payment-item <?php echo $method['is_default'] ? 'selected' : ''; ?>" data-id="<?php echo $method['id']; ?>">
-                            <div class="payment-select">
-                                <div class="payment-radio">
-                                    <div class="radio-dot"></div>
+                            <div class="mobile-payment-item <?php echo $method['is_default'] ? 'selected' : ''; ?>" data-id="<?php echo $method['id']; ?>">
+                                <div class="payment-select">
+                                    <div class="payment-radio">
+                                        <div class="radio-dot"></div>
+                                    </div>
+                                </div>
+                                <div class="payment-icon <?php echo $method['method_type'] == 'bank_transfer' ? 'transfer-icon' : 'card-icon'; ?>">
+                                    <i class="fas fa-<?php echo $method['method_type'] == 'bank_transfer' ? 'exchange-alt' : 'credit-card'; ?>"></i>
+                                </div>
+                                <div class="payment-details">
+                                    <h4><?php echo ucfirst(str_replace('_', ' ', $method['method_type'])); ?></h4>
+                                    <p><?php echo $method['account_last4'] ? '**** ' . $method['account_last4'] : ''; ?></p>
+                                </div>
+                                <div class="payment-action" onclick="showPaymentOptions('<?php echo $method['id']; ?>', '<?php echo $method['method_type']; ?>')">
+                                    <i class="fas fa-ellipsis-v"></i>
                                 </div>
                             </div>
-                            <div class="payment-icon <?php echo $method['method_type'] == 'bank_transfer' ? 'transfer-icon' : 'card-icon'; ?>">
-                                <i class="fas fa-<?php echo $method['method_type'] == 'bank_transfer' ? 'exchange-alt' : 'credit-card'; ?>"></i>
-                            </div>
-                            <div class="payment-details">
-                                <h4><?php echo ucfirst(str_replace('_', ' ', $method['method_type'])); ?></h4>
-                                <p><?php echo $method['account_last4'] ? '**** ' . $method['account_last4'] : ''; ?></p>
-                            </div>
-                            <div class="payment-action" onclick="showPaymentOptions('<?php echo $method['id']; ?>', '<?php echo $method['method_type']; ?>')">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </div>
-                        </div>
                         <?php endwhile; ?>
                     <?php else: ?>
                         <div class="text-center py-4 text-gray-500">No payment methods added yet</div>
@@ -223,9 +263,9 @@ $rideCount = $statsData['ride_count'] ?? 0;
                 </div>
                 <div class="transaction-list">
                     <?php if ($transResult && $transResult->num_rows > 0): ?>
-                        <?php 
+                        <?php
                         $transResult->data_seek(0);
-                        while ($trans = $transResult->fetch_assoc()): 
+                        while ($trans = $transResult->fetch_assoc()):
                             // FIXED: Include ride_refund as positive transaction
                             $isPositive = in_array($trans['transaction_type'], ['deposit', 'bonus', 'referral', 'ride_refund']);
                             // Generate a proper display ID
@@ -238,7 +278,7 @@ $rideCount = $statsData['ride_count'] ?? 0;
                                 // Use last 8 characters of UUID as transaction ID
                                 $displayId = 'TXN-' . substr($trans['id'], -8);
                             }
-                            
+
                             // Prepare transaction data for onclick
                             $transactionData = [
                                 'id' => $trans['id'],
@@ -256,21 +296,21 @@ $rideCount = $statsData['ride_count'] ?? 0;
                                 'is_credit' => $isPositive
                             ];
                         ?>
-                        <div class="transaction-item" onclick='viewTransaction(<?php echo json_encode($transactionData); ?>)'>
-                            <div class="transaction-info">
-                                <div class="transaction-icon <?php echo $isPositive ? 'topup-icon' : 'transfer-icon'; ?>">
-                                    <i class="fas fa-<?php echo $isPositive ? 'plus' : 'minus'; ?>"></i>
+                            <div class="transaction-item" onclick='viewTransaction(<?php echo json_encode($transactionData); ?>)'>
+                                <div class="transaction-info">
+                                    <div class="transaction-icon <?php echo $isPositive ? 'topup-icon' : 'transfer-icon'; ?>">
+                                        <i class="fas fa-<?php echo $isPositive ? 'plus' : 'minus'; ?>"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <h4><?php echo ucfirst(str_replace('_', ' ', $trans['transaction_type'])); ?></h4>
+                                        <p><?php echo date('M d, h:i A', strtotime($trans['created_at'])); ?></p>
+                                        <p class="text-xs text-gray-400"><?php echo $displayId; ?></p>
+                                    </div>
                                 </div>
-                                <div class="transaction-details">
-                                    <h4><?php echo ucfirst(str_replace('_', ' ', $trans['transaction_type'])); ?></h4>
-                                    <p><?php echo date('M d, h:i A', strtotime($trans['created_at'])); ?></p>
-                                    <p class="text-xs text-gray-400"><?php echo $displayId; ?></p>
+                                <div class="transaction-amount <?php echo $isPositive ? 'positive' : 'negative'; ?>">
+                                    <?php echo $isPositive ? '+' : '-'; ?>₦<?php echo number_format($trans['amount'], 2); ?>
                                 </div>
                             </div>
-                            <div class="transaction-amount <?php echo $isPositive ? 'positive' : 'negative'; ?>">
-                                <?php echo $isPositive ? '+' : '-'; ?>₦<?php echo number_format($trans['amount'], 2); ?>
-                            </div>
-                        </div>
                         <?php endwhile; ?>
                     <?php else: ?>
                         <div class="text-center py-4 text-gray-500">No transactions yet</div>
@@ -354,10 +394,10 @@ $rideCount = $statsData['ride_count'] ?? 0;
                         <div class="card-header">
                             <h2>Total Balance</h2>
                             <?php if ($rideCount > 10): ?>
-                            <div class="reward-badge">
-                                <i class="fas fa-gift"></i>
-                                <span>Reward Available</span>
-                            </div>
+                                <div class="reward-badge">
+                                    <i class="fas fa-gift"></i>
+                                    <span>Reward Available</span>
+                                </div>
                             <?php endif; ?>
                         </div>
                         <div class="balance-amount">₦<?php echo number_format($walletBalance, 2); ?></div>
@@ -375,34 +415,34 @@ $rideCount = $statsData['ride_count'] ?? 0;
                         </div>
 
                         <div class="payment-methods-list">
-                            <?php 
+                            <?php
                             // Reset payment result pointer
                             $paymentResult->data_seek(0);
-                            if ($paymentResult->num_rows > 0): 
-                                while ($method = $paymentResult->fetch_assoc()): 
+                            if ($paymentResult->num_rows > 0):
+                                while ($method = $paymentResult->fetch_assoc()):
                             ?>
-                            <div class="payment-method-item <?php echo $method['is_default'] ? 'selected' : ''; ?>" data-id="<?php echo $method['id']; ?>">
-                                <div class="payment-method-select">
-                                    <div class="payment-radio">
-                                        <div class="radio-dot"></div>
+                                    <div class="payment-method-item <?php echo $method['is_default'] ? 'selected' : ''; ?>" data-id="<?php echo $method['id']; ?>">
+                                        <div class="payment-method-select">
+                                            <div class="payment-radio">
+                                                <div class="radio-dot"></div>
+                                            </div>
+                                        </div>
+                                        <div class="payment-method-icon <?php echo $method['method_type'] == 'bank_transfer' ? 'transfer-icon' : 'card-icon'; ?>">
+                                            <i class="fas fa-<?php echo $method['method_type'] == 'bank_transfer' ? 'exchange-alt' : 'credit-card'; ?>"></i>
+                                        </div>
+                                        <div class="payment-method-details">
+                                            <h4><?php echo ucfirst(str_replace('_', ' ', $method['method_type'])); ?></h4>
+                                            <p><?php echo $method['account_last4'] ? '**** ' . $method['account_last4'] : ''; ?></p>
+                                        </div>
+                                        <div class="payment-method-action" onclick="showPaymentOptions('<?php echo $method['id']; ?>', '<?php echo $method['method_type']; ?>')">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="payment-method-icon <?php echo $method['method_type'] == 'bank_transfer' ? 'transfer-icon' : 'card-icon'; ?>">
-                                    <i class="fas fa-<?php echo $method['method_type'] == 'bank_transfer' ? 'exchange-alt' : 'credit-card'; ?>"></i>
-                                </div>
-                                <div class="payment-method-details">
-                                    <h4><?php echo ucfirst(str_replace('_', ' ', $method['method_type'])); ?></h4>
-                                    <p><?php echo $method['account_last4'] ? '**** ' . $method['account_last4'] : ''; ?></p>
-                                </div>
-                                <div class="payment-method-action" onclick="showPaymentOptions('<?php echo $method['id']; ?>', '<?php echo $method['method_type']; ?>')">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </div>
-                            </div>
-                            <?php 
+                                <?php
                                 endwhile;
-                            else: 
-                            ?>
-                            <div class="text-center py-4 text-gray-500">No payment methods added yet</div>
+                            else:
+                                ?>
+                                <div class="text-center py-4 text-gray-500">No payment methods added yet</div>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -479,11 +519,11 @@ $rideCount = $statsData['ride_count'] ?? 0;
                         </div>
                         <div class="desktop-transactions">
                             <div class="transaction-list">
-                                <?php 
+                                <?php
                                 // Reset transaction result pointer
                                 $transResult->data_seek(0);
-                                if ($transResult && $transResult->num_rows > 0): 
-                                    while ($trans = $transResult->fetch_assoc()): 
+                                if ($transResult && $transResult->num_rows > 0):
+                                    while ($trans = $transResult->fetch_assoc()):
                                         // FIXED: Include ride_refund as positive transaction
                                         $isPositive = in_array($trans['transaction_type'], ['deposit', 'bonus', 'referral', 'ride_refund']);
                                         $displayId = '';
@@ -494,7 +534,7 @@ $rideCount = $statsData['ride_count'] ?? 0;
                                         } else {
                                             $displayId = 'TXN-' . substr($trans['id'], -8);
                                         }
-                                        
+
                                         $transactionData = [
                                             'id' => $trans['id'],
                                             'display_id' => $displayId,
@@ -511,26 +551,26 @@ $rideCount = $statsData['ride_count'] ?? 0;
                                             'is_credit' => $isPositive
                                         ];
                                 ?>
-                                <div class="transaction-item" onclick='viewTransaction(<?php echo json_encode($transactionData); ?>)'>
-                                    <div class="transaction-info">
-                                        <div class="transaction-icon <?php echo $isPositive ? 'topup-icon' : 'transfer-icon'; ?>">
-                                            <i class="fas fa-<?php echo $isPositive ? 'plus' : 'minus'; ?>"></i>
+                                        <div class="transaction-item" onclick='viewTransaction(<?php echo json_encode($transactionData); ?>)'>
+                                            <div class="transaction-info">
+                                                <div class="transaction-icon <?php echo $isPositive ? 'topup-icon' : 'transfer-icon'; ?>">
+                                                    <i class="fas fa-<?php echo $isPositive ? 'plus' : 'minus'; ?>"></i>
+                                                </div>
+                                                <div class="transaction-details">
+                                                    <h4><?php echo ucfirst(str_replace('_', ' ', $trans['transaction_type'])); ?></h4>
+                                                    <p><?php echo date('M d, h:i A', strtotime($trans['created_at'])); ?></p>
+                                                    <p class="text-xs text-gray-400"><?php echo $displayId; ?></p>
+                                                </div>
+                                            </div>
+                                            <div class="transaction-amount <?php echo $isPositive ? 'positive' : 'negative'; ?>">
+                                                <?php echo $isPositive ? '+' : '-'; ?>₦<?php echo number_format($trans['amount'], 2); ?>
+                                            </div>
                                         </div>
-                                        <div class="transaction-details">
-                                            <h4><?php echo ucfirst(str_replace('_', ' ', $trans['transaction_type'])); ?></h4>
-                                            <p><?php echo date('M d, h:i A', strtotime($trans['created_at'])); ?></p>
-                                            <p class="text-xs text-gray-400"><?php echo $displayId; ?></p>
-                                        </div>
-                                    </div>
-                                    <div class="transaction-amount <?php echo $isPositive ? 'positive' : 'negative'; ?>">
-                                        <?php echo $isPositive ? '+' : '-'; ?>₦<?php echo number_format($trans['amount'], 2); ?>
-                                    </div>
-                                </div>
-                                <?php 
+                                    <?php
                                     endwhile;
-                                else: 
-                                ?>
-                                <div class="text-center py-4 text-gray-500">No transactions yet</div>
+                                else:
+                                    ?>
+                                    <div class="text-center py-4 text-gray-500">No transactions yet</div>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -571,15 +611,13 @@ $rideCount = $statsData['ride_count'] ?? 0;
 
     <script>
     // ========== WALLET FUNCTIONS ==========
-    
+
     // View transaction details
     function viewTransaction(transaction) {
         console.log('Viewing transaction:', transaction);
-        
-        // Build HTML for transaction details
-        const amountClass = transaction.is_credit ? 'positive' : 'negative';
+
         const amountPrefix = transaction.is_credit ? '+' : '-';
-        
+
         const html = `
             <div style="text-align: left; padding: 10px;">
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 15px;">
@@ -633,7 +671,7 @@ $rideCount = $statsData['ride_count'] ?? 0;
                 </div>
             </div>
         `;
-        
+
         Swal.fire({
             title: 'Transaction Details',
             html: html,
@@ -643,22 +681,22 @@ $rideCount = $statsData['ride_count'] ?? 0;
         });
     }
 
-    // Add funds to wallet
+    // ========== KORAPAY ADD FUNDS FUNCTION ==========
     function addFunds() {
+        console.log('addFunds called - KoraPay version');
+        
         Swal.fire({
             title: 'Add Funds to Wallet',
             html: `
                 <input type="number" id="amount" class="swal2-input" placeholder="Enter amount" min="100" step="100">
-                <select id="paymentMethod" class="swal2-input">
-                    <option value="bank_transfer">Bank Transfer</option>
-                    <option value="card">Credit/Debit Card</option>
-                </select>
                 <div style="margin-top: 10px; text-align: left; font-size: 13px; color: #666;">
                     <p><i class="fas fa-info-circle" style="color: #ff5e00;"></i> Minimum deposit: ₦100</p>
-                    <p><i class="fas fa-clock" style="color: #ff5e00;"></i> Funds are added instantly</p>
+                    <p><i class="fas fa-credit-card" style="color: #ff5e00;"></i> Secured by KoraPay</p>
+                    <p><i class="fas fa-percent" style="color: #ff5e00;"></i> Platform fees are covered by Speedly</p>
+                    <p><i class="fas fa-clock" style="color: #ff5e00;"></i> Funds are added instantly after payment</p>
                 </div>
             `,
-            confirmButtonText: 'Add Funds',
+            confirmButtonText: 'Proceed to Payment',
             confirmButtonColor: '#ff5e00',
             showCancelButton: true,
             preConfirm: () => {
@@ -671,18 +709,52 @@ $rideCount = $statsData['ride_count'] ?? 0;
             }
         }).then((result) => {
             if (result.isConfirmed) {
+                // Show loading
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Funds Added!',
-                    html: `
-                        <p>₦${result.value.amount.toLocaleString()} has been added to your wallet</p>
-                        <p style="font-size: 13px; color: #666; margin-top: 10px;">Transaction ID: TXN-${Math.random().toString(36).substr(2, 9).toUpperCase()}</p>
-                    `,
-                    timer: 3000,
-                    showConfirmButton: true,
-                    confirmButtonColor: '#ff5e00'
-                }).then(() => {
-                    location.reload();
+                    title: 'Processing...',
+                    text: 'Initializing payment gateway',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+                
+                // Initialize KoraPay payment
+                fetch('SERVER/API/initiate_korapay_payment.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        amount: result.value.amount
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    Swal.close();
+                    console.log('KoraPay Response:', data);
+                    
+                    if (data.success && data.checkout_url) {
+                        sessionStorage.setItem('payment_reference', data.reference);
+                        window.location.href = data.checkout_url;
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Payment Initiation Failed',
+                            text: data.message || 'Unable to initialize payment. Please try again.',
+                            confirmButtonColor: '#ff5e00'
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.close();
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Connection Error',
+                        text: 'Unable to connect to payment gateway. Please try again.',
+                        confirmButtonColor: '#ff5e00'
+                    });
                 });
             }
         });
@@ -699,7 +771,7 @@ $rideCount = $statsData['ride_count'] ?? 0;
             });
             return;
         }
-        
+
         Swal.fire({
             title: 'Withdraw Funds',
             html: `
@@ -727,7 +799,7 @@ $rideCount = $statsData['ride_count'] ?? 0;
                 const bank = document.getElementById('bank-name').value;
                 const account = document.getElementById('account-number').value;
                 const name = document.getElementById('account-name').value;
-                
+
                 if (!amount || amount < 1000) {
                     Swal.showValidationMessage('Minimum withdrawal is ₦1,000');
                     return false;
@@ -793,7 +865,7 @@ $rideCount = $statsData['ride_count'] ?? 0;
                 const name = document.getElementById('account-name').value;
                 const number = document.getElementById('account-number').value;
                 const isDefault = document.getElementById('set-default').checked;
-                
+
                 if (!bank || !name || !number) {
                     Swal.showValidationMessage('Please fill all fields');
                     return false;
@@ -904,7 +976,7 @@ $rideCount = $statsData['ride_count'] ?? 0;
     function checkScreenSize() {
         const mobileView = document.querySelector('.mobile-view');
         const desktopView = document.querySelector('.desktop-view');
-        
+
         if (window.innerWidth >= 1024) {
             if (mobileView) mobileView.style.display = 'none';
             if (desktopView) desktopView.style.display = 'flex';
@@ -916,10 +988,25 @@ $rideCount = $statsData['ride_count'] ?? 0;
 
     // Initialize
     document.addEventListener('DOMContentLoaded', function() {
+        console.log('Wallet page loaded - KoraPay version');
         checkScreenSize();
         window.addEventListener('resize', checkScreenSize);
+        
+        // Check for payment status from redirect
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('payment_status') === 'completed') {
+            const reference = urlParams.get('reference');
+            if (reference) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Deposit Successful!',
+                    text: 'Your wallet has been credited.',
+                    confirmButtonColor: '#ff5e00'
+                });
+            }
+        }
     });
-    </script>
+</script>
 </body>
 
 </html>

@@ -1,0 +1,2487 @@
+2026-03-22 10:24:19 - Webhook received
+2026-03-22 10:24:19 - Data: {"test":true}
+2026-03-22 10:24:19 - Unhandled event: 
+2026-03-22 10:24:20 - Webhook received
+2026-03-22 10:24:20 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171459","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171459","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:24:20 - Processing: ref=TEST-1774171459, paid=500, fee=0, credit=500
+2026-03-22 10:24:20 - Transaction not found for: TEST-1774171459
+2026-03-22 10:24:23 - Webhook received
+2026-03-22 10:24:23 - Data: {"test":true}
+2026-03-22 10:24:23 - Unhandled event: 
+2026-03-22 10:24:24 - Webhook received
+2026-03-22 10:24:24 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171463","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171463","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:24:24 - Processing: ref=TEST-1774171463, paid=500, fee=0, credit=500
+2026-03-22 10:24:24 - Transaction not found for: TEST-1774171463
+2026-03-22 10:24:26 - Webhook received
+2026-03-22 10:24:26 - Data: {"test":true}
+2026-03-22 10:24:26 - Unhandled event: 
+2026-03-22 10:24:27 - Webhook received
+2026-03-22 10:24:27 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171467","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171467","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:24:27 - Processing: ref=TEST-1774171467, paid=500, fee=0, credit=500
+2026-03-22 10:24:27 - Transaction not found for: TEST-1774171467
+2026-03-22 10:24:31 - Webhook received
+2026-03-22 10:24:31 - Data: {"test":true}
+2026-03-22 10:24:31 - Unhandled event: 
+2026-03-22 10:24:32 - Webhook received
+2026-03-22 10:24:32 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171471","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171471","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:24:32 - Processing: ref=TEST-1774171471, paid=500, fee=0, credit=500
+2026-03-22 10:24:32 - Transaction not found for: TEST-1774171471
+2026-03-22 10:24:39 - Webhook received
+2026-03-22 10:24:39 - Data: {"test":true}
+2026-03-22 10:24:39 - Unhandled event: 
+2026-03-22 10:24:40 - Webhook received
+2026-03-22 10:24:40 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171479","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171479","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:24:40 - Processing: ref=TEST-1774171479, paid=500, fee=0, credit=500
+2026-03-22 10:24:40 - Transaction not found for: TEST-1774171479
+2026-03-22 10:24:44 - Webhook received
+2026-03-22 10:24:44 - Data: {"test":true}
+2026-03-22 10:24:44 - Unhandled event: 
+2026-03-22 10:24:45 - Webhook received
+2026-03-22 10:24:45 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171484","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171484","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:24:45 - Processing: ref=TEST-1774171484, paid=500, fee=0, credit=500
+2026-03-22 10:24:45 - Transaction not found for: TEST-1774171484
+2026-03-22 10:24:47 - Webhook received
+2026-03-22 10:24:47 - Data: {"test":true}
+2026-03-22 10:24:47 - Unhandled event: 
+2026-03-22 10:24:48 - Webhook received
+2026-03-22 10:24:48 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171488","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171488","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:24:48 - Processing: ref=TEST-1774171488, paid=500, fee=0, credit=500
+2026-03-22 10:24:48 - Transaction not found for: TEST-1774171488
+2026-03-22 10:24:51 - Webhook received
+2026-03-22 10:24:51 - Data: {"test":true}
+2026-03-22 10:24:51 - Unhandled event: 
+2026-03-22 10:24:52 - Webhook received
+2026-03-22 10:24:52 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171491","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171491","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:24:52 - Processing: ref=TEST-1774171491, paid=500, fee=0, credit=500
+2026-03-22 10:24:52 - Transaction not found for: TEST-1774171491
+2026-03-22 10:24:55 - Webhook received
+2026-03-22 10:24:55 - Data: {"test":true}
+2026-03-22 10:24:55 - Unhandled event: 
+2026-03-22 10:24:55 - Webhook received
+2026-03-22 10:24:55 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171495","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171495","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:24:55 - Processing: ref=TEST-1774171495, paid=500, fee=0, credit=500
+2026-03-22 10:24:55 - Transaction not found for: TEST-1774171495
+2026-03-22 10:24:55 - Webhook received
+2026-03-22 10:24:55 - Data: {"test":true}
+2026-03-22 10:24:55 - Unhandled event: 
+2026-03-22 10:24:56 - Webhook received
+2026-03-22 10:24:56 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171496","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171496","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:24:56 - Processing: ref=TEST-1774171496, paid=500, fee=0, credit=500
+2026-03-22 10:24:56 - Transaction not found for: TEST-1774171496
+2026-03-22 10:24:58 - Webhook received
+2026-03-22 10:24:58 - Data: {"test":true}
+2026-03-22 10:24:58 - Unhandled event: 
+2026-03-22 10:24:59 - Webhook received
+2026-03-22 10:24:59 - Data: {"test":true}
+2026-03-22 10:24:59 - Unhandled event: 
+2026-03-22 10:24:59 - Webhook received
+2026-03-22 10:24:59 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171498","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171498","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:24:59 - Processing: ref=TEST-1774171498, paid=500, fee=0, credit=500
+2026-03-22 10:24:59 - Transaction not found for: TEST-1774171498
+2026-03-22 10:24:59 - Webhook received
+2026-03-22 10:24:59 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171499","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171499","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:24:59 - Processing: ref=TEST-1774171499, paid=500, fee=0, credit=500
+2026-03-22 10:24:59 - Transaction not found for: TEST-1774171499
+2026-03-22 10:25:01 - Webhook received
+2026-03-22 10:25:01 - Data: {"test":true}
+2026-03-22 10:25:01 - Unhandled event: 
+2026-03-22 10:25:02 - Webhook received
+2026-03-22 10:25:02 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171501","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171501","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:02 - Processing: ref=TEST-1774171501, paid=500, fee=0, credit=500
+2026-03-22 10:25:02 - Transaction not found for: TEST-1774171501
+2026-03-22 10:25:02 - Webhook received
+2026-03-22 10:25:02 - Data: {"test":true}
+2026-03-22 10:25:02 - Unhandled event: 
+2026-03-22 10:25:03 - Webhook received
+2026-03-22 10:25:03 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171502","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171502","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:03 - Processing: ref=TEST-1774171502, paid=500, fee=0, credit=500
+2026-03-22 10:25:03 - Transaction not found for: TEST-1774171502
+2026-03-22 10:25:03 - Webhook received
+2026-03-22 10:25:03 - Data: {"test":true}
+2026-03-22 10:25:03 - Unhandled event: 
+2026-03-22 10:25:04 - Webhook received
+2026-03-22 10:25:04 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171503","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171503","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:04 - Processing: ref=TEST-1774171503, paid=500, fee=0, credit=500
+2026-03-22 10:25:04 - Transaction not found for: TEST-1774171503
+2026-03-22 10:25:05 - Webhook received
+2026-03-22 10:25:05 - Data: {"test":true}
+2026-03-22 10:25:05 - Unhandled event: 
+2026-03-22 10:25:05 - Webhook received
+2026-03-22 10:25:05 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171505","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171505","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:05 - Processing: ref=TEST-1774171505, paid=500, fee=0, credit=500
+2026-03-22 10:25:05 - Transaction not found for: TEST-1774171505
+2026-03-22 10:25:05 - Webhook received
+2026-03-22 10:25:05 - Data: {"test":true}
+2026-03-22 10:25:05 - Unhandled event: 
+2026-03-22 10:25:06 - Webhook received
+2026-03-22 10:25:06 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171506","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171506","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:06 - Processing: ref=TEST-1774171506, paid=500, fee=0, credit=500
+2026-03-22 10:25:06 - Transaction not found for: TEST-1774171506
+2026-03-22 10:25:06 - Webhook received
+2026-03-22 10:25:06 - Data: {"test":true}
+2026-03-22 10:25:06 - Unhandled event: 
+2026-03-22 10:25:07 - Webhook received
+2026-03-22 10:25:07 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171507","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171507","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:07 - Processing: ref=TEST-1774171507, paid=500, fee=0, credit=500
+2026-03-22 10:25:07 - Transaction not found for: TEST-1774171507
+2026-03-22 10:25:08 - Webhook received
+2026-03-22 10:25:08 - Data: {"test":true}
+2026-03-22 10:25:08 - Unhandled event: 
+2026-03-22 10:25:09 - Webhook received
+2026-03-22 10:25:09 - Data: {"test":true}
+2026-03-22 10:25:09 - Unhandled event: 
+2026-03-22 10:25:09 - Webhook received
+2026-03-22 10:25:09 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171508","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171508","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:09 - Processing: ref=TEST-1774171508, paid=500, fee=0, credit=500
+2026-03-22 10:25:09 - Transaction not found for: TEST-1774171508
+2026-03-22 10:25:10 - Webhook received
+2026-03-22 10:25:10 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171509","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171509","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:10 - Processing: ref=TEST-1774171509, paid=500, fee=0, credit=500
+2026-03-22 10:25:10 - Transaction not found for: TEST-1774171509
+2026-03-22 10:25:10 - Webhook received
+2026-03-22 10:25:10 - Data: {"test":true}
+2026-03-22 10:25:10 - Unhandled event: 
+2026-03-22 10:25:11 - Webhook received
+2026-03-22 10:25:11 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171510","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171510","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:11 - Processing: ref=TEST-1774171510, paid=500, fee=0, credit=500
+2026-03-22 10:25:11 - Transaction not found for: TEST-1774171510
+2026-03-22 10:25:11 - Webhook received
+2026-03-22 10:25:11 - Data: {"test":true}
+2026-03-22 10:25:11 - Unhandled event: 
+2026-03-22 10:25:11 - Webhook received
+2026-03-22 10:25:11 - Data: {"test":true}
+2026-03-22 10:25:11 - Unhandled event: 
+2026-03-22 10:25:12 - Webhook received
+2026-03-22 10:25:12 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171511","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171511","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:12 - Processing: ref=TEST-1774171511, paid=500, fee=0, credit=500
+2026-03-22 10:25:12 - Transaction not found for: TEST-1774171511
+2026-03-22 10:25:12 - Webhook received
+2026-03-22 10:25:12 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171512","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171512","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:12 - Processing: ref=TEST-1774171512, paid=500, fee=0, credit=500
+2026-03-22 10:25:12 - Transaction not found for: TEST-1774171512
+2026-03-22 10:25:12 - Webhook received
+2026-03-22 10:25:12 - Data: {"test":true}
+2026-03-22 10:25:12 - Unhandled event: 
+2026-03-22 10:25:13 - Webhook received
+2026-03-22 10:25:13 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171512","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171512","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:13 - Processing: ref=TEST-1774171512, paid=500, fee=0, credit=500
+2026-03-22 10:25:13 - Transaction not found for: TEST-1774171512
+2026-03-22 10:25:13 - Webhook received
+2026-03-22 10:25:13 - Data: {"test":true}
+2026-03-22 10:25:13 - Unhandled event: 
+2026-03-22 10:25:14 - Webhook received
+2026-03-22 10:25:14 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171513","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171513","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:14 - Processing: ref=TEST-1774171513, paid=500, fee=0, credit=500
+2026-03-22 10:25:14 - Transaction not found for: TEST-1774171513
+2026-03-22 10:25:14 - Webhook received
+2026-03-22 10:25:14 - Data: {"test":true}
+2026-03-22 10:25:14 - Unhandled event: 
+2026-03-22 10:25:15 - Webhook received
+2026-03-22 10:25:15 - Data: {"test":true}
+2026-03-22 10:25:15 - Unhandled event: 
+2026-03-22 10:25:15 - Webhook received
+2026-03-22 10:25:15 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171514","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171514","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:15 - Processing: ref=TEST-1774171514, paid=500, fee=0, credit=500
+2026-03-22 10:25:15 - Transaction not found for: TEST-1774171514
+2026-03-22 10:25:16 - Webhook received
+2026-03-22 10:25:16 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171515","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171515","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:16 - Processing: ref=TEST-1774171515, paid=500, fee=0, credit=500
+2026-03-22 10:25:16 - Transaction not found for: TEST-1774171515
+2026-03-22 10:25:16 - Webhook received
+2026-03-22 10:25:16 - Data: {"test":true}
+2026-03-22 10:25:16 - Unhandled event: 
+2026-03-22 10:25:16 - Webhook received
+2026-03-22 10:25:16 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171516","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171516","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:16 - Processing: ref=TEST-1774171516, paid=500, fee=0, credit=500
+2026-03-22 10:25:16 - Transaction not found for: TEST-1774171516
+2026-03-22 10:25:17 - Webhook received
+2026-03-22 10:25:17 - Data: {"test":true}
+2026-03-22 10:25:17 - Unhandled event: 
+2026-03-22 10:25:17 - Webhook received
+2026-03-22 10:25:17 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171517","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171517","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:17 - Processing: ref=TEST-1774171517, paid=500, fee=0, credit=500
+2026-03-22 10:25:17 - Transaction not found for: TEST-1774171517
+2026-03-22 10:25:18 - Webhook received
+2026-03-22 10:25:18 - Data: {"test":true}
+2026-03-22 10:25:18 - Unhandled event: 
+2026-03-22 10:25:18 - Webhook received
+2026-03-22 10:25:18 - Data: {"test":true}
+2026-03-22 10:25:18 - Unhandled event: 
+2026-03-22 10:25:19 - Webhook received
+2026-03-22 10:25:19 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171518","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171518","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:19 - Processing: ref=TEST-1774171518, paid=500, fee=0, credit=500
+2026-03-22 10:25:19 - Transaction not found for: TEST-1774171518
+2026-03-22 10:25:19 - Webhook received
+2026-03-22 10:25:19 - Data: {"test":true}
+2026-03-22 10:25:19 - Unhandled event: 
+2026-03-22 10:25:19 - Webhook received
+2026-03-22 10:25:19 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171518","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171518","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:19 - Processing: ref=TEST-1774171518, paid=500, fee=0, credit=500
+2026-03-22 10:25:19 - Transaction not found for: TEST-1774171518
+2026-03-22 10:25:19 - Webhook received
+2026-03-22 10:25:19 - Data: {"test":true}
+2026-03-22 10:25:19 - Unhandled event: 
+2026-03-22 10:25:19 - Webhook received
+2026-03-22 10:25:19 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171519","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171519","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:19 - Processing: ref=TEST-1774171519, paid=500, fee=0, credit=500
+2026-03-22 10:25:19 - Transaction not found for: TEST-1774171519
+2026-03-22 10:25:20 - Webhook received
+2026-03-22 10:25:20 - Data: {"test":true}
+2026-03-22 10:25:20 - Unhandled event: 
+2026-03-22 10:25:20 - Webhook received
+2026-03-22 10:25:20 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171519","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171519","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:20 - Processing: ref=TEST-1774171519, paid=500, fee=0, credit=500
+2026-03-22 10:25:20 - Transaction not found for: TEST-1774171519
+2026-03-22 10:25:21 - Webhook received
+2026-03-22 10:25:21 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171520","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171520","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:21 - Processing: ref=TEST-1774171520, paid=500, fee=0, credit=500
+2026-03-22 10:25:21 - Transaction not found for: TEST-1774171520
+2026-03-22 10:25:21 - Webhook received
+2026-03-22 10:25:21 - Data: {"test":true}
+2026-03-22 10:25:21 - Unhandled event: 
+2026-03-22 10:25:22 - Webhook received
+2026-03-22 10:25:22 - Data: {"test":true}
+2026-03-22 10:25:22 - Unhandled event: 
+2026-03-22 10:25:22 - Webhook received
+2026-03-22 10:25:22 - Data: {"test":true}
+2026-03-22 10:25:22 - Unhandled event: 
+2026-03-22 10:25:22 - Webhook received
+2026-03-22 10:25:22 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171522","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171522","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:22 - Processing: ref=TEST-1774171522, paid=500, fee=0, credit=500
+2026-03-22 10:25:22 - Transaction not found for: TEST-1774171522
+2026-03-22 10:25:23 - Webhook received
+2026-03-22 10:25:23 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171522","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171522","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:23 - Processing: ref=TEST-1774171522, paid=500, fee=0, credit=500
+2026-03-22 10:25:23 - Transaction not found for: TEST-1774171522
+2026-03-22 10:25:23 - Webhook received
+2026-03-22 10:25:23 - Data: {"test":true}
+2026-03-22 10:25:23 - Unhandled event: 
+2026-03-22 10:25:23 - Webhook received
+2026-03-22 10:25:23 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171522","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171522","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:23 - Processing: ref=TEST-1774171522, paid=500, fee=0, credit=500
+2026-03-22 10:25:23 - Transaction not found for: TEST-1774171522
+2026-03-22 10:25:24 - Webhook received
+2026-03-22 10:25:24 - Data: {"test":true}
+2026-03-22 10:25:24 - Unhandled event: 
+2026-03-22 10:25:24 - Webhook received
+2026-03-22 10:25:24 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171523","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171523","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:24 - Processing: ref=TEST-1774171523, paid=500, fee=0, credit=500
+2026-03-22 10:25:24 - Transaction not found for: TEST-1774171523
+2026-03-22 10:25:24 - Webhook received
+2026-03-22 10:25:24 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171524","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171524","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:24 - Processing: ref=TEST-1774171524, paid=500, fee=0, credit=500
+2026-03-22 10:25:24 - Transaction not found for: TEST-1774171524
+2026-03-22 10:25:27 - Webhook received
+2026-03-22 10:25:27 - Data: {"test":true}
+2026-03-22 10:25:27 - Unhandled event: 
+2026-03-22 10:25:28 - Webhook received
+2026-03-22 10:25:28 - Data: {"test":true}
+2026-03-22 10:25:28 - Unhandled event: 
+2026-03-22 10:25:28 - Webhook received
+2026-03-22 10:25:28 - Data: {"test":true}
+2026-03-22 10:25:28 - Unhandled event: 
+2026-03-22 10:25:28 - Webhook received
+2026-03-22 10:25:28 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171527","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171527","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:28 - Processing: ref=TEST-1774171527, paid=500, fee=0, credit=500
+2026-03-22 10:25:28 - Transaction not found for: TEST-1774171527
+2026-03-22 10:25:29 - Webhook received
+2026-03-22 10:25:29 - Data: {"test":true}
+2026-03-22 10:25:29 - Unhandled event: 
+2026-03-22 10:25:29 - Webhook received
+2026-03-22 10:25:29 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171528","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171528","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:29 - Processing: ref=TEST-1774171528, paid=500, fee=0, credit=500
+2026-03-22 10:25:29 - Transaction not found for: TEST-1774171528
+2026-03-22 10:25:31 - Webhook received
+2026-03-22 10:25:31 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171529","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171529","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:31 - Processing: ref=TEST-1774171529, paid=500, fee=0, credit=500
+2026-03-22 10:25:31 - Transaction not found for: TEST-1774171529
+2026-03-22 10:25:31 - Webhook received
+2026-03-22 10:25:31 - Data: {"test":true}
+2026-03-22 10:25:31 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171529","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171529","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:31 - Unhandled event: 
+2026-03-22 10:25:31 - Processing: ref=TEST-1774171529, paid=500, fee=0, credit=500
+2026-03-22 10:25:31 - Transaction not found for: TEST-1774171529
+2026-03-22 10:25:34 - Webhook received
+2026-03-22 10:25:34 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171531","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171531","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:34 - Processing: ref=TEST-1774171531, paid=500, fee=0, credit=500
+2026-03-22 10:25:34 - Transaction not found for: TEST-1774171531
+2026-03-22 10:25:34 - Webhook received
+2026-03-22 10:25:34 - Data: {"test":true}
+2026-03-22 10:25:34 - Unhandled event: 
+2026-03-22 10:25:35 - Webhook received
+2026-03-22 10:25:35 - Data: {"test":true}
+2026-03-22 10:25:35 - Unhandled event: 
+2026-03-22 10:25:36 - Webhook received
+2026-03-22 10:25:36 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171534","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171534","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:36 - Processing: ref=TEST-1774171534, paid=500, fee=0, credit=500
+2026-03-22 10:25:36 - Transaction not found for: TEST-1774171534
+2026-03-22 10:25:38 - Webhook received
+2026-03-22 10:25:38 - Data: {"test":true}
+2026-03-22 10:25:38 - Unhandled event: 
+2026-03-22 10:25:38 - Webhook received
+2026-03-22 10:25:38 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171535","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171535","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:38 - Processing: ref=TEST-1774171535, paid=500, fee=0, credit=500
+2026-03-22 10:25:38 - Transaction not found for: TEST-1774171535
+2026-03-22 10:25:38 - Webhook received
+2026-03-22 10:25:38 - Data: {"test":true}
+2026-03-22 10:25:38 - Unhandled event: 
+2026-03-22 10:25:41 - Webhook received
+2026-03-22 10:25:41 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171538","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171538","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:41 - Processing: ref=TEST-1774171538, paid=500, fee=0, credit=500
+2026-03-22 10:25:41 - Transaction not found for: TEST-1774171538
+2026-03-22 10:25:41 - Webhook received
+2026-03-22 10:25:41 - Data: 
+2026-03-22 10:25:41 - Unhandled event: 
+2026-03-22 10:25:42 - Webhook received
+2026-03-22 10:25:42 - Data: {"test":true}
+2026-03-22 10:25:42 - Unhandled event: 
+2026-03-22 10:25:42 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171539","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171539","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:42 - Processing: ref=TEST-1774171539, paid=500, fee=0, credit=500
+2026-03-22 10:25:42 - Transaction not found for: TEST-1774171539
+2026-03-22 10:25:43 - Webhook received
+2026-03-22 10:25:43 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171542","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171542","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:43 - Processing: ref=TEST-1774171542, paid=500, fee=0, credit=500
+2026-03-22 10:25:43 - Transaction not found for: TEST-1774171542
+2026-03-22 10:25:43 - Webhook received
+2026-03-22 10:25:43 - Data: {"test":true}
+2026-03-22 10:25:43 - Unhandled event: 
+2026-03-22 10:25:43 - Webhook received
+2026-03-22 10:25:43 - Data: {"test":true}
+2026-03-22 10:25:43 - Unhandled event: 
+2026-03-22 10:25:44 - Webhook received
+2026-03-22 10:25:44 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171543","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171543","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:44 - Processing: ref=TEST-1774171543, paid=500, fee=0, credit=500
+2026-03-22 10:25:44 - Transaction not found for: TEST-1774171543
+2026-03-22 10:25:44 - Webhook received
+2026-03-22 10:25:44 - Data: {"test":true}
+2026-03-22 10:25:44 - Unhandled event: 
+2026-03-22 10:25:44 - Webhook received
+2026-03-22 10:25:44 - Data: {"test":true}
+2026-03-22 10:25:44 - Unhandled event: 
+2026-03-22 10:25:44 - Webhook received
+2026-03-22 10:25:44 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171544","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171544","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:44 - Processing: ref=TEST-1774171544, paid=500, fee=0, credit=500
+2026-03-22 10:25:44 - Transaction not found for: TEST-1774171544
+2026-03-22 10:25:45 - Webhook received
+2026-03-22 10:25:45 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171544","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171544","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:45 - Processing: ref=TEST-1774171544, paid=500, fee=0, credit=500
+2026-03-22 10:25:45 - Transaction not found for: TEST-1774171544
+2026-03-22 10:25:45 - Webhook received
+2026-03-22 10:25:45 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171544","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171544","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:45 - Processing: ref=TEST-1774171544, paid=500, fee=0, credit=500
+2026-03-22 10:25:45 - Transaction not found for: TEST-1774171544
+2026-03-22 10:25:45 - Webhook received
+2026-03-22 10:25:45 - Data: {"test":true}
+2026-03-22 10:25:45 - Unhandled event: 
+2026-03-22 10:25:46 - Webhook received
+2026-03-22 10:25:46 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171545","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171545","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:46 - Processing: ref=TEST-1774171545, paid=500, fee=0, credit=500
+2026-03-22 10:25:46 - Transaction not found for: TEST-1774171545
+2026-03-22 10:25:46 - Webhook received
+2026-03-22 10:25:46 - Data: {"test":true}
+2026-03-22 10:25:46 - Unhandled event: 
+2026-03-22 10:25:47 - Webhook received
+2026-03-22 10:25:47 - Data: {"test":true}
+2026-03-22 10:25:47 - Unhandled event: 
+2026-03-22 10:25:47 - Webhook received
+2026-03-22 10:25:47 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171546","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171546","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:47 - Processing: ref=TEST-1774171546, paid=500, fee=0, credit=500
+2026-03-22 10:25:47 - Transaction not found for: TEST-1774171546
+2026-03-22 10:25:47 - Webhook received
+2026-03-22 10:25:47 - Data: {"test":true}
+2026-03-22 10:25:47 - Unhandled event: 
+2026-03-22 10:25:48 - Webhook received
+2026-03-22 10:25:48 - Data: {"test":true}
+2026-03-22 10:25:48 - Unhandled event: 
+2026-03-22 10:25:48 - Webhook received
+2026-03-22 10:25:48 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171547","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171547","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:48 - Processing: ref=TEST-1774171547, paid=500, fee=0, credit=500
+2026-03-22 10:25:48 - Transaction not found for: TEST-1774171547
+2026-03-22 10:25:48 - Webhook received
+2026-03-22 10:25:48 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171548","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171548","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:48 - Processing: ref=TEST-1774171548, paid=500, fee=0, credit=500
+2026-03-22 10:25:48 - Transaction not found for: TEST-1774171548
+2026-03-22 10:25:48 - Webhook received
+2026-03-22 10:25:48 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171548","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171548","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:48 - Processing: ref=TEST-1774171548, paid=500, fee=0, credit=500
+2026-03-22 10:25:48 - Transaction not found for: TEST-1774171548
+2026-03-22 10:25:49 - Webhook received
+2026-03-22 10:25:49 - Data: {"test":true}
+2026-03-22 10:25:49 - Unhandled event: 
+2026-03-22 10:25:50 - Webhook received
+2026-03-22 10:25:50 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171549","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171549","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:50 - Processing: ref=TEST-1774171549, paid=500, fee=0, credit=500
+2026-03-22 10:25:50 - Transaction not found for: TEST-1774171549
+2026-03-22 10:25:50 - Webhook received
+2026-03-22 10:25:50 - Data: {"test":true}
+2026-03-22 10:25:50 - Unhandled event: 
+2026-03-22 10:25:50 - Webhook received
+2026-03-22 10:25:50 - Data: {"test":true}
+2026-03-22 10:25:50 - Unhandled event: 
+2026-03-22 10:25:51 - Webhook received
+2026-03-22 10:25:51 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171550","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171550","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:51 - Processing: ref=TEST-1774171550, paid=500, fee=0, credit=500
+2026-03-22 10:25:51 - Transaction not found for: TEST-1774171550
+2026-03-22 10:25:51 - Webhook received
+2026-03-22 10:25:51 - Data: {"test":true}
+2026-03-22 10:25:51 - Unhandled event: 
+2026-03-22 10:25:51 - Webhook received
+2026-03-22 10:25:51 - Data: {"test":true}
+2026-03-22 10:25:51 - Unhandled event: 
+2026-03-22 10:25:51 - Webhook received
+2026-03-22 10:25:51 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171551","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171551","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:51 - Processing: ref=TEST-1774171551, paid=500, fee=0, credit=500
+2026-03-22 10:25:51 - Transaction not found for: TEST-1774171551
+2026-03-22 10:25:51 - Webhook received
+2026-03-22 10:25:51 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171551","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171551","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:51 - Processing: ref=TEST-1774171551, paid=500, fee=0, credit=500
+2026-03-22 10:25:51 - Transaction not found for: TEST-1774171551
+2026-03-22 10:25:52 - Webhook received
+2026-03-22 10:25:52 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171551","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171551","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:52 - Processing: ref=TEST-1774171551, paid=500, fee=0, credit=500
+2026-03-22 10:25:52 - Transaction not found for: TEST-1774171551
+2026-03-22 10:25:52 - Webhook received
+2026-03-22 10:25:52 - Data: {"test":true}
+2026-03-22 10:25:52 - Unhandled event: 
+2026-03-22 10:25:53 - Webhook received
+2026-03-22 10:25:53 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171552","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171552","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:53 - Processing: ref=TEST-1774171552, paid=500, fee=0, credit=500
+2026-03-22 10:25:53 - Transaction not found for: TEST-1774171552
+2026-03-22 10:25:53 - Webhook received
+2026-03-22 10:25:53 - Data: {"test":true}
+2026-03-22 10:25:53 - Unhandled event: 
+2026-03-22 10:25:54 - Webhook received
+2026-03-22 10:25:54 - Data: {"test":true}
+2026-03-22 10:25:54 - Unhandled event: 
+2026-03-22 10:25:54 - Webhook received
+2026-03-22 10:25:54 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171553","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171553","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:54 - Processing: ref=TEST-1774171553, paid=500, fee=0, credit=500
+2026-03-22 10:25:54 - Transaction not found for: TEST-1774171553
+2026-03-22 10:25:54 - Webhook received
+2026-03-22 10:25:54 - Data: {"test":true}
+2026-03-22 10:25:54 - Unhandled event: 
+2026-03-22 10:25:54 - Webhook received
+2026-03-22 10:25:54 - Data: {"test":true}
+2026-03-22 10:25:54 - Unhandled event: 
+2026-03-22 10:25:54 - Webhook received
+2026-03-22 10:25:54 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171554","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171554","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:54 - Processing: ref=TEST-1774171554, paid=500, fee=0, credit=500
+2026-03-22 10:25:54 - Transaction not found for: TEST-1774171554
+2026-03-22 10:25:55 - Webhook received
+2026-03-22 10:25:55 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171554","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171554","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:55 - Processing: ref=TEST-1774171554, paid=500, fee=0, credit=500
+2026-03-22 10:25:55 - Transaction not found for: TEST-1774171554
+2026-03-22 10:25:55 - Webhook received
+2026-03-22 10:25:55 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171554","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171554","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:55 - Processing: ref=TEST-1774171554, paid=500, fee=0, credit=500
+2026-03-22 10:25:55 - Transaction not found for: TEST-1774171554
+2026-03-22 10:25:55 - Webhook received
+2026-03-22 10:25:55 - Data: {"test":true}
+2026-03-22 10:25:55 - Unhandled event: 
+2026-03-22 10:25:56 - Webhook received
+2026-03-22 10:25:56 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171556","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171556","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:56 - Processing: ref=TEST-1774171556, paid=500, fee=0, credit=500
+2026-03-22 10:25:56 - Transaction not found for: TEST-1774171556
+2026-03-22 10:25:56 - Webhook received
+2026-03-22 10:25:56 - Data: {"test":true}
+2026-03-22 10:25:56 - Unhandled event: 
+2026-03-22 10:25:57 - Webhook received
+2026-03-22 10:25:57 - Data: {"test":true}
+2026-03-22 10:25:57 - Unhandled event: 
+2026-03-22 10:25:57 - Webhook received
+2026-03-22 10:25:57 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171557","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171557","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:57 - Processing: ref=TEST-1774171557, paid=500, fee=0, credit=500
+2026-03-22 10:25:57 - Transaction not found for: TEST-1774171557
+2026-03-22 10:25:58 - Webhook received
+2026-03-22 10:25:58 - Data: {"test":true}
+2026-03-22 10:25:58 - Unhandled event: 
+2026-03-22 10:25:58 - Webhook received
+2026-03-22 10:25:58 - Data: {"test":true}
+2026-03-22 10:25:58 - Unhandled event: 
+2026-03-22 10:25:58 - Webhook received
+2026-03-22 10:25:58 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171557","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171557","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:25:58 - Processing: ref=TEST-1774171557, paid=500, fee=0, credit=500
+2026-03-22 10:25:58 - Transaction not found for: TEST-1774171557
+2026-03-22 10:26:01 - Webhook received
+2026-03-22 10:26:01 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171558","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171558","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:01 - Processing: ref=TEST-1774171558, paid=500, fee=0, credit=500
+2026-03-22 10:26:01 - Transaction not found for: TEST-1774171558
+2026-03-22 10:26:01 - Webhook received
+2026-03-22 10:26:01 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171558","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171558","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:01 - Processing: ref=TEST-1774171558, paid=500, fee=0, credit=500
+2026-03-22 10:26:01 - Transaction not found for: TEST-1774171558
+2026-03-22 10:26:01 - Webhook received
+2026-03-22 10:26:01 - Data: {"test":true}
+2026-03-22 10:26:01 - Unhandled event: 
+2026-03-22 10:26:05 - Webhook received
+2026-03-22 10:26:05 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171561","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171561","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:05 - Processing: ref=TEST-1774171561, paid=500, fee=0, credit=500
+2026-03-22 10:26:05 - Transaction not found for: TEST-1774171561
+2026-03-22 10:26:08 - Webhook received
+2026-03-22 10:26:08 - Data: {"test":true}
+2026-03-22 10:26:08 - Unhandled event: 
+2026-03-22 10:26:08 - Webhook received
+2026-03-22 10:26:08 - Data: {"test":true}
+2026-03-22 10:26:08 - Unhandled event: 
+2026-03-22 10:26:10 - Webhook received
+2026-03-22 10:26:10 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171569","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171569","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:10 - Processing: ref=TEST-1774171569, paid=500, fee=0, credit=500
+2026-03-22 10:26:10 - Transaction not found for: TEST-1774171569
+2026-03-22 10:26:13 - Webhook received
+2026-03-22 10:26:13 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171569","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171569","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:13 - Processing: ref=TEST-1774171569, paid=500, fee=0, credit=500
+2026-03-22 10:26:13 - Transaction not found for: TEST-1774171569
+2026-03-22 10:26:14 - Webhook received
+2026-03-22 10:26:14 - Data: {"test":true}
+2026-03-22 10:26:14 - Unhandled event: 
+2026-03-22 10:26:14 - Webhook received
+2026-03-22 10:26:14 - Data: {"test":true}
+2026-03-22 10:26:14 - Unhandled event: 
+2026-03-22 10:26:16 - Webhook received
+2026-03-22 10:26:16 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171575","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171575","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:16 - Processing: ref=TEST-1774171575, paid=500, fee=0, credit=500
+2026-03-22 10:26:16 - Transaction not found for: TEST-1774171575
+2026-03-22 10:26:16 - Webhook received
+2026-03-22 10:26:16 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171575","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171575","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:16 - Processing: ref=TEST-1774171575, paid=500, fee=0, credit=500
+2026-03-22 10:26:16 - Transaction not found for: TEST-1774171575
+2026-03-22 10:26:18 - Webhook received
+2026-03-22 10:26:18 - Data: {"test":true}
+2026-03-22 10:26:18 - Unhandled event: 
+2026-03-22 10:26:20 - Webhook received
+2026-03-22 10:26:20 - Data: {"test":true}
+2026-03-22 10:26:20 - Unhandled event: 
+2026-03-22 10:26:20 - Webhook received
+2026-03-22 10:26:20 - Data: {"test":true}
+2026-03-22 10:26:20 - Unhandled event: 
+2026-03-22 10:26:20 - Webhook received
+2026-03-22 10:26:20 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171580","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171580","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:20 - Processing: ref=TEST-1774171580, paid=500, fee=0, credit=500
+2026-03-22 10:26:20 - Transaction not found for: TEST-1774171580
+2026-03-22 10:26:21 - Webhook received
+2026-03-22 10:26:21 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171580","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171580","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:21 - Processing: ref=TEST-1774171580, paid=500, fee=0, credit=500
+2026-03-22 10:26:21 - Transaction not found for: TEST-1774171580
+2026-03-22 10:26:21 - Webhook received
+2026-03-22 10:26:21 - Data: {"test":true}
+2026-03-22 10:26:21 - Unhandled event: 
+2026-03-22 10:26:21 - Webhook received
+2026-03-22 10:26:21 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171581","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171581","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:21 - Processing: ref=TEST-1774171581, paid=500, fee=0, credit=500
+2026-03-22 10:26:21 - Transaction not found for: TEST-1774171581
+2026-03-22 10:26:25 - Webhook received
+2026-03-22 10:26:25 - Data: {"test":true}
+2026-03-22 10:26:25 - Unhandled event: 
+2026-03-22 10:26:26 - Webhook received
+2026-03-22 10:26:26 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171581","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171581","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:26 - Processing: ref=TEST-1774171581, paid=500, fee=0, credit=500
+2026-03-22 10:26:26 - Transaction not found for: TEST-1774171581
+2026-03-22 10:26:28 - Webhook received
+2026-03-22 10:26:28 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171586","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171586","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:28 - Processing: ref=TEST-1774171586, paid=500, fee=0, credit=500
+2026-03-22 10:26:28 - Transaction not found for: TEST-1774171586
+2026-03-22 10:26:30 - Webhook received
+2026-03-22 10:26:31 - Data: {"test":true}
+2026-03-22 10:26:31 - Data: {"test":true}
+2026-03-22 10:26:31 - Data: {"test":true}
+2026-03-22 10:26:31 - Unhandled event: 
+2026-03-22 10:26:31 - Unhandled event: 
+2026-03-22 10:26:31 - Unhandled event: 
+2026-03-22 10:26:32 - Webhook received
+2026-03-22 10:26:32 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171591","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171591","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:32 - Processing: ref=TEST-1774171591, paid=500, fee=0, credit=500
+2026-03-22 10:26:32 - Transaction not found for: TEST-1774171591
+2026-03-22 10:26:32 - Webhook received
+2026-03-22 10:26:32 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171591","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171591","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:32 - Processing: ref=TEST-1774171591, paid=500, fee=0, credit=500
+2026-03-22 10:26:32 - Transaction not found for: TEST-1774171591
+2026-03-22 10:26:32 - Webhook received
+2026-03-22 10:26:32 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171591","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171591","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:32 - Processing: ref=TEST-1774171591, paid=500, fee=0, credit=500
+2026-03-22 10:26:32 - Transaction not found for: TEST-1774171591
+2026-03-22 10:26:32 - Webhook received
+2026-03-22 10:26:34 - Data: {"test":true}
+2026-03-22 10:26:34 - Unhandled event: 
+2026-03-22 10:26:32 - Webhook received
+2026-03-22 10:26:34 - Data: {"test":true}
+2026-03-22 10:26:34 - Unhandled event: 
+2026-03-22 10:26:44 - Webhook received
+2026-03-22 10:26:44 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171595","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171595","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:44 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171595","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171595","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:26:44 - Processing: ref=TEST-1774171595, paid=500, fee=0, credit=500
+2026-03-22 10:26:44 - Transaction not found for: TEST-1774171595
+2026-03-22 10:26:44 - Transaction not found for: TEST-1774171595
+2026-03-22 10:27:14 - Webhook received
+2026-03-22 10:27:14 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171625","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171625","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:14 - Processing: ref=TEST-1774171625, paid=500, fee=0, credit=500
+2026-03-22 10:27:14 - Transaction not found for: TEST-1774171625
+2026-03-22 10:27:26 - Webhook received
+2026-03-22 10:27:26 - Data: {"test":true}
+2026-03-22 10:27:26 - Unhandled event: 
+2026-03-22 10:27:29 - Webhook received
+2026-03-22 10:27:29 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171647","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171647","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:29 - Processing: ref=TEST-1774171647, paid=500, fee=0, credit=500
+2026-03-22 10:27:29 - Transaction not found for: TEST-1774171647
+2026-03-22 10:27:31 - Webhook received
+2026-03-22 10:27:31 - Data: {"test":true}
+2026-03-22 10:27:31 - Unhandled event: 
+2026-03-22 10:27:32 - Webhook received
+2026-03-22 10:27:32 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171652","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171652","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:32 - Processing: ref=TEST-1774171652, paid=500, fee=0, credit=500
+2026-03-22 10:27:32 - Transaction not found for: TEST-1774171652
+2026-03-22 10:27:33 - Webhook received
+2026-03-22 10:27:33 - Data: {"test":true}
+2026-03-22 10:27:33 - Unhandled event: 
+2026-03-22 10:27:36 - Webhook received
+2026-03-22 10:27:36 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171653","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171653","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:36 - Processing: ref=TEST-1774171653, paid=500, fee=0, credit=500
+2026-03-22 10:27:36 - Transaction not found for: TEST-1774171653
+2026-03-22 10:27:36 - Webhook received
+2026-03-22 10:27:36 - Data: {"test":true}
+2026-03-22 10:27:36 - Unhandled event: 
+2026-03-22 10:27:37 - Webhook received
+2026-03-22 10:27:37 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171656","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171656","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:37 - Processing: ref=TEST-1774171656, paid=500, fee=0, credit=500
+2026-03-22 10:27:37 - Transaction not found for: TEST-1774171656
+2026-03-22 10:27:38 - Webhook received
+2026-03-22 10:27:38 - Data: {"test":true}
+2026-03-22 10:27:38 - Unhandled event: 
+2026-03-22 10:27:39 - Webhook received
+2026-03-22 10:27:39 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171659","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171659","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:39 - Processing: ref=TEST-1774171659, paid=500, fee=0, credit=500
+2026-03-22 10:27:39 - Transaction not found for: TEST-1774171659
+2026-03-22 10:27:40 - Webhook received
+2026-03-22 10:27:40 - Data: {"test":true}
+2026-03-22 10:27:40 - Unhandled event: 
+2026-03-22 10:27:40 - Webhook received
+2026-03-22 10:27:40 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171660","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171660","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:40 - Processing: ref=TEST-1774171660, paid=500, fee=0, credit=500
+2026-03-22 10:27:40 - Transaction not found for: TEST-1774171660
+2026-03-22 10:27:42 - Webhook received
+2026-03-22 10:27:42 - Data: {"test":true}
+2026-03-22 10:27:42 - Unhandled event: 
+2026-03-22 10:27:42 - Webhook received
+2026-03-22 10:27:42 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171662","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171662","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:42 - Processing: ref=TEST-1774171662, paid=500, fee=0, credit=500
+2026-03-22 10:27:42 - Transaction not found for: TEST-1774171662
+2026-03-22 10:27:43 - Webhook received
+2026-03-22 10:27:43 - Data: {"test":true}
+2026-03-22 10:27:43 - Unhandled event: 
+2026-03-22 10:27:43 - Webhook received
+2026-03-22 10:27:43 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171663","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171663","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:43 - Processing: ref=TEST-1774171663, paid=500, fee=0, credit=500
+2026-03-22 10:27:43 - Transaction not found for: TEST-1774171663
+2026-03-22 10:27:45 - Webhook received
+2026-03-22 10:27:45 - Data: {"test":true}
+2026-03-22 10:27:45 - Unhandled event: 
+2026-03-22 10:27:45 - Webhook received
+2026-03-22 10:27:45 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171665","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171665","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:45 - Processing: ref=TEST-1774171665, paid=500, fee=0, credit=500
+2026-03-22 10:27:45 - Transaction not found for: TEST-1774171665
+2026-03-22 10:27:46 - Webhook received
+2026-03-22 10:27:46 - Data: {"test":true}
+2026-03-22 10:27:46 - Unhandled event: 
+2026-03-22 10:27:46 - Webhook received
+2026-03-22 10:27:46 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171666","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171666","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:46 - Processing: ref=TEST-1774171666, paid=500, fee=0, credit=500
+2026-03-22 10:27:46 - Transaction not found for: TEST-1774171666
+2026-03-22 10:27:48 - Webhook received
+2026-03-22 10:27:48 - Data: {"test":true}
+2026-03-22 10:27:48 - Unhandled event: 
+2026-03-22 10:27:48 - Webhook received
+2026-03-22 10:27:48 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171668","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171668","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:48 - Processing: ref=TEST-1774171668, paid=500, fee=0, credit=500
+2026-03-22 10:27:48 - Transaction not found for: TEST-1774171668
+2026-03-22 10:27:49 - Webhook received
+2026-03-22 10:27:49 - Data: {"test":true}
+2026-03-22 10:27:49 - Unhandled event: 
+2026-03-22 10:27:49 - Webhook received
+2026-03-22 10:27:49 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171669","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171669","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:49 - Processing: ref=TEST-1774171669, paid=500, fee=0, credit=500
+2026-03-22 10:27:49 - Transaction not found for: TEST-1774171669
+2026-03-22 10:27:51 - Webhook received
+2026-03-22 10:27:51 - Data: {"test":true}
+2026-03-22 10:27:51 - Unhandled event: 
+2026-03-22 10:27:51 - Webhook received
+2026-03-22 10:27:51 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171671","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171671","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:51 - Processing: ref=TEST-1774171671, paid=500, fee=0, credit=500
+2026-03-22 10:27:51 - Transaction not found for: TEST-1774171671
+2026-03-22 10:27:52 - Webhook received
+2026-03-22 10:27:52 - Data: {"test":true}
+2026-03-22 10:27:52 - Unhandled event: 
+2026-03-22 10:27:52 - Webhook received
+2026-03-22 10:27:52 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171672","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171672","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:52 - Processing: ref=TEST-1774171672, paid=500, fee=0, credit=500
+2026-03-22 10:27:52 - Transaction not found for: TEST-1774171672
+2026-03-22 10:27:54 - Webhook received
+2026-03-22 10:27:54 - Data: {"test":true}
+2026-03-22 10:27:54 - Unhandled event: 
+2026-03-22 10:27:54 - Webhook received
+2026-03-22 10:27:54 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171674","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171674","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:54 - Processing: ref=TEST-1774171674, paid=500, fee=0, credit=500
+2026-03-22 10:27:54 - Transaction not found for: TEST-1774171674
+2026-03-22 10:27:55 - Webhook received
+2026-03-22 10:27:55 - Data: {"test":true}
+2026-03-22 10:27:55 - Unhandled event: 
+2026-03-22 10:27:56 - Webhook received
+2026-03-22 10:27:56 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171675","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171675","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:56 - Processing: ref=TEST-1774171675, paid=500, fee=0, credit=500
+2026-03-22 10:27:56 - Transaction not found for: TEST-1774171675
+2026-03-22 10:27:57 - Webhook received
+2026-03-22 10:27:57 - Data: {"test":true}
+2026-03-22 10:27:57 - Unhandled event: 
+2026-03-22 10:27:58 - Webhook received
+2026-03-22 10:27:58 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171677","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171677","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:58 - Processing: ref=TEST-1774171677, paid=500, fee=0, credit=500
+2026-03-22 10:27:58 - Transaction not found for: TEST-1774171677
+2026-03-22 10:27:58 - Webhook received
+2026-03-22 10:27:58 - Data: {"test":true}
+2026-03-22 10:27:58 - Unhandled event: 
+2026-03-22 10:27:59 - Webhook received
+2026-03-22 10:27:59 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171678","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171678","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:27:59 - Processing: ref=TEST-1774171678, paid=500, fee=0, credit=500
+2026-03-22 10:27:59 - Transaction not found for: TEST-1774171678
+2026-03-22 10:28:00 - Webhook received
+2026-03-22 10:28:00 - Data: {"test":true}
+2026-03-22 10:28:00 - Unhandled event: 
+2026-03-22 10:28:01 - Webhook received
+2026-03-22 10:28:01 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171680","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171680","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:01 - Processing: ref=TEST-1774171680, paid=500, fee=0, credit=500
+2026-03-22 10:28:01 - Transaction not found for: TEST-1774171680
+2026-03-22 10:28:01 - Webhook received
+2026-03-22 10:28:01 - Data: {"test":true}
+2026-03-22 10:28:01 - Unhandled event: 
+2026-03-22 10:28:02 - Webhook received
+2026-03-22 10:28:02 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171681","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171681","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:02 - Processing: ref=TEST-1774171681, paid=500, fee=0, credit=500
+2026-03-22 10:28:02 - Transaction not found for: TEST-1774171681
+2026-03-22 10:28:03 - Webhook received
+2026-03-22 10:28:03 - Data: {"test":true}
+2026-03-22 10:28:03 - Unhandled event: 
+2026-03-22 10:28:04 - Webhook received
+2026-03-22 10:28:04 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171683","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171683","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:04 - Processing: ref=TEST-1774171683, paid=500, fee=0, credit=500
+2026-03-22 10:28:04 - Transaction not found for: TEST-1774171683
+2026-03-22 10:28:04 - Webhook received
+2026-03-22 10:28:04 - Data: {"test":true}
+2026-03-22 10:28:04 - Unhandled event: 
+2026-03-22 10:28:05 - Webhook received
+2026-03-22 10:28:05 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171684","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171684","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:05 - Processing: ref=TEST-1774171684, paid=500, fee=0, credit=500
+2026-03-22 10:28:05 - Transaction not found for: TEST-1774171684
+2026-03-22 10:28:07 - Webhook received
+2026-03-22 10:28:07 - Data: {"test":true}
+2026-03-22 10:28:07 - Unhandled event: 
+2026-03-22 10:28:07 - Webhook received
+2026-03-22 10:28:07 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171687","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171687","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:07 - Processing: ref=TEST-1774171687, paid=500, fee=0, credit=500
+2026-03-22 10:28:07 - Transaction not found for: TEST-1774171687
+2026-03-22 10:28:08 - Webhook received
+2026-03-22 10:28:08 - Data: {"test":true}
+2026-03-22 10:28:08 - Unhandled event: 
+2026-03-22 10:28:09 - Webhook received
+2026-03-22 10:28:09 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171688","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171688","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:09 - Processing: ref=TEST-1774171688, paid=500, fee=0, credit=500
+2026-03-22 10:28:09 - Transaction not found for: TEST-1774171688
+2026-03-22 10:28:10 - Webhook received
+2026-03-22 10:28:10 - Data: {"test":true}
+2026-03-22 10:28:10 - Unhandled event: 
+2026-03-22 10:28:11 - Webhook received
+2026-03-22 10:28:11 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171690","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171690","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:11 - Processing: ref=TEST-1774171690, paid=500, fee=0, credit=500
+2026-03-22 10:28:11 - Transaction not found for: TEST-1774171690
+2026-03-22 10:28:11 - Webhook received
+2026-03-22 10:28:11 - Data: {"test":true}
+2026-03-22 10:28:11 - Unhandled event: 
+2026-03-22 10:28:12 - Webhook received
+2026-03-22 10:28:12 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171692","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171692","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:12 - Processing: ref=TEST-1774171692, paid=500, fee=0, credit=500
+2026-03-22 10:28:12 - Transaction not found for: TEST-1774171692
+2026-03-22 10:28:14 - Webhook received
+2026-03-22 10:28:14 - Data: {"test":true}
+2026-03-22 10:28:14 - Unhandled event: 
+2026-03-22 10:28:15 - Webhook received
+2026-03-22 10:28:15 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171694","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171694","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:15 - Processing: ref=TEST-1774171694, paid=500, fee=0, credit=500
+2026-03-22 10:28:15 - Transaction not found for: TEST-1774171694
+2026-03-22 10:28:15 - Webhook received
+2026-03-22 10:28:15 - Data: {"test":true}
+2026-03-22 10:28:15 - Unhandled event: 
+2026-03-22 10:28:16 - Webhook received
+2026-03-22 10:28:16 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171695","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171695","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:16 - Processing: ref=TEST-1774171695, paid=500, fee=0, credit=500
+2026-03-22 10:28:16 - Transaction not found for: TEST-1774171695
+2026-03-22 10:28:17 - Webhook received
+2026-03-22 10:28:17 - Data: {"test":true}
+2026-03-22 10:28:17 - Unhandled event: 
+2026-03-22 10:28:18 - Webhook received
+2026-03-22 10:28:18 - Data: {"test":true}
+2026-03-22 10:28:18 - Webhook received
+
+2026-03-22 10:28:18 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171697","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171697","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:18 - Processing: ref=TEST-1774171697, paid=500, fee=0, credit=500
+2026-03-22 10:28:18 - Transaction not found for: TEST-1774171697
+2026-03-22 10:28:19 - Webhook received
+2026-03-22 10:28:19 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171698","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171698","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:19 - Processing: ref=TEST-1774171698, paid=500, fee=0, credit=500
+2026-03-22 10:28:19 - Transaction not found for: TEST-1774171698
+2026-03-22 10:28:21 - Webhook received
+2026-03-22 10:28:21 - Data: {"test":true}
+2026-03-22 10:28:21 - Unhandled event: 
+2026-03-22 10:28:21 - Webhook received
+2026-03-22 10:28:21 - Data: {"test":true}
+2026-03-22 10:28:21 - Unhandled event: 
+2026-03-22 10:28:21 - Webhook received
+2026-03-22 10:28:21 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171701","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171701","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:21 - Processing: ref=TEST-1774171701, paid=500, fee=0, credit=500
+2026-03-22 10:28:21 - Transaction not found for: TEST-1774171701
+2026-03-22 10:28:22 - Webhook received
+2026-03-22 10:28:22 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171702","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171702","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:22 - Processing: ref=TEST-1774171702, paid=500, fee=0, credit=500
+2026-03-22 10:28:22 - Transaction not found for: TEST-1774171702
+2026-03-22 10:28:24 - Webhook received
+2026-03-22 10:28:24 - Data: {"test":true}
+2026-03-22 10:28:24 - Unhandled event: 
+2026-03-22 10:28:25 - Webhook received
+2026-03-22 10:28:25 - Data: {"test":true}
+2026-03-22 10:28:25 - Unhandled event: 
+2026-03-22 10:28:25 - Webhook received
+2026-03-22 10:28:25 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171704","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171704","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:25 - Processing: ref=TEST-1774171704, paid=500, fee=0, credit=500
+2026-03-22 10:28:25 - Transaction not found for: TEST-1774171704
+2026-03-22 10:28:26 - Webhook received
+2026-03-22 10:28:26 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171705","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171705","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:26 - Processing: ref=TEST-1774171705, paid=500, fee=0, credit=500
+2026-03-22 10:28:26 - Transaction not found for: TEST-1774171705
+2026-03-22 10:28:28 - Webhook received
+2026-03-22 10:28:28 - Data: {"test":true}
+2026-03-22 10:28:28 - Unhandled event: 
+2026-03-22 10:28:28 - Webhook received
+2026-03-22 10:28:28 - Data: {"test":true}
+2026-03-22 10:28:28 - Unhandled event: 
+2026-03-22 10:28:29 - Webhook received
+2026-03-22 10:28:29 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171708","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171708","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:29 - Processing: ref=TEST-1774171708, paid=500, fee=0, credit=500
+2026-03-22 10:28:29 - Transaction not found for: TEST-1774171708
+2026-03-22 10:28:29 - Webhook received
+2026-03-22 10:28:29 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171709","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171709","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:29 - Processing: ref=TEST-1774171709, paid=500, fee=0, credit=500
+2026-03-22 10:28:29 - Transaction not found for: TEST-1774171709
+2026-03-22 10:28:31 - Webhook received
+2026-03-22 10:28:31 - Data: {"test":true}
+2026-03-22 10:28:31 - Unhandled event: 
+2026-03-22 10:28:31 - Webhook received
+2026-03-22 10:28:31 - Data: {"test":true}
+2026-03-22 10:28:31 - Unhandled event: 
+2026-03-22 10:28:32 - Webhook received
+2026-03-22 10:28:32 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171711","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171711","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:32 - Processing: ref=TEST-1774171711, paid=500, fee=0, credit=500
+2026-03-22 10:28:32 - Transaction not found for: TEST-1774171711
+2026-03-22 10:28:32 - Webhook received
+2026-03-22 10:28:32 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171712","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171712","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:32 - Processing: ref=TEST-1774171712, paid=500, fee=0, credit=500
+2026-03-22 10:28:32 - Transaction not found for: TEST-1774171712
+2026-03-22 10:28:34 - Webhook received
+2026-03-22 10:28:34 - Data: {"test":true}
+2026-03-22 10:28:34 - Unhandled event: 
+2026-03-22 10:28:34 - Webhook received
+2026-03-22 10:28:34 - Data: {"test":true}
+2026-03-22 10:28:34 - Unhandled event: 
+2026-03-22 10:28:35 - Webhook received
+2026-03-22 10:28:35 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171714","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171714","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:35 - Processing: ref=TEST-1774171714, paid=500, fee=0, credit=500
+2026-03-22 10:28:35 - Transaction not found for: TEST-1774171714
+2026-03-22 10:28:35 - Webhook received
+2026-03-22 10:28:35 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171715","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171715","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:35 - Processing: ref=TEST-1774171715, paid=500, fee=0, credit=500
+2026-03-22 10:28:35 - Transaction not found for: TEST-1774171715
+2026-03-22 10:28:37 - Webhook received
+2026-03-22 10:28:37 - Data: {"test":true}
+2026-03-22 10:28:37 - Unhandled event: 
+2026-03-22 10:28:38 - Webhook received
+2026-03-22 10:28:38 - Data: {"test":true}
+2026-03-22 10:28:38 - Unhandled event: 
+2026-03-22 10:28:38 - Webhook received
+2026-03-22 10:28:38 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171717","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171717","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:38 - Processing: ref=TEST-1774171717, paid=500, fee=0, credit=500
+2026-03-22 10:28:38 - Transaction not found for: TEST-1774171717
+2026-03-22 10:28:38 - Webhook received
+2026-03-22 10:28:38 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171718","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171718","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:28:38 - Processing: ref=TEST-1774171718, paid=500, fee=0, credit=500
+2026-03-22 10:28:38 - Transaction not found for: TEST-1774171718
+2026-03-22 10:33:19 - Webhook received
+2026-03-22 10:33:19 - Data: {"test":true}
+2026-03-22 10:33:19 - Unhandled event: 
+2026-03-22 10:33:20 - Webhook received
+2026-03-22 10:33:20 - Data: {"event":"charge.success","data":{"reference":"TEST-1774171999","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774171999","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:33:20 - Processing: ref=TEST-1774171999, paid=500, fee=0, credit=500
+2026-03-22 10:33:20 - Transaction not found for: TEST-1774171999
+2026-03-22 10:33:22 - Webhook received
+2026-03-22 10:33:22 - Data: {"test":true}
+2026-03-22 10:33:22 - Unhandled event: 
+2026-03-22 10:33:24 - Webhook received
+2026-03-22 10:33:24 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172003","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172003","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:33:24 - Processing: ref=TEST-1774172003, paid=500, fee=0, credit=500
+2026-03-22 10:33:24 - Transaction not found for: TEST-1774172003
+2026-03-22 10:33:29 - Webhook received
+2026-03-22 10:33:29 - Data: {"test":true}
+2026-03-22 10:33:29 - Unhandled event: 
+2026-03-22 10:33:30 - Webhook received
+2026-03-22 10:33:30 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172009","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172009","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:33:30 - Processing: ref=TEST-1774172009, paid=500, fee=0, credit=500
+2026-03-22 10:33:30 - Transaction not found for: TEST-1774172009
+2026-03-22 10:33:33 - Webhook received
+2026-03-22 10:33:33 - Data: {"test":true}
+2026-03-22 10:33:33 - Unhandled event: 
+2026-03-22 10:33:34 - Webhook received
+2026-03-22 10:33:34 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172013","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172013","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:33:34 - Processing: ref=TEST-1774172013, paid=500, fee=0, credit=500
+2026-03-22 10:33:34 - Transaction not found for: TEST-1774172013
+2026-03-22 10:33:37 - Webhook received
+2026-03-22 10:33:37 - Data: {"test":true}
+2026-03-22 10:33:37 - Unhandled event: 
+2026-03-22 10:33:38 - Webhook received
+2026-03-22 10:33:38 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172017","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172017","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:33:38 - Processing: ref=TEST-1774172017, paid=500, fee=0, credit=500
+2026-03-22 10:33:38 - Transaction not found for: TEST-1774172017
+2026-03-22 10:33:41 - Webhook received
+2026-03-22 10:33:41 - Data: {"test":true}
+2026-03-22 10:33:41 - Unhandled event: 
+2026-03-22 10:33:42 - Webhook received
+2026-03-22 10:33:42 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172021","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172021","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:33:42 - Processing: ref=TEST-1774172021, paid=500, fee=0, credit=500
+2026-03-22 10:33:42 - Transaction not found for: TEST-1774172021
+2026-03-22 10:33:44 - Webhook received
+2026-03-22 10:33:44 - Data: {"test":true}
+2026-03-22 10:33:44 - Unhandled event: 
+2026-03-22 10:33:45 - Webhook received
+2026-03-22 10:33:45 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172025","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172025","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:33:45 - Processing: ref=TEST-1774172025, paid=500, fee=0, credit=500
+2026-03-22 10:33:45 - Transaction not found for: TEST-1774172025
+2026-03-22 10:33:49 - Webhook received
+2026-03-22 10:33:49 - Data: {"test":true}
+2026-03-22 10:33:49 - Unhandled event: 
+2026-03-22 10:33:49 - Webhook received
+2026-03-22 10:33:49 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172029","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172029","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:33:49 - Processing: ref=TEST-1774172029, paid=500, fee=0, credit=500
+2026-03-22 10:33:49 - Transaction not found for: TEST-1774172029
+2026-03-22 10:33:52 - Webhook received
+2026-03-22 10:33:52 - Data: {"test":true}
+2026-03-22 10:33:52 - Unhandled event: 
+2026-03-22 10:33:52 - Webhook received
+2026-03-22 10:33:52 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172032","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172032","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:33:52 - Processing: ref=TEST-1774172032, paid=500, fee=0, credit=500
+2026-03-22 10:33:52 - Transaction not found for: TEST-1774172032
+2026-03-22 10:33:55 - Webhook received
+2026-03-22 10:33:55 - Data: {"test":true}
+2026-03-22 10:33:55 - Unhandled event: 
+2026-03-22 10:33:59 - Webhook received
+2026-03-22 10:33:59 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172038","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172038","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:33:59 - Processing: ref=TEST-1774172038, paid=500, fee=0, credit=500
+2026-03-22 10:33:59 - Transaction not found for: TEST-1774172038
+2026-03-22 10:34:03 - Webhook received
+2026-03-22 10:34:03 - Data: {"test":true}
+2026-03-22 10:34:03 - Unhandled event: 
+2026-03-22 10:34:04 - Webhook received
+2026-03-22 10:34:04 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172043","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172043","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:04 - Processing: ref=TEST-1774172043, paid=500, fee=0, credit=500
+2026-03-22 10:34:04 - Transaction not found for: TEST-1774172043
+2026-03-22 10:34:06 - Webhook received
+2026-03-22 10:34:07 - Data: {"test":true}
+2026-03-22 10:34:07 - Unhandled event: 
+2026-03-22 10:34:07 - Webhook received
+2026-03-22 10:34:07 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172047","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172047","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:07 - Processing: ref=TEST-1774172047, paid=500, fee=0, credit=500
+2026-03-22 10:34:07 - Transaction not found for: TEST-1774172047
+2026-03-22 10:34:09 - Webhook received
+2026-03-22 10:34:09 - Data: {"test":true}
+2026-03-22 10:34:09 - Unhandled event: 
+2026-03-22 10:34:10 - Webhook received
+2026-03-22 10:34:10 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172050","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172050","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:10 - Processing: ref=TEST-1774172050, paid=500, fee=0, credit=500
+2026-03-22 10:34:10 - Transaction not found for: TEST-1774172050
+2026-03-22 10:34:12 - Webhook received
+2026-03-22 10:34:12 - Data: {"test":true}
+2026-03-22 10:34:12 - Unhandled event: 
+2026-03-22 10:34:13 - Webhook received
+2026-03-22 10:34:13 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172053","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172053","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:13 - Processing: ref=TEST-1774172053, paid=500, fee=0, credit=500
+2026-03-22 10:34:13 - Transaction not found for: TEST-1774172053
+2026-03-22 10:34:16 - Webhook received
+2026-03-22 10:34:16 - Data: {"test":true}
+2026-03-22 10:34:16 - Unhandled event: 
+2026-03-22 10:34:16 - Webhook received
+2026-03-22 10:34:16 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172056","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172056","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:16 - Processing: ref=TEST-1774172056, paid=500, fee=0, credit=500
+2026-03-22 10:34:16 - Transaction not found for: TEST-1774172056
+2026-03-22 10:34:19 - Webhook received
+2026-03-22 10:34:19 - Data: {"test":true}
+2026-03-22 10:34:19 - Unhandled event: 
+2026-03-22 10:34:20 - Webhook received
+2026-03-22 10:34:20 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172059","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172059","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:20 - Processing: ref=TEST-1774172059, paid=500, fee=0, credit=500
+2026-03-22 10:34:20 - Transaction not found for: TEST-1774172059
+2026-03-22 10:34:22 - Webhook received
+2026-03-22 10:34:22 - Data: {"test":true}
+2026-03-22 10:34:22 - Unhandled event: 
+2026-03-22 10:34:23 - Webhook received
+2026-03-22 10:34:23 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172062","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172062","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:23 - Processing: ref=TEST-1774172062, paid=500, fee=0, credit=500
+2026-03-22 10:34:23 - Transaction not found for: TEST-1774172062
+2026-03-22 10:34:26 - Webhook received
+2026-03-22 10:34:26 - Data: {"test":true}
+2026-03-22 10:34:26 - Unhandled event: 
+2026-03-22 10:34:26 - Webhook received
+2026-03-22 10:34:26 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172066","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172066","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:26 - Processing: ref=TEST-1774172066, paid=500, fee=0, credit=500
+2026-03-22 10:34:26 - Transaction not found for: TEST-1774172066
+2026-03-22 10:34:29 - Webhook received
+2026-03-22 10:34:29 - Data: {"test":true}
+2026-03-22 10:34:29 - Unhandled event: 
+2026-03-22 10:34:30 - Webhook received
+2026-03-22 10:34:30 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172069","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172069","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:30 - Processing: ref=TEST-1774172069, paid=500, fee=0, credit=500
+2026-03-22 10:34:30 - Transaction not found for: TEST-1774172069
+2026-03-22 10:34:32 - Webhook received
+2026-03-22 10:34:32 - Data: {"test":true}
+2026-03-22 10:34:32 - Unhandled event: 
+2026-03-22 10:34:33 - Webhook received
+2026-03-22 10:34:33 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172072","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172072","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:33 - Processing: ref=TEST-1774172072, paid=500, fee=0, credit=500
+2026-03-22 10:34:33 - Transaction not found for: TEST-1774172072
+2026-03-22 10:34:35 - Webhook received
+2026-03-22 10:34:35 - Data: {"test":true}
+2026-03-22 10:34:35 - Unhandled event: 
+2026-03-22 10:34:36 - Webhook received
+2026-03-22 10:34:36 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172076","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172076","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:36 - Processing: ref=TEST-1774172076, paid=500, fee=0, credit=500
+2026-03-22 10:34:36 - Transaction not found for: TEST-1774172076
+2026-03-22 10:34:38 - Webhook received
+2026-03-22 10:34:38 - Data: {"test":true}
+2026-03-22 10:34:38 - Unhandled event: 
+2026-03-22 10:34:39 - Webhook received
+2026-03-22 10:34:39 - Data: {"test":true}
+2026-03-22 10:34:39 - Unhandled event: 
+2026-03-22 10:34:39 - Webhook received
+2026-03-22 10:34:39 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172078","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172078","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:39 - Processing: ref=TEST-1774172078, paid=500, fee=0, credit=500
+2026-03-22 10:34:39 - Transaction not found for: TEST-1774172078
+2026-03-22 10:34:39 - Webhook received
+2026-03-22 10:34:39 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172079","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172079","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:39 - Processing: ref=TEST-1774172079, paid=500, fee=0, credit=500
+2026-03-22 10:34:39 - Transaction not found for: TEST-1774172079
+2026-03-22 10:34:41 - Webhook received
+2026-03-22 10:34:41 - Data: {"test":true}
+2026-03-22 10:34:41 - Unhandled event: 
+2026-03-22 10:34:42 - Webhook received
+2026-03-22 10:34:42 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172081","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172081","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:42 - Processing: ref=TEST-1774172081, paid=500, fee=0, credit=500
+2026-03-22 10:34:42 - Transaction not found for: TEST-1774172081
+2026-03-22 10:34:42 - Webhook received
+2026-03-22 10:34:42 - Data: {"test":true}
+2026-03-22 10:34:42 - Unhandled event: 
+2026-03-22 10:34:43 - Webhook received
+2026-03-22 10:34:43 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172082","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172082","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:43 - Processing: ref=TEST-1774172082, paid=500, fee=0, credit=500
+2026-03-22 10:34:43 - Transaction not found for: TEST-1774172082
+2026-03-22 10:34:44 - Webhook received
+2026-03-22 10:34:44 - Data: {"test":true}
+2026-03-22 10:34:44 - Unhandled event: 
+2026-03-22 10:34:45 - Webhook received
+2026-03-22 10:34:45 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172084","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172084","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:45 - Processing: ref=TEST-1774172084, paid=500, fee=0, credit=500
+2026-03-22 10:34:45 - Transaction not found for: TEST-1774172084
+2026-03-22 10:34:45 - Webhook received
+2026-03-22 10:34:45 - Data: {"test":true}
+2026-03-22 10:34:45 - Unhandled event: 
+2026-03-22 10:34:46 - Webhook received
+2026-03-22 10:34:46 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172085","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172085","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:46 - Processing: ref=TEST-1774172085, paid=500, fee=0, credit=500
+2026-03-22 10:34:46 - Transaction not found for: TEST-1774172085
+2026-03-22 10:34:47 - Webhook received
+2026-03-22 10:34:47 - Data: {"test":true}
+2026-03-22 10:34:47 - Unhandled event: 
+2026-03-22 10:34:48 - Webhook received
+2026-03-22 10:34:48 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172087","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172087","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:48 - Processing: ref=TEST-1774172087, paid=500, fee=0, credit=500
+2026-03-22 10:34:48 - Transaction not found for: TEST-1774172087
+2026-03-22 10:34:48 - Webhook received
+2026-03-22 10:34:48 - Data: {"test":true}
+2026-03-22 10:34:48 - Unhandled event: 
+2026-03-22 10:34:49 - Webhook received
+2026-03-22 10:34:49 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172089","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172089","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:49 - Processing: ref=TEST-1774172089, paid=500, fee=0, credit=500
+2026-03-22 10:34:49 - Transaction not found for: TEST-1774172089
+2026-03-22 10:34:51 - Webhook received
+2026-03-22 10:34:51 - Data: {"test":true}
+2026-03-22 10:34:51 - Unhandled event: 
+2026-03-22 10:34:51 - Webhook received
+2026-03-22 10:34:51 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172091","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172091","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:51 - Processing: ref=TEST-1774172091, paid=500, fee=0, credit=500
+2026-03-22 10:34:51 - Transaction not found for: TEST-1774172091
+2026-03-22 10:34:51 - Webhook received
+2026-03-22 10:34:51 - Data: {"test":true}
+2026-03-22 10:34:51 - Unhandled event: 
+2026-03-22 10:34:52 - Webhook received
+2026-03-22 10:34:52 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172092","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172092","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:52 - Processing: ref=TEST-1774172092, paid=500, fee=0, credit=500
+2026-03-22 10:34:52 - Transaction not found for: TEST-1774172092
+2026-03-22 10:34:54 - Webhook received
+2026-03-22 10:34:54 - Data: {"test":true}
+2026-03-22 10:34:54 - Unhandled event: 
+2026-03-22 10:34:54 - Webhook received
+2026-03-22 10:34:54 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172094","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172094","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:54 - Processing: ref=TEST-1774172094, paid=500, fee=0, credit=500
+2026-03-22 10:34:54 - Transaction not found for: TEST-1774172094
+2026-03-22 10:34:54 - Webhook received
+2026-03-22 10:34:54 - Data: {"test":true}
+2026-03-22 10:34:54 - Unhandled event: 
+2026-03-22 10:34:56 - Webhook received
+2026-03-22 10:34:56 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172095","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172095","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:56 - Processing: ref=TEST-1774172095, paid=500, fee=0, credit=500
+2026-03-22 10:34:56 - Transaction not found for: TEST-1774172095
+2026-03-22 10:34:57 - Webhook received
+2026-03-22 10:34:57 - Data: {"test":true}
+2026-03-22 10:34:57 - Unhandled event: 
+2026-03-22 10:34:57 - Webhook received
+2026-03-22 10:34:57 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172097","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172097","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:57 - Processing: ref=TEST-1774172097, paid=500, fee=0, credit=500
+2026-03-22 10:34:57 - Transaction not found for: TEST-1774172097
+2026-03-22 10:34:58 - Webhook received
+2026-03-22 10:34:58 - Data: {"test":true}
+2026-03-22 10:34:58 - Unhandled event: 
+2026-03-22 10:34:59 - Webhook received
+2026-03-22 10:34:59 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172098","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172098","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:34:59 - Processing: ref=TEST-1774172098, paid=500, fee=0, credit=500
+2026-03-22 10:34:59 - Transaction not found for: TEST-1774172098
+2026-03-22 10:35:00 - Webhook received
+2026-03-22 10:35:00 - Data: {"test":true}
+2026-03-22 10:35:00 - Unhandled event: 
+2026-03-22 10:35:01 - Webhook received
+2026-03-22 10:35:01 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172100","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172100","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:01 - Processing: ref=TEST-1774172100, paid=500, fee=0, credit=500
+2026-03-22 10:35:01 - Transaction not found for: TEST-1774172100
+2026-03-22 10:35:01 - Webhook received
+2026-03-22 10:35:01 - Data: {"test":true}
+2026-03-22 10:35:01 - Unhandled event: 
+2026-03-22 10:35:02 - Webhook received
+2026-03-22 10:35:02 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172101","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172101","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:02 - Processing: ref=TEST-1774172101, paid=500, fee=0, credit=500
+2026-03-22 10:35:02 - Transaction not found for: TEST-1774172101
+2026-03-22 10:35:03 - Webhook received
+2026-03-22 10:35:03 - Data: {"test":true}
+2026-03-22 10:35:03 - Unhandled event: 
+2026-03-22 10:35:04 - Webhook received
+2026-03-22 10:35:04 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172103","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172103","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:04 - Processing: ref=TEST-1774172103, paid=500, fee=0, credit=500
+2026-03-22 10:35:04 - Transaction not found for: TEST-1774172103
+2026-03-22 10:35:04 - Webhook received
+2026-03-22 10:35:04 - Data: {"test":true}
+2026-03-22 10:35:04 - Unhandled event: 
+2026-03-22 10:35:05 - Webhook received
+2026-03-22 10:35:05 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172104","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172104","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:05 - Processing: ref=TEST-1774172104, paid=500, fee=0, credit=500
+2026-03-22 10:35:05 - Transaction not found for: TEST-1774172104
+2026-03-22 10:35:05 - Webhook received
+2026-03-22 10:35:05 - Data: 
+2026-03-22 10:35:05 - Unhandled event: 
+2026-03-22 10:35:06 - Webhook received
+2026-03-22 10:35:06 - Data: {"test":true}
+2026-03-22 10:35:06 - Unhandled event: 
+2026-03-22 10:35:07 - Webhook received
+2026-03-22 10:35:07 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172106","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172106","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:07 - Processing: ref=TEST-1774172106, paid=500, fee=0, credit=500
+2026-03-22 10:35:07 - Transaction not found for: TEST-1774172106
+2026-03-22 10:35:07 - Webhook received
+2026-03-22 10:35:07 - Data: {"test":true}
+2026-03-22 10:35:07 - Unhandled event: 
+2026-03-22 10:35:08 - Webhook received
+2026-03-22 10:35:08 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172107","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172107","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:08 - Processing: ref=TEST-1774172107, paid=500, fee=0, credit=500
+2026-03-22 10:35:08 - Transaction not found for: TEST-1774172107
+2026-03-22 10:35:09 - Webhook received
+2026-03-22 10:35:09 - Data: {"test":true}
+2026-03-22 10:35:09 - Unhandled event: 
+2026-03-22 10:35:10 - Webhook received
+2026-03-22 10:35:10 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172109","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172109","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:10 - Processing: ref=TEST-1774172109, paid=500, fee=0, credit=500
+2026-03-22 10:35:10 - Transaction not found for: TEST-1774172109
+2026-03-22 10:35:10 - Webhook received
+2026-03-22 10:35:10 - Data: {"test":true}
+2026-03-22 10:35:10 - Unhandled event: 
+2026-03-22 10:35:11 - Webhook received
+2026-03-22 10:35:11 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172110","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172110","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:11 - Processing: ref=TEST-1774172110, paid=500, fee=0, credit=500
+2026-03-22 10:35:11 - Transaction not found for: TEST-1774172110
+2026-03-22 10:35:12 - Webhook received
+2026-03-22 10:35:12 - Data: {"test":true}
+2026-03-22 10:35:12 - Unhandled event: 
+2026-03-22 10:35:13 - Webhook received
+2026-03-22 10:35:13 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172112","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172112","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:13 - Processing: ref=TEST-1774172112, paid=500, fee=0, credit=500
+2026-03-22 10:35:13 - Transaction not found for: TEST-1774172112
+2026-03-22 10:35:13 - Webhook received
+2026-03-22 10:35:13 - Data: {"test":true}
+2026-03-22 10:35:13 - Unhandled event: 
+2026-03-22 10:35:14 - Webhook received
+2026-03-22 10:35:14 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172113","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172113","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:14 - Processing: ref=TEST-1774172113, paid=500, fee=0, credit=500
+2026-03-22 10:35:14 - Transaction not found for: TEST-1774172113
+2026-03-22 10:35:15 - Webhook received
+2026-03-22 10:35:15 - Data: {"test":true}
+2026-03-22 10:35:15 - Unhandled event: 
+2026-03-22 10:35:16 - Webhook received
+2026-03-22 10:35:16 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172115","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172115","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:16 - Processing: ref=TEST-1774172115, paid=500, fee=0, credit=500
+2026-03-22 10:35:16 - Transaction not found for: TEST-1774172115
+2026-03-22 10:35:16 - Webhook received
+2026-03-22 10:35:16 - Data: {"test":true}
+2026-03-22 10:35:16 - Unhandled event: 
+2026-03-22 10:35:17 - Webhook received
+2026-03-22 10:35:17 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172116","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172116","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:17 - Processing: ref=TEST-1774172116, paid=500, fee=0, credit=500
+2026-03-22 10:35:17 - Transaction not found for: TEST-1774172116
+2026-03-22 10:35:18 - Webhook received
+2026-03-22 10:35:18 - Data: {"test":true}
+2026-03-22 10:35:18 - Unhandled event: 
+2026-03-22 10:35:19 - Webhook received
+2026-03-22 10:35:19 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172118","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172118","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:19 - Processing: ref=TEST-1774172118, paid=500, fee=0, credit=500
+2026-03-22 10:35:19 - Transaction not found for: TEST-1774172118
+2026-03-22 10:35:19 - Webhook received
+2026-03-22 10:35:19 - Data: {"test":true}
+2026-03-22 10:35:19 - Unhandled event: 
+2026-03-22 10:35:20 - Webhook received
+2026-03-22 10:35:20 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172119","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172119","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:20 - Processing: ref=TEST-1774172119, paid=500, fee=0, credit=500
+2026-03-22 10:35:20 - Transaction not found for: TEST-1774172119
+2026-03-22 10:35:21 - Webhook received
+2026-03-22 10:35:21 - Data: {"test":true}
+2026-03-22 10:35:21 - Unhandled event: 
+2026-03-22 10:35:22 - Webhook received
+2026-03-22 10:35:22 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172121","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172121","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:22 - Processing: ref=TEST-1774172121, paid=500, fee=0, credit=500
+2026-03-22 10:35:22 - Transaction not found for: TEST-1774172121
+2026-03-22 10:35:22 - Webhook received
+2026-03-22 10:35:22 - Data: {"test":true}
+2026-03-22 10:35:22 - Unhandled event: 
+2026-03-22 10:35:23 - Webhook received
+2026-03-22 10:35:23 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172122","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172122","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:23 - Processing: ref=TEST-1774172122, paid=500, fee=0, credit=500
+2026-03-22 10:35:23 - Transaction not found for: TEST-1774172122
+2026-03-22 10:35:24 - Webhook received
+2026-03-22 10:35:24 - Data: {"test":true}
+2026-03-22 10:35:24 - Unhandled event: 
+2026-03-22 10:35:25 - Webhook received
+2026-03-22 10:35:25 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172124","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172124","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:25 - Processing: ref=TEST-1774172124, paid=500, fee=0, credit=500
+2026-03-22 10:35:25 - Transaction not found for: TEST-1774172124
+2026-03-22 10:35:25 - Webhook received
+2026-03-22 10:35:25 - Data: {"test":true}
+2026-03-22 10:35:25 - Unhandled event: 
+2026-03-22 10:35:26 - Webhook received
+2026-03-22 10:35:26 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172125","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172125","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:26 - Processing: ref=TEST-1774172125, paid=500, fee=0, credit=500
+2026-03-22 10:35:26 - Transaction not found for: TEST-1774172125
+2026-03-22 10:35:27 - Webhook received
+2026-03-22 10:35:27 - Data: {"test":true}
+2026-03-22 10:35:27 - Unhandled event: 
+2026-03-22 10:35:28 - Webhook received
+2026-03-22 10:35:28 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172127","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172127","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:28 - Processing: ref=TEST-1774172127, paid=500, fee=0, credit=500
+2026-03-22 10:35:28 - Transaction not found for: TEST-1774172127
+2026-03-22 10:35:28 - Webhook received
+2026-03-22 10:35:28 - Data: {"test":true}
+2026-03-22 10:35:28 - Unhandled event: 
+2026-03-22 10:35:29 - Webhook received
+2026-03-22 10:35:29 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172128","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172128","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:29 - Processing: ref=TEST-1774172128, paid=500, fee=0, credit=500
+2026-03-22 10:35:29 - Transaction not found for: TEST-1774172128
+2026-03-22 10:35:30 - Webhook received
+2026-03-22 10:35:30 - Data: {"test":true}
+2026-03-22 10:35:30 - Unhandled event: 
+2026-03-22 10:35:31 - Webhook received
+2026-03-22 10:35:31 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172130","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172130","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:31 - Processing: ref=TEST-1774172130, paid=500, fee=0, credit=500
+2026-03-22 10:35:31 - Transaction not found for: TEST-1774172130
+2026-03-22 10:35:31 - Webhook received
+2026-03-22 10:35:31 - Data: {"test":true}
+2026-03-22 10:35:31 - Unhandled event: 
+2026-03-22 10:35:32 - Webhook received
+2026-03-22 10:35:32 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172131","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172131","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:32 - Processing: ref=TEST-1774172131, paid=500, fee=0, credit=500
+2026-03-22 10:35:32 - Transaction not found for: TEST-1774172131
+2026-03-22 10:35:33 - Webhook received
+2026-03-22 10:35:33 - Data: {"test":true}
+2026-03-22 10:35:33 - Unhandled event: 
+2026-03-22 10:35:34 - Webhook received
+2026-03-22 10:35:34 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172133","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172133","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:34 - Processing: ref=TEST-1774172133, paid=500, fee=0, credit=500
+2026-03-22 10:35:34 - Transaction not found for: TEST-1774172133
+2026-03-22 10:35:34 - Webhook received
+2026-03-22 10:35:34 - Data: {"test":true}
+2026-03-22 10:35:34 - Unhandled event: 
+2026-03-22 10:35:35 - Webhook received
+2026-03-22 10:35:35 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172134","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172134","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:35 - Processing: ref=TEST-1774172134, paid=500, fee=0, credit=500
+2026-03-22 10:35:35 - Transaction not found for: TEST-1774172134
+2026-03-22 10:35:36 - Webhook received
+2026-03-22 10:35:36 - Data: {"test":true}
+2026-03-22 10:35:36 - Unhandled event: 
+2026-03-22 10:35:37 - Webhook received
+2026-03-22 10:35:37 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172136","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172136","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:37 - Processing: ref=TEST-1774172136, paid=500, fee=0, credit=500
+2026-03-22 10:35:37 - Transaction not found for: TEST-1774172136
+2026-03-22 10:35:37 - Webhook received
+2026-03-22 10:35:37 - Data: {"test":true}
+2026-03-22 10:35:37 - Unhandled event: 
+2026-03-22 10:35:38 - Webhook received
+2026-03-22 10:35:38 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172137","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172137","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:38 - Processing: ref=TEST-1774172137, paid=500, fee=0, credit=500
+2026-03-22 10:35:38 - Transaction not found for: TEST-1774172137
+2026-03-22 10:35:39 - Webhook received
+2026-03-22 10:35:39 - Data: {"test":true}
+2026-03-22 10:35:39 - Unhandled event: 
+2026-03-22 10:35:40 - Webhook received
+2026-03-22 10:35:40 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172139","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172139","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:40 - Processing: ref=TEST-1774172139, paid=500, fee=0, credit=500
+2026-03-22 10:35:40 - Transaction not found for: TEST-1774172139
+2026-03-22 10:35:40 - Webhook received
+2026-03-22 10:35:40 - Data: {"test":true}
+2026-03-22 10:35:40 - Unhandled event: 
+2026-03-22 10:35:41 - Webhook received
+2026-03-22 10:35:41 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172140","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172140","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:41 - Processing: ref=TEST-1774172140, paid=500, fee=0, credit=500
+2026-03-22 10:35:41 - Transaction not found for: TEST-1774172140
+2026-03-22 10:35:42 - Webhook received
+2026-03-22 10:35:42 - Data: {"test":true}
+2026-03-22 10:35:42 - Unhandled event: 
+2026-03-22 10:35:43 - Webhook received
+2026-03-22 10:35:43 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172142","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172142","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:43 - Processing: ref=TEST-1774172142, paid=500, fee=0, credit=500
+2026-03-22 10:35:43 - Transaction not found for: TEST-1774172142
+2026-03-22 10:35:43 - Webhook received
+2026-03-22 10:35:43 - Data: {"test":true}
+2026-03-22 10:35:43 - Unhandled event: 
+2026-03-22 10:35:44 - Webhook received
+2026-03-22 10:35:44 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172143","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172143","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:44 - Processing: ref=TEST-1774172143, paid=500, fee=0, credit=500
+2026-03-22 10:35:44 - Transaction not found for: TEST-1774172143
+2026-03-22 10:35:45 - Webhook received
+2026-03-22 10:35:45 - Data: {"test":true}
+2026-03-22 10:35:45 - Unhandled event: 
+2026-03-22 10:35:46 - Webhook received
+2026-03-22 10:35:46 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172145","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172145","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:46 - Processing: ref=TEST-1774172145, paid=500, fee=0, credit=500
+2026-03-22 10:35:46 - Transaction not found for: TEST-1774172145
+2026-03-22 10:35:46 - Webhook received
+2026-03-22 10:35:46 - Data: {"test":true}
+2026-03-22 10:35:46 - Unhandled event: 
+2026-03-22 10:35:47 - Webhook received
+2026-03-22 10:35:47 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172146","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172146","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:47 - Processing: ref=TEST-1774172146, paid=500, fee=0, credit=500
+2026-03-22 10:35:47 - Transaction not found for: TEST-1774172146
+2026-03-22 10:35:49 - Webhook received
+2026-03-22 10:35:49 - Data: {"test":true}
+2026-03-22 10:35:49 - Unhandled event: 
+2026-03-22 10:35:50 - Webhook received
+2026-03-22 10:35:50 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172149","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172149","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:50 - Processing: ref=TEST-1774172149, paid=500, fee=0, credit=500
+2026-03-22 10:35:50 - Transaction not found for: TEST-1774172149
+2026-03-22 10:35:50 - Webhook received
+2026-03-22 10:35:50 - Data: {"test":true}
+2026-03-22 10:35:50 - Unhandled event: 
+2026-03-22 10:35:51 - Webhook received
+2026-03-22 10:35:51 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172150","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172150","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:51 - Processing: ref=TEST-1774172150, paid=500, fee=0, credit=500
+2026-03-22 10:35:51 - Transaction not found for: TEST-1774172150
+2026-03-22 10:35:52 - Webhook received
+2026-03-22 10:35:52 - Data: {"test":true}
+2026-03-22 10:35:52 - Unhandled event: 
+2026-03-22 10:35:53 - Webhook received
+2026-03-22 10:35:53 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172153","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172153","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:53 - Processing: ref=TEST-1774172153, paid=500, fee=0, credit=500
+2026-03-22 10:35:53 - Transaction not found for: TEST-1774172153
+2026-03-22 10:35:53 - Webhook received
+2026-03-22 10:35:53 - Data: {"test":true}
+2026-03-22 10:35:53 - Unhandled event: 
+2026-03-22 10:35:54 - Webhook received
+2026-03-22 10:35:54 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172153","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172153","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:54 - Processing: ref=TEST-1774172153, paid=500, fee=0, credit=500
+2026-03-22 10:35:54 - Transaction not found for: TEST-1774172153
+2026-03-22 10:35:56 - Webhook received
+2026-03-22 10:35:56 - Data: {"test":true}
+2026-03-22 10:35:56 - Unhandled event: 
+2026-03-22 10:35:56 - Webhook received
+2026-03-22 10:35:56 - Data: {"test":true}
+2026-03-22 10:35:56 - Unhandled event: 
+2026-03-22 10:35:56 - Webhook received
+2026-03-22 10:35:56 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172156","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172156","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:56 - Processing: ref=TEST-1774172156, paid=500, fee=0, credit=500
+2026-03-22 10:35:56 - Transaction not found for: TEST-1774172156
+2026-03-22 10:35:57 - Webhook received
+2026-03-22 10:35:57 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172157","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172157","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:35:57 - Processing: ref=TEST-1774172157, paid=500, fee=0, credit=500
+2026-03-22 10:35:57 - Transaction not found for: TEST-1774172157
+2026-03-22 10:35:59 - Webhook received
+2026-03-22 10:35:59 - Data: {"test":true}
+2026-03-22 10:35:59 - Unhandled event: 
+2026-03-22 10:35:59 - Webhook received
+2026-03-22 10:35:59 - Data: {"test":true}
+2026-03-22 10:35:59 - Unhandled event: 
+2026-03-22 10:36:00 - Webhook received
+2026-03-22 10:36:00 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172159","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172159","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:00 - Processing: ref=TEST-1774172159, paid=500, fee=0, credit=500
+2026-03-22 10:36:00 - Transaction not found for: TEST-1774172159
+2026-03-22 10:36:00 - Webhook received
+2026-03-22 10:36:00 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172160","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172160","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:00 - Processing: ref=TEST-1774172160, paid=500, fee=0, credit=500
+2026-03-22 10:36:00 - Transaction not found for: TEST-1774172160
+2026-03-22 10:36:02 - Webhook received
+2026-03-22 10:36:02 - Data: {"test":true}
+2026-03-22 10:36:02 - Unhandled event: 
+2026-03-22 10:36:03 - Webhook received
+2026-03-22 10:36:03 - Data: {"test":true}
+2026-03-22 10:36:03 - Unhandled event: 
+2026-03-22 10:36:03 - Webhook received
+2026-03-22 10:36:03 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172162","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172162","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:03 - Processing: ref=TEST-1774172162, paid=500, fee=0, credit=500
+2026-03-22 10:36:03 - Transaction not found for: TEST-1774172162
+2026-03-22 10:36:03 - Webhook received
+2026-03-22 10:36:03 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172163","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172163","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:03 - Processing: ref=TEST-1774172163, paid=500, fee=0, credit=500
+2026-03-22 10:36:03 - Transaction not found for: TEST-1774172163
+2026-03-22 10:36:05 - Webhook received
+2026-03-22 10:36:05 - Data: {"test":true}
+2026-03-22 10:36:05 - Unhandled event: 
+2026-03-22 10:36:06 - Webhook received
+2026-03-22 10:36:06 - Data: {"test":true}
+2026-03-22 10:36:06 - Unhandled event: 
+2026-03-22 10:36:06 - Webhook received
+2026-03-22 10:36:06 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172165","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172165","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:06 - Processing: ref=TEST-1774172165, paid=500, fee=0, credit=500
+2026-03-22 10:36:06 - Transaction not found for: TEST-1774172165
+2026-03-22 10:36:06 - Webhook received
+2026-03-22 10:36:06 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172166","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172166","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:06 - Processing: ref=TEST-1774172166, paid=500, fee=0, credit=500
+2026-03-22 10:36:06 - Transaction not found for: TEST-1774172166
+2026-03-22 10:36:08 - Webhook received
+2026-03-22 10:36:08 - Data: {"test":true}
+2026-03-22 10:36:08 - Unhandled event: 
+2026-03-22 10:36:09 - Webhook received
+2026-03-22 10:36:09 - Data: {"test":true}
+2026-03-22 10:36:09 - Unhandled event: 
+2026-03-22 10:36:09 - Webhook received
+2026-03-22 10:36:09 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172168","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172168","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:09 - Processing: ref=TEST-1774172168, paid=500, fee=0, credit=500
+2026-03-22 10:36:09 - Transaction not found for: TEST-1774172168
+2026-03-22 10:36:09 - Webhook received
+2026-03-22 10:36:09 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172169","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172169","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:09 - Processing: ref=TEST-1774172169, paid=500, fee=0, credit=500
+2026-03-22 10:36:09 - Transaction not found for: TEST-1774172169
+2026-03-22 10:36:11 - Webhook received
+2026-03-22 10:36:11 - Data: {"test":true}
+2026-03-22 10:36:11 - Unhandled event: 
+2026-03-22 10:36:12 - Webhook received
+2026-03-22 10:36:12 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172171","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172171","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:12 - Processing: ref=TEST-1774172171, paid=500, fee=0, credit=500
+2026-03-22 10:36:12 - Transaction not found for: TEST-1774172171
+2026-03-22 10:36:12 - Webhook received
+2026-03-22 10:36:12 - Data: {"test":true}
+2026-03-22 10:36:12 - Unhandled event: 
+2026-03-22 10:36:13 - Webhook received
+2026-03-22 10:36:13 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172172","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172172","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:13 - Processing: ref=TEST-1774172172, paid=500, fee=0, credit=500
+2026-03-22 10:36:13 - Transaction not found for: TEST-1774172172
+2026-03-22 10:36:14 - Webhook received
+2026-03-22 10:36:14 - Data: {"test":true}
+2026-03-22 10:36:14 - Unhandled event: 
+2026-03-22 10:36:15 - Webhook received
+2026-03-22 10:36:15 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172174","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172174","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:15 - Processing: ref=TEST-1774172174, paid=500, fee=0, credit=500
+2026-03-22 10:36:15 - Transaction not found for: TEST-1774172174
+2026-03-22 10:36:15 - Webhook received
+2026-03-22 10:36:15 - Data: {"test":true}
+2026-03-22 10:36:15 - Unhandled event: 
+2026-03-22 10:36:16 - Webhook received
+2026-03-22 10:36:16 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172175","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172175","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:16 - Processing: ref=TEST-1774172175, paid=500, fee=0, credit=500
+2026-03-22 10:36:16 - Transaction not found for: TEST-1774172175
+2026-03-22 10:36:17 - Webhook received
+2026-03-22 10:36:17 - Data: {"test":true}
+2026-03-22 10:36:17 - Unhandled event: 
+2026-03-22 10:36:18 - Webhook received
+2026-03-22 10:36:18 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172177","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172177","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:18 - Processing: ref=TEST-1774172177, paid=500, fee=0, credit=500
+2026-03-22 10:36:18 - Transaction not found for: TEST-1774172177
+2026-03-22 10:36:18 - Webhook received
+2026-03-22 10:36:18 - Data: {"test":true}
+2026-03-22 10:36:18 - Unhandled event: 
+2026-03-22 10:36:19 - Webhook received
+2026-03-22 10:36:19 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172178","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172178","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:19 - Processing: ref=TEST-1774172178, paid=500, fee=0, credit=500
+2026-03-22 10:36:19 - Transaction not found for: TEST-1774172178
+2026-03-22 10:36:20 - Webhook received
+2026-03-22 10:36:20 - Data: {"test":true}
+2026-03-22 10:36:20 - Unhandled event: 
+2026-03-22 10:36:21 - Webhook received
+2026-03-22 10:36:21 - Data: {"test":true}
+2026-03-22 10:36:21 - Unhandled event: 
+2026-03-22 10:36:21 - Webhook received
+2026-03-22 10:36:21 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172180","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172180","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:21 - Processing: ref=TEST-1774172180, paid=500, fee=0, credit=500
+2026-03-22 10:36:21 - Transaction not found for: TEST-1774172180
+2026-03-22 10:36:22 - Webhook received
+2026-03-22 10:36:22 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172181","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172181","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:22 - Processing: ref=TEST-1774172181, paid=500, fee=0, credit=500
+2026-03-22 10:36:22 - Transaction not found for: TEST-1774172181
+2026-03-22 10:36:23 - Webhook received
+2026-03-22 10:36:23 - Data: {"test":true}
+2026-03-22 10:36:23 - Unhandled event: 
+2026-03-22 10:36:24 - Webhook received
+2026-03-22 10:36:24 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172184","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172184","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:24 - Processing: ref=TEST-1774172184, paid=500, fee=0, credit=500
+2026-03-22 10:36:24 - Transaction not found for: TEST-1774172184
+2026-03-22 10:36:24 - Webhook received
+2026-03-22 10:36:24 - Data: {"test":true}
+2026-03-22 10:36:24 - Unhandled event: 
+2026-03-22 10:36:25 - Webhook received
+2026-03-22 10:36:25 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172184","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172184","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:25 - Processing: ref=TEST-1774172184, paid=500, fee=0, credit=500
+2026-03-22 10:36:25 - Transaction not found for: TEST-1774172184
+2026-03-22 10:36:26 - Webhook received
+2026-03-22 10:36:26 - Data: {"test":true}
+2026-03-22 10:36:26 - Unhandled event: 
+2026-03-22 10:36:27 - Webhook received
+2026-03-22 10:36:27 - Data: {"test":true}
+2026-03-22 10:36:27 - Unhandled event: 
+2026-03-22 10:36:27 - Webhook received
+2026-03-22 10:36:27 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172187","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172187","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:27 - Processing: ref=TEST-1774172187, paid=500, fee=0, credit=500
+2026-03-22 10:36:27 - Transaction not found for: TEST-1774172187
+2026-03-22 10:36:28 - Webhook received
+2026-03-22 10:36:28 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172187","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172187","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:28 - Processing: ref=TEST-1774172187, paid=500, fee=0, credit=500
+2026-03-22 10:36:28 - Transaction not found for: TEST-1774172187
+2026-03-22 10:36:30 - Webhook received
+2026-03-22 10:36:30 - Data: {"test":true}
+2026-03-22 10:36:30 - Unhandled event: 
+2026-03-22 10:36:30 - Webhook received
+2026-03-22 10:36:30 - Data: {"test":true}
+2026-03-22 10:36:30 - Unhandled event: 
+2026-03-22 10:36:30 - Webhook received
+2026-03-22 10:36:30 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172190","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172190","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:30 - Processing: ref=TEST-1774172190, paid=500, fee=0, credit=500
+2026-03-22 10:36:30 - Transaction not found for: TEST-1774172190
+2026-03-22 10:36:31 - Webhook received
+2026-03-22 10:36:31 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172190","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172190","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:31 - Processing: ref=TEST-1774172190, paid=500, fee=0, credit=500
+2026-03-22 10:36:31 - Transaction not found for: TEST-1774172190
+2026-03-22 10:36:33 - Webhook received
+2026-03-22 10:36:33 - Data: {"test":true}
+2026-03-22 10:36:33 - Unhandled event: 
+2026-03-22 10:36:33 - Webhook received
+2026-03-22 10:36:33 - Data: {"test":true}
+2026-03-22 10:36:33 - Unhandled event: 
+2026-03-22 10:36:34 - Webhook received
+2026-03-22 10:36:34 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172193","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172193","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:34 - Processing: ref=TEST-1774172193, paid=500, fee=0, credit=500
+2026-03-22 10:36:34 - Transaction not found for: TEST-1774172193
+2026-03-22 10:36:34 - Webhook received
+2026-03-22 10:36:34 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172193","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172193","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:34 - Processing: ref=TEST-1774172193, paid=500, fee=0, credit=500
+2026-03-22 10:36:34 - Transaction not found for: TEST-1774172193
+2026-03-22 10:36:36 - Webhook received
+2026-03-22 10:36:36 - Data: {"test":true}
+2026-03-22 10:36:36 - Unhandled event: 
+2026-03-22 10:36:36 - Webhook received
+2026-03-22 10:36:36 - Data: {"test":true}
+2026-03-22 10:36:36 - Unhandled event: 
+2026-03-22 10:36:37 - Webhook received
+2026-03-22 10:36:37 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172196","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172196","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:37 - Processing: ref=TEST-1774172196, paid=500, fee=0, credit=500
+2026-03-22 10:36:37 - Transaction not found for: TEST-1774172196
+2026-03-22 10:36:37 - Webhook received
+2026-03-22 10:36:37 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172196","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172196","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:37 - Processing: ref=TEST-1774172196, paid=500, fee=0, credit=500
+2026-03-22 10:36:37 - Transaction not found for: TEST-1774172196
+2026-03-22 10:36:39 - Webhook received
+2026-03-22 10:36:39 - Data: {"test":true}
+2026-03-22 10:36:39 - Unhandled event: 
+2026-03-22 10:36:39 - Webhook received
+2026-03-22 10:36:39 - Data: {"test":true}
+2026-03-22 10:36:39 - Unhandled event: 
+2026-03-22 10:36:40 - Webhook received
+2026-03-22 10:36:40 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172199","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172199","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:40 - Processing: ref=TEST-1774172199, paid=500, fee=0, credit=500
+2026-03-22 10:36:40 - Transaction not found for: TEST-1774172199
+2026-03-22 10:36:40 - Webhook received
+2026-03-22 10:36:40 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172199","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172199","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:40 - Processing: ref=TEST-1774172199, paid=500, fee=0, credit=500
+2026-03-22 10:36:40 - Transaction not found for: TEST-1774172199
+2026-03-22 10:36:42 - Webhook received
+2026-03-22 10:36:42 - Data: {"test":true}
+2026-03-22 10:36:42 - Unhandled event: 
+2026-03-22 10:36:42 - Webhook received
+2026-03-22 10:36:42 - Data: {"test":true}
+2026-03-22 10:36:42 - Unhandled event: 
+2026-03-22 10:36:43 - Webhook received
+2026-03-22 10:36:43 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172202","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172202","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:43 - Processing: ref=TEST-1774172202, paid=500, fee=0, credit=500
+2026-03-22 10:36:43 - Transaction not found for: TEST-1774172202
+2026-03-22 10:36:43 - Webhook received
+2026-03-22 10:36:43 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172202","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172202","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:43 - Processing: ref=TEST-1774172202, paid=500, fee=0, credit=500
+2026-03-22 10:36:43 - Transaction not found for: TEST-1774172202
+2026-03-22 10:36:45 - Webhook received
+2026-03-22 10:36:45 - Data: {"test":true}
+2026-03-22 10:36:45 - Unhandled event: 
+2026-03-22 10:36:45 - Webhook received
+2026-03-22 10:36:45 - Data: {"test":true}
+2026-03-22 10:36:45 - Unhandled event: 
+2026-03-22 10:36:46 - Webhook received
+2026-03-22 10:36:46 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172205","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172205","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:46 - Processing: ref=TEST-1774172205, paid=500, fee=0, credit=500
+2026-03-22 10:36:46 - Transaction not found for: TEST-1774172205
+2026-03-22 10:36:46 - Webhook received
+2026-03-22 10:36:46 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172206","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172206","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:46 - Processing: ref=TEST-1774172206, paid=500, fee=0, credit=500
+2026-03-22 10:36:46 - Transaction not found for: TEST-1774172206
+2026-03-22 10:36:48 - Webhook received
+2026-03-22 10:36:48 - Data: {"test":true}
+2026-03-22 10:36:48 - Unhandled event: 
+2026-03-22 10:36:48 - Webhook received
+2026-03-22 10:36:48 - Data: {"test":true}
+2026-03-22 10:36:48 - Unhandled event: 
+2026-03-22 10:36:49 - Webhook received
+2026-03-22 10:36:49 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172208","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172208","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:49 - Processing: ref=TEST-1774172208, paid=500, fee=0, credit=500
+2026-03-22 10:36:49 - Transaction not found for: TEST-1774172208
+2026-03-22 10:36:49 - Webhook received
+2026-03-22 10:36:49 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172209","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172209","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:49 - Processing: ref=TEST-1774172209, paid=500, fee=0, credit=500
+2026-03-22 10:36:49 - Transaction not found for: TEST-1774172209
+2026-03-22 10:36:51 - Webhook received
+2026-03-22 10:36:51 - Data: {"test":true}
+2026-03-22 10:36:51 - Unhandled event: 
+2026-03-22 10:36:51 - Webhook received
+2026-03-22 10:36:51 - Data: {"test":true}
+2026-03-22 10:36:51 - Unhandled event: 
+2026-03-22 10:36:52 - Webhook received
+2026-03-22 10:36:52 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172211","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172211","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:52 - Processing: ref=TEST-1774172211, paid=500, fee=0, credit=500
+2026-03-22 10:36:52 - Transaction not found for: TEST-1774172211
+2026-03-22 10:36:52 - Webhook received
+2026-03-22 10:36:52 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172212","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172212","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:52 - Processing: ref=TEST-1774172212, paid=500, fee=0, credit=500
+2026-03-22 10:36:52 - Transaction not found for: TEST-1774172212
+2026-03-22 10:36:54 - Webhook received
+2026-03-22 10:36:54 - Data: {"test":true}
+2026-03-22 10:36:54 - Unhandled event: 
+2026-03-22 10:36:55 - Webhook received
+2026-03-22 10:36:55 - Data: {"test":true}
+2026-03-22 10:36:55 - Unhandled event: 
+2026-03-22 10:36:55 - Webhook received
+2026-03-22 10:36:55 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172214","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172214","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:55 - Processing: ref=TEST-1774172214, paid=500, fee=0, credit=500
+2026-03-22 10:36:55 - Transaction not found for: TEST-1774172214
+2026-03-22 10:36:55 - Webhook received
+2026-03-22 10:36:55 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172215","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172215","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:55 - Processing: ref=TEST-1774172215, paid=500, fee=0, credit=500
+2026-03-22 10:36:55 - Transaction not found for: TEST-1774172215
+2026-03-22 10:36:57 - Webhook received
+2026-03-22 10:36:57 - Data: {"test":true}
+2026-03-22 10:36:57 - Unhandled event: 
+2026-03-22 10:36:58 - Webhook received
+2026-03-22 10:36:58 - Data: {"test":true}
+2026-03-22 10:36:58 - Unhandled event: 
+2026-03-22 10:36:58 - Webhook received
+2026-03-22 10:36:58 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172217","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172217","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:58 - Processing: ref=TEST-1774172217, paid=500, fee=0, credit=500
+2026-03-22 10:36:58 - Transaction not found for: TEST-1774172217
+2026-03-22 10:36:58 - Webhook received
+2026-03-22 10:36:58 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172218","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172218","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:36:58 - Processing: ref=TEST-1774172218, paid=500, fee=0, credit=500
+2026-03-22 10:36:58 - Transaction not found for: TEST-1774172218
+2026-03-22 10:37:00 - Webhook received
+2026-03-22 10:37:00 - Data: {"test":true}
+2026-03-22 10:37:00 - Unhandled event: 
+2026-03-22 10:37:01 - Webhook received
+2026-03-22 10:37:01 - Data: {"test":true}
+2026-03-22 10:37:01 - Unhandled event: 
+2026-03-22 10:37:01 - Webhook received
+2026-03-22 10:37:01 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172220","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172220","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:01 - Processing: ref=TEST-1774172220, paid=500, fee=0, credit=500
+2026-03-22 10:37:01 - Transaction not found for: TEST-1774172220
+2026-03-22 10:37:01 - Webhook received
+2026-03-22 10:37:01 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172221","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172221","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:01 - Processing: ref=TEST-1774172221, paid=500, fee=0, credit=500
+2026-03-22 10:37:01 - Transaction not found for: TEST-1774172221
+2026-03-22 10:37:04 - Webhook received
+2026-03-22 10:37:04 - Data: {"test":true}
+2026-03-22 10:37:04 - Unhandled event: 
+2026-03-22 10:37:04 - Webhook received
+2026-03-22 10:37:04 - Data: {"test":true}
+2026-03-22 10:37:04 - Unhandled event: 
+2026-03-22 10:37:04 - Webhook received
+2026-03-22 10:37:04 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172224","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172224","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:04 - Processing: ref=TEST-1774172224, paid=500, fee=0, credit=500
+2026-03-22 10:37:04 - Transaction not found for: TEST-1774172224
+2026-03-22 10:37:05 - Webhook received
+2026-03-22 10:37:05 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172224","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172224","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:05 - Processing: ref=TEST-1774172224, paid=500, fee=0, credit=500
+2026-03-22 10:37:05 - Transaction not found for: TEST-1774172224
+2026-03-22 10:37:07 - Webhook received
+2026-03-22 10:37:07 - Data: {"test":true}
+2026-03-22 10:37:07 - Unhandled event: 
+2026-03-22 10:37:07 - Webhook received
+2026-03-22 10:37:07 - Data: {"test":true}
+2026-03-22 10:37:07 - Unhandled event: 
+2026-03-22 10:37:07 - Webhook received
+2026-03-22 10:37:07 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172227","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172227","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:07 - Processing: ref=TEST-1774172227, paid=500, fee=0, credit=500
+2026-03-22 10:37:07 - Transaction not found for: TEST-1774172227
+2026-03-22 10:37:08 - Webhook received
+2026-03-22 10:37:08 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172227","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172227","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:08 - Processing: ref=TEST-1774172227, paid=500, fee=0, credit=500
+2026-03-22 10:37:08 - Transaction not found for: TEST-1774172227
+2026-03-22 10:37:10 - Webhook received
+2026-03-22 10:37:10 - Data: {"test":true}
+2026-03-22 10:37:10 - Unhandled event: 
+2026-03-22 10:37:10 - Webhook received
+2026-03-22 10:37:10 - Data: {"test":true}
+2026-03-22 10:37:10 - Unhandled event: 
+2026-03-22 10:37:11 - Webhook received
+2026-03-22 10:37:11 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172230","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172230","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:11 - Processing: ref=TEST-1774172230, paid=500, fee=0, credit=500
+2026-03-22 10:37:11 - Transaction not found for: TEST-1774172230
+2026-03-22 10:37:11 - Webhook received
+2026-03-22 10:37:11 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172230","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172230","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:11 - Processing: ref=TEST-1774172230, paid=500, fee=0, credit=500
+2026-03-22 10:37:11 - Transaction not found for: TEST-1774172230
+2026-03-22 10:37:13 - Webhook received
+2026-03-22 10:37:13 - Data: {"test":true}
+2026-03-22 10:37:13 - Unhandled event: 
+2026-03-22 10:37:14 - Webhook received
+2026-03-22 10:37:14 - Data: {"test":true}
+2026-03-22 10:37:14 - Unhandled event: 
+2026-03-22 10:37:14 - Webhook received
+2026-03-22 10:37:14 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172233","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172233","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:14 - Processing: ref=TEST-1774172233, paid=500, fee=0, credit=500
+2026-03-22 10:37:14 - Transaction not found for: TEST-1774172233
+2026-03-22 10:37:14 - Webhook received
+2026-03-22 10:37:14 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172234","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172234","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:14 - Processing: ref=TEST-1774172234, paid=500, fee=0, credit=500
+2026-03-22 10:37:14 - Transaction not found for: TEST-1774172234
+2026-03-22 10:37:16 - Webhook received
+2026-03-22 10:37:16 - Data: {"test":true}
+2026-03-22 10:37:16 - Unhandled event: 
+2026-03-22 10:37:17 - Webhook received
+2026-03-22 10:37:17 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172236","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172236","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:17 - Processing: ref=TEST-1774172236, paid=500, fee=0, credit=500
+2026-03-22 10:37:17 - Transaction not found for: TEST-1774172236
+2026-03-22 10:37:17 - Webhook received
+2026-03-22 10:37:17 - Data: {"test":true}
+2026-03-22 10:37:17 - Unhandled event: 
+2026-03-22 10:37:17 - Webhook received
+2026-03-22 10:37:17 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172237","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172237","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:17 - Processing: ref=TEST-1774172237, paid=500, fee=0, credit=500
+2026-03-22 10:37:17 - Transaction not found for: TEST-1774172237
+2026-03-22 10:37:19 - Webhook received
+2026-03-22 10:37:19 - Data: {"test":true}
+2026-03-22 10:37:19 - Unhandled event: 
+2026-03-22 10:37:20 - Webhook received
+2026-03-22 10:37:20 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172239","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172239","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:20 - Processing: ref=TEST-1774172239, paid=500, fee=0, credit=500
+2026-03-22 10:37:20 - Transaction not found for: TEST-1774172239
+2026-03-22 10:37:20 - Webhook received
+2026-03-22 10:37:20 - Data: {"test":true}
+2026-03-22 10:37:20 - Unhandled event: 
+2026-03-22 10:37:21 - Webhook received
+2026-03-22 10:37:21 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172240","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172240","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:21 - Processing: ref=TEST-1774172240, paid=500, fee=0, credit=500
+2026-03-22 10:37:21 - Transaction not found for: TEST-1774172240
+2026-03-22 10:37:22 - Webhook received
+2026-03-22 10:37:22 - Data: {"test":true}
+2026-03-22 10:37:22 - Unhandled event: 
+2026-03-22 10:37:23 - Webhook received
+2026-03-22 10:37:23 - Data: {"test":true}
+2026-03-22 10:37:23 - Unhandled event: 
+2026-03-22 10:37:23 - Webhook received
+2026-03-22 10:37:23 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172242","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172242","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:23 - Processing: ref=TEST-1774172242, paid=500, fee=0, credit=500
+2026-03-22 10:37:23 - Transaction not found for: TEST-1774172242
+2026-03-22 10:37:23 - Webhook received
+2026-03-22 10:37:23 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172243","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172243","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:23 - Processing: ref=TEST-1774172243, paid=500, fee=0, credit=500
+2026-03-22 10:37:23 - Transaction not found for: TEST-1774172243
+2026-03-22 10:37:25 - Webhook received
+2026-03-22 10:37:25 - Data: {"test":true}
+2026-03-22 10:37:25 - Unhandled event: 
+2026-03-22 10:37:26 - Webhook received
+2026-03-22 10:37:26 - Data: {"test":true}
+2026-03-22 10:37:26 - Unhandled event: 
+2026-03-22 10:37:26 - Webhook received
+2026-03-22 10:37:26 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172246","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172246","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:26 - Processing: ref=TEST-1774172246, paid=500, fee=0, credit=500
+2026-03-22 10:37:26 - Transaction not found for: TEST-1774172246
+2026-03-22 10:37:26 - Webhook received
+2026-03-22 10:37:26 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172246","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172246","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:26 - Processing: ref=TEST-1774172246, paid=500, fee=0, credit=500
+2026-03-22 10:37:26 - Transaction not found for: TEST-1774172246
+2026-03-22 10:37:29 - Webhook received
+2026-03-22 10:37:29 - Data: {"test":true}
+2026-03-22 10:37:29 - Unhandled event: 
+2026-03-22 10:37:29 - Webhook received
+2026-03-22 10:37:29 - Data: {"test":true}
+2026-03-22 10:37:29 - Unhandled event: 
+2026-03-22 10:37:29 - Webhook received
+2026-03-22 10:37:29 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172249","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172249","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:29 - Processing: ref=TEST-1774172249, paid=500, fee=0, credit=500
+2026-03-22 10:37:29 - Transaction not found for: TEST-1774172249
+2026-03-22 10:37:29 - Webhook received
+2026-03-22 10:37:29 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172249","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172249","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:29 - Processing: ref=TEST-1774172249, paid=500, fee=0, credit=500
+2026-03-22 10:37:29 - Transaction not found for: TEST-1774172249
+2026-03-22 10:37:32 - Webhook received
+2026-03-22 10:37:32 - Data: {"test":true}
+2026-03-22 10:37:32 - Unhandled event: 
+2026-03-22 10:37:32 - Webhook received
+2026-03-22 10:37:32 - Data: {"test":true}
+2026-03-22 10:37:32 - Unhandled event: 
+2026-03-22 10:37:33 - Webhook received
+2026-03-22 10:37:33 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172252","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172252","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:33 - Processing: ref=TEST-1774172252, paid=500, fee=0, credit=500
+2026-03-22 10:37:33 - Transaction not found for: TEST-1774172252
+2026-03-22 10:37:33 - Webhook received
+2026-03-22 10:37:33 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172252","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172252","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:33 - Processing: ref=TEST-1774172252, paid=500, fee=0, credit=500
+2026-03-22 10:37:33 - Transaction not found for: TEST-1774172252
+2026-03-22 10:37:35 - Webhook received
+2026-03-22 10:37:35 - Data: {"test":true}
+2026-03-22 10:37:35 - Unhandled event: 
+2026-03-22 10:37:35 - Webhook received
+2026-03-22 10:37:35 - Data: {"test":true}
+2026-03-22 10:37:35 - Unhandled event: 
+2026-03-22 10:37:35 - Webhook received
+2026-03-22 10:37:35 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172255","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172255","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:35 - Processing: ref=TEST-1774172255, paid=500, fee=0, credit=500
+2026-03-22 10:37:35 - Transaction not found for: TEST-1774172255
+2026-03-22 10:37:36 - Webhook received
+2026-03-22 10:37:36 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172255","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172255","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:36 - Processing: ref=TEST-1774172255, paid=500, fee=0, credit=500
+2026-03-22 10:37:36 - Transaction not found for: TEST-1774172255
+2026-03-22 10:37:38 - Webhook received
+2026-03-22 10:37:38 - Data: {"test":true}
+2026-03-22 10:37:38 - Unhandled event: 
+2026-03-22 10:37:38 - Webhook received
+2026-03-22 10:37:38 - Data: {"test":true}
+2026-03-22 10:37:38 - Unhandled event: 
+2026-03-22 10:37:38 - Webhook received
+2026-03-22 10:37:38 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172258","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172258","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:38 - Processing: ref=TEST-1774172258, paid=500, fee=0, credit=500
+2026-03-22 10:37:38 - Transaction not found for: TEST-1774172258
+2026-03-22 10:37:38 - Webhook received
+2026-03-22 10:37:38 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172258","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172258","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:38 - Processing: ref=TEST-1774172258, paid=500, fee=0, credit=500
+2026-03-22 10:37:38 - Transaction not found for: TEST-1774172258
+2026-03-22 10:37:41 - Webhook received
+2026-03-22 10:37:41 - Data: {"test":true}
+2026-03-22 10:37:41 - Unhandled event: 
+2026-03-22 10:37:41 - Webhook received
+2026-03-22 10:37:41 - Data: {"test":true}
+2026-03-22 10:37:41 - Unhandled event: 
+2026-03-22 10:37:41 - Webhook received
+2026-03-22 10:37:41 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172261","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172261","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:41 - Processing: ref=TEST-1774172261, paid=500, fee=0, credit=500
+2026-03-22 10:37:41 - Transaction not found for: TEST-1774172261
+2026-03-22 10:37:41 - Webhook received
+2026-03-22 10:37:41 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172261","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172261","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:41 - Processing: ref=TEST-1774172261, paid=500, fee=0, credit=500
+2026-03-22 10:37:41 - Transaction not found for: TEST-1774172261
+2026-03-22 10:37:44 - Webhook received
+2026-03-22 10:37:44 - Data: {"test":true}
+2026-03-22 10:37:44 - Unhandled event: 
+2026-03-22 10:37:44 - Webhook received
+2026-03-22 10:37:44 - Data: {"test":true}
+2026-03-22 10:37:44 - Unhandled event: 
+2026-03-22 10:37:44 - Webhook received
+2026-03-22 10:37:44 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172264","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172264","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:44 - Processing: ref=TEST-1774172264, paid=500, fee=0, credit=500
+2026-03-22 10:37:44 - Transaction not found for: TEST-1774172264
+2026-03-22 10:37:44 - Webhook received
+2026-03-22 10:37:44 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172264","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172264","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:44 - Processing: ref=TEST-1774172264, paid=500, fee=0, credit=500
+2026-03-22 10:37:44 - Transaction not found for: TEST-1774172264
+2026-03-22 10:37:47 - Webhook received
+2026-03-22 10:37:47 - Data: {"test":true}
+2026-03-22 10:37:47 - Unhandled event: 
+2026-03-22 10:37:47 - Webhook received
+2026-03-22 10:37:47 - Data: {"test":true}
+2026-03-22 10:37:47 - Unhandled event: 
+2026-03-22 10:37:47 - Webhook received
+2026-03-22 10:37:47 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172267","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172267","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:47 - Processing: ref=TEST-1774172267, paid=500, fee=0, credit=500
+2026-03-22 10:37:47 - Transaction not found for: TEST-1774172267
+2026-03-22 10:37:47 - Webhook received
+2026-03-22 10:37:47 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172267","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172267","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:47 - Processing: ref=TEST-1774172267, paid=500, fee=0, credit=500
+2026-03-22 10:37:47 - Transaction not found for: TEST-1774172267
+2026-03-22 10:37:50 - Webhook received
+2026-03-22 10:37:50 - Data: {"test":true}
+2026-03-22 10:37:50 - Unhandled event: 
+2026-03-22 10:37:50 - Webhook received
+2026-03-22 10:37:50 - Data: {"test":true}
+2026-03-22 10:37:50 - Unhandled event: 
+2026-03-22 10:37:50 - Webhook received
+2026-03-22 10:37:50 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172270","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172270","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:50 - Processing: ref=TEST-1774172270, paid=500, fee=0, credit=500
+2026-03-22 10:37:50 - Transaction not found for: TEST-1774172270
+2026-03-22 10:37:50 - Webhook received
+2026-03-22 10:37:50 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172270","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172270","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:50 - Processing: ref=TEST-1774172270, paid=500, fee=0, credit=500
+2026-03-22 10:37:50 - Transaction not found for: TEST-1774172270
+2026-03-22 10:37:53 - Webhook received
+2026-03-22 10:37:53 - Data: {"test":true}
+2026-03-22 10:37:53 - Unhandled event: 
+2026-03-22 10:37:53 - Webhook received
+2026-03-22 10:37:53 - Data: {"test":true}
+2026-03-22 10:37:53 - Unhandled event: 
+2026-03-22 10:37:53 - Webhook received
+2026-03-22 10:37:53 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172273","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172273","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:53 - Processing: ref=TEST-1774172273, paid=500, fee=0, credit=500
+2026-03-22 10:37:53 - Transaction not found for: TEST-1774172273
+2026-03-22 10:37:54 - Webhook received
+2026-03-22 10:37:54 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172273","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172273","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:54 - Processing: ref=TEST-1774172273, paid=500, fee=0, credit=500
+2026-03-22 10:37:54 - Transaction not found for: TEST-1774172273
+2026-03-22 10:37:56 - Webhook received
+2026-03-22 10:37:56 - Data: {"test":true}
+2026-03-22 10:37:56 - Unhandled event: 
+2026-03-22 10:37:56 - Webhook received
+2026-03-22 10:37:56 - Data: {"test":true}
+2026-03-22 10:37:56 - Unhandled event: 
+2026-03-22 10:37:56 - Webhook received
+2026-03-22 10:37:56 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172276","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172276","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:56 - Processing: ref=TEST-1774172276, paid=500, fee=0, credit=500
+2026-03-22 10:37:56 - Transaction not found for: TEST-1774172276
+2026-03-22 10:37:56 - Webhook received
+2026-03-22 10:37:56 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172276","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172276","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:56 - Processing: ref=TEST-1774172276, paid=500, fee=0, credit=500
+2026-03-22 10:37:56 - Transaction not found for: TEST-1774172276
+2026-03-22 10:37:59 - Webhook received
+2026-03-22 10:37:59 - Data: {"test":true}
+2026-03-22 10:37:59 - Unhandled event: 
+2026-03-22 10:37:59 - Webhook received
+2026-03-22 10:37:59 - Data: {"test":true}
+2026-03-22 10:37:59 - Unhandled event: 
+2026-03-22 10:37:59 - Webhook received
+2026-03-22 10:37:59 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172279","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172279","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:37:59 - Processing: ref=TEST-1774172279, paid=500, fee=0, credit=500
+2026-03-22 10:37:59 - Transaction not found for: TEST-1774172279
+2026-03-22 10:38:00 - Webhook received
+2026-03-22 10:38:00 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172279","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172279","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:00 - Processing: ref=TEST-1774172279, paid=500, fee=0, credit=500
+2026-03-22 10:38:00 - Transaction not found for: TEST-1774172279
+2026-03-22 10:38:02 - Webhook received
+2026-03-22 10:38:02 - Data: {"test":true}
+2026-03-22 10:38:02 - Unhandled event: 
+2026-03-22 10:38:02 - Webhook received
+2026-03-22 10:38:02 - Data: {"test":true}
+2026-03-22 10:38:02 - Unhandled event: 
+2026-03-22 10:38:02 - Webhook received
+2026-03-22 10:38:02 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172282","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172282","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:02 - Processing: ref=TEST-1774172282, paid=500, fee=0, credit=500
+2026-03-22 10:38:02 - Transaction not found for: TEST-1774172282
+2026-03-22 10:38:02 - Webhook received
+2026-03-22 10:38:02 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172282","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172282","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:02 - Processing: ref=TEST-1774172282, paid=500, fee=0, credit=500
+2026-03-22 10:38:02 - Transaction not found for: TEST-1774172282
+2026-03-22 10:38:05 - Webhook received
+2026-03-22 10:38:05 - Data: {"test":true}
+2026-03-22 10:38:05 - Unhandled event: 
+2026-03-22 10:38:05 - Webhook received
+2026-03-22 10:38:05 - Data: {"test":true}
+2026-03-22 10:38:05 - Unhandled event: 
+2026-03-22 10:38:05 - Webhook received
+2026-03-22 10:38:05 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172285","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172285","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:05 - Processing: ref=TEST-1774172285, paid=500, fee=0, credit=500
+2026-03-22 10:38:05 - Transaction not found for: TEST-1774172285
+2026-03-22 10:38:05 - Webhook received
+2026-03-22 10:38:05 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172285","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172285","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:05 - Processing: ref=TEST-1774172285, paid=500, fee=0, credit=500
+2026-03-22 10:38:05 - Transaction not found for: TEST-1774172285
+2026-03-22 10:38:08 - Webhook received
+2026-03-22 10:38:08 - Data: {"test":true}
+2026-03-22 10:38:08 - Unhandled event: 
+2026-03-22 10:38:08 - Webhook received
+2026-03-22 10:38:08 - Data: {"test":true}
+2026-03-22 10:38:08 - Unhandled event: 
+2026-03-22 10:38:08 - Webhook received
+2026-03-22 10:38:08 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172288","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172288","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:08 - Processing: ref=TEST-1774172288, paid=500, fee=0, credit=500
+2026-03-22 10:38:08 - Transaction not found for: TEST-1774172288
+2026-03-22 10:38:08 - Webhook received
+2026-03-22 10:38:08 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172288","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172288","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:08 - Processing: ref=TEST-1774172288, paid=500, fee=0, credit=500
+2026-03-22 10:38:08 - Transaction not found for: TEST-1774172288
+2026-03-22 10:38:11 - Webhook received
+2026-03-22 10:38:11 - Data: {"test":true}
+2026-03-22 10:38:11 - Unhandled event: 
+2026-03-22 10:38:11 - Webhook received
+2026-03-22 10:38:11 - Data: {"test":true}
+2026-03-22 10:38:11 - Unhandled event: 
+2026-03-22 10:38:12 - Webhook received
+2026-03-22 10:38:12 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172291","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172291","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:12 - Processing: ref=TEST-1774172291, paid=500, fee=0, credit=500
+2026-03-22 10:38:12 - Transaction not found for: TEST-1774172291
+2026-03-22 10:38:12 - Webhook received
+2026-03-22 10:38:12 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172291","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172291","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:12 - Processing: ref=TEST-1774172291, paid=500, fee=0, credit=500
+2026-03-22 10:38:12 - Transaction not found for: TEST-1774172291
+2026-03-22 10:38:14 - Webhook received
+2026-03-22 10:38:14 - Data: {"test":true}
+2026-03-22 10:38:14 - Unhandled event: 
+2026-03-22 10:38:14 - Webhook received
+2026-03-22 10:38:14 - Data: {"test":true}
+2026-03-22 10:38:14 - Unhandled event: 
+2026-03-22 10:38:14 - Webhook received
+2026-03-22 10:38:14 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172294","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172294","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:14 - Processing: ref=TEST-1774172294, paid=500, fee=0, credit=500
+2026-03-22 10:38:14 - Transaction not found for: TEST-1774172294
+2026-03-22 10:38:15 - Webhook received
+2026-03-22 10:38:15 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172294","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172294","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:15 - Processing: ref=TEST-1774172294, paid=500, fee=0, credit=500
+2026-03-22 10:38:15 - Transaction not found for: TEST-1774172294
+2026-03-22 10:38:17 - Webhook received
+2026-03-22 10:38:17 - Data: {"test":true}
+2026-03-22 10:38:17 - Unhandled event: 
+2026-03-22 10:38:17 - Webhook received
+2026-03-22 10:38:17 - Data: {"test":true}
+2026-03-22 10:38:17 - Unhandled event: 
+2026-03-22 10:38:17 - Webhook received
+2026-03-22 10:38:17 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172297","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172297","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:17 - Processing: ref=TEST-1774172297, paid=500, fee=0, credit=500
+2026-03-22 10:38:17 - Transaction not found for: TEST-1774172297
+2026-03-22 10:38:17 - Webhook received
+2026-03-22 10:38:17 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172297","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172297","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:17 - Processing: ref=TEST-1774172297, paid=500, fee=0, credit=500
+2026-03-22 10:38:17 - Transaction not found for: TEST-1774172297
+2026-03-22 10:38:20 - Webhook received
+2026-03-22 10:38:20 - Data: {"test":true}
+2026-03-22 10:38:20 - Unhandled event: 
+2026-03-22 10:38:20 - Webhook received
+2026-03-22 10:38:20 - Data: {"test":true}
+2026-03-22 10:38:20 - Unhandled event: 
+2026-03-22 10:38:20 - Webhook received
+2026-03-22 10:38:20 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172300","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172300","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:20 - Processing: ref=TEST-1774172300, paid=500, fee=0, credit=500
+2026-03-22 10:38:20 - Transaction not found for: TEST-1774172300
+2026-03-22 10:38:20 - Webhook received
+2026-03-22 10:38:20 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172300","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172300","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:20 - Processing: ref=TEST-1774172300, paid=500, fee=0, credit=500
+2026-03-22 10:38:20 - Transaction not found for: TEST-1774172300
+2026-03-22 10:38:23 - Webhook received
+2026-03-22 10:38:23 - Data: {"test":true}
+2026-03-22 10:38:23 - Unhandled event: 
+2026-03-22 10:38:23 - Webhook received
+2026-03-22 10:38:23 - Data: {"test":true}
+2026-03-22 10:38:23 - Unhandled event: 
+2026-03-22 10:38:23 - Webhook received
+2026-03-22 10:38:23 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172303","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172303","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:23 - Processing: ref=TEST-1774172303, paid=500, fee=0, credit=500
+2026-03-22 10:38:23 - Transaction not found for: TEST-1774172303
+2026-03-22 10:38:23 - Webhook received
+2026-03-22 10:38:23 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172303","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172303","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:23 - Processing: ref=TEST-1774172303, paid=500, fee=0, credit=500
+2026-03-22 10:38:23 - Transaction not found for: TEST-1774172303
+2026-03-22 10:38:26 - Webhook received
+2026-03-22 10:38:26 - Data: {"test":true}
+2026-03-22 10:38:26 - Unhandled event: 
+2026-03-22 10:38:26 - Webhook received
+2026-03-22 10:38:26 - Data: {"test":true}
+2026-03-22 10:38:26 - Unhandled event: 
+2026-03-22 10:38:27 - Webhook received
+2026-03-22 10:38:27 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172306","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172306","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:27 - Processing: ref=TEST-1774172306, paid=500, fee=0, credit=500
+2026-03-22 10:38:27 - Transaction not found for: TEST-1774172306
+2026-03-22 10:38:27 - Webhook received
+2026-03-22 10:38:27 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172306","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172306","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:27 - Processing: ref=TEST-1774172306, paid=500, fee=0, credit=500
+2026-03-22 10:38:27 - Transaction not found for: TEST-1774172306
+2026-03-22 10:38:29 - Webhook received
+2026-03-22 10:38:30 - Data: {"test":true}
+2026-03-22 10:38:30 - Unhandled event: 
+2026-03-22 10:38:30 - Webhook received
+2026-03-22 10:38:30 - Data: {"test":true}
+2026-03-22 10:38:30 - Unhandled event: 
+2026-03-22 10:38:30 - Webhook received
+2026-03-22 10:38:30 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172310","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172310","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:30 - Processing: ref=TEST-1774172310, paid=500, fee=0, credit=500
+2026-03-22 10:38:30 - Transaction not found for: TEST-1774172310
+2026-03-22 10:38:30 - Webhook received
+2026-03-22 10:38:30 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172310","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172310","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:30 - Processing: ref=TEST-1774172310, paid=500, fee=0, credit=500
+2026-03-22 10:38:30 - Transaction not found for: TEST-1774172310
+2026-03-22 10:38:32 - Webhook received
+2026-03-22 10:38:32 - Data: {"test":true}
+2026-03-22 10:38:32 - Unhandled event: 
+2026-03-22 10:38:33 - Webhook received
+2026-03-22 10:38:33 - Data: {"test":true}
+2026-03-22 10:38:33 - Unhandled event: 
+2026-03-22 10:38:33 - Webhook received
+2026-03-22 10:38:33 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172313","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172313","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:33 - Processing: ref=TEST-1774172313, paid=500, fee=0, credit=500
+2026-03-22 10:38:33 - Transaction not found for: TEST-1774172313
+2026-03-22 10:38:33 - Webhook received
+2026-03-22 10:38:33 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172313","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172313","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:33 - Processing: ref=TEST-1774172313, paid=500, fee=0, credit=500
+2026-03-22 10:38:33 - Transaction not found for: TEST-1774172313
+2026-03-22 10:38:36 - Webhook received
+2026-03-22 10:38:36 - Data: {"test":true}
+2026-03-22 10:38:36 - Unhandled event: 
+2026-03-22 10:38:36 - Webhook received
+2026-03-22 10:38:36 - Data: {"test":true}
+2026-03-22 10:38:36 - Unhandled event: 
+2026-03-22 10:38:36 - Webhook received
+2026-03-22 10:38:36 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172316","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172316","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:36 - Processing: ref=TEST-1774172316, paid=500, fee=0, credit=500
+2026-03-22 10:38:36 - Transaction not found for: TEST-1774172316
+2026-03-22 10:38:36 - Webhook received
+2026-03-22 10:38:36 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172316","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172316","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:36 - Processing: ref=TEST-1774172316, paid=500, fee=0, credit=500
+2026-03-22 10:38:36 - Transaction not found for: TEST-1774172316
+2026-03-22 10:38:39 - Webhook received
+2026-03-22 10:38:39 - Data: {"test":true}
+2026-03-22 10:38:39 - Unhandled event: 
+2026-03-22 10:38:39 - Webhook received
+2026-03-22 10:38:39 - Data: {"test":true}
+2026-03-22 10:38:39 - Unhandled event: 
+2026-03-22 10:38:40 - Webhook received
+2026-03-22 10:38:40 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172319","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172319","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:40 - Processing: ref=TEST-1774172319, paid=500, fee=0, credit=500
+2026-03-22 10:38:40 - Transaction not found for: TEST-1774172319
+2026-03-22 10:38:40 - Webhook received
+2026-03-22 10:38:40 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172319","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172319","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:40 - Processing: ref=TEST-1774172319, paid=500, fee=0, credit=500
+2026-03-22 10:38:40 - Transaction not found for: TEST-1774172319
+2026-03-22 10:38:42 - Webhook received
+2026-03-22 10:38:42 - Data: {"test":true}
+2026-03-22 10:38:42 - Unhandled event: 
+2026-03-22 10:38:42 - Webhook received
+2026-03-22 10:38:42 - Data: {"test":true}
+2026-03-22 10:38:42 - Unhandled event: 
+2026-03-22 10:38:43 - Webhook received
+2026-03-22 10:38:43 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172322","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172322","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:43 - Processing: ref=TEST-1774172322, paid=500, fee=0, credit=500
+2026-03-22 10:38:43 - Transaction not found for: TEST-1774172322
+2026-03-22 10:38:43 - Webhook received
+2026-03-22 10:38:43 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172322","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172322","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:43 - Processing: ref=TEST-1774172322, paid=500, fee=0, credit=500
+2026-03-22 10:38:43 - Transaction not found for: TEST-1774172322
+2026-03-22 10:38:45 - Webhook received
+2026-03-22 10:38:45 - Data: {"test":true}
+2026-03-22 10:38:45 - Unhandled event: 
+2026-03-22 10:38:45 - Webhook received
+2026-03-22 10:38:45 - Data: {"test":true}
+2026-03-22 10:38:45 - Unhandled event: 
+2026-03-22 10:38:46 - Webhook received
+2026-03-22 10:38:46 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172325","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172325","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:46 - Processing: ref=TEST-1774172325, paid=500, fee=0, credit=500
+2026-03-22 10:38:46 - Transaction not found for: TEST-1774172325
+2026-03-22 10:38:46 - Webhook received
+2026-03-22 10:38:46 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172325","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172325","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:46 - Processing: ref=TEST-1774172325, paid=500, fee=0, credit=500
+2026-03-22 10:38:46 - Transaction not found for: TEST-1774172325
+2026-03-22 10:38:48 - Webhook received
+2026-03-22 10:38:48 - Data: {"test":true}
+2026-03-22 10:38:48 - Unhandled event: 
+2026-03-22 10:38:48 - Webhook received
+2026-03-22 10:38:48 - Data: {"test":true}
+2026-03-22 10:38:48 - Unhandled event: 
+2026-03-22 10:38:49 - Webhook received
+2026-03-22 10:38:49 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172328","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172328","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:49 - Processing: ref=TEST-1774172328, paid=500, fee=0, credit=500
+2026-03-22 10:38:49 - Transaction not found for: TEST-1774172328
+2026-03-22 10:38:49 - Webhook received
+2026-03-22 10:38:49 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172328","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172328","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:49 - Processing: ref=TEST-1774172328, paid=500, fee=0, credit=500
+2026-03-22 10:38:49 - Transaction not found for: TEST-1774172328
+2026-03-22 10:38:51 - Webhook received
+2026-03-22 10:38:51 - Data: {"test":true}
+2026-03-22 10:38:51 - Unhandled event: 
+2026-03-22 10:38:51 - Webhook received
+2026-03-22 10:38:51 - Data: {"test":true}
+2026-03-22 10:38:51 - Unhandled event: 
+2026-03-22 10:38:52 - Webhook received
+2026-03-22 10:38:52 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172331","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172331","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:52 - Processing: ref=TEST-1774172331, paid=500, fee=0, credit=500
+2026-03-22 10:38:52 - Transaction not found for: TEST-1774172331
+2026-03-22 10:38:52 - Webhook received
+2026-03-22 10:38:52 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172331","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172331","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:52 - Processing: ref=TEST-1774172331, paid=500, fee=0, credit=500
+2026-03-22 10:38:52 - Transaction not found for: TEST-1774172331
+2026-03-22 10:38:54 - Webhook received
+2026-03-22 10:38:54 - Data: {"test":true}
+2026-03-22 10:38:54 - Unhandled event: 
+2026-03-22 10:38:54 - Webhook received
+2026-03-22 10:38:54 - Data: {"test":true}
+2026-03-22 10:38:54 - Unhandled event: 
+2026-03-22 10:38:55 - Webhook received
+2026-03-22 10:38:55 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172334","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172334","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:55 - Processing: ref=TEST-1774172334, paid=500, fee=0, credit=500
+2026-03-22 10:38:55 - Transaction not found for: TEST-1774172334
+2026-03-22 10:38:55 - Webhook received
+2026-03-22 10:38:55 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172334","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172334","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:55 - Processing: ref=TEST-1774172334, paid=500, fee=0, credit=500
+2026-03-22 10:38:55 - Transaction not found for: TEST-1774172334
+2026-03-22 10:38:57 - Webhook received
+2026-03-22 10:38:57 - Data: {"test":true}
+2026-03-22 10:38:57 - Unhandled event: 
+2026-03-22 10:38:57 - Webhook received
+2026-03-22 10:38:57 - Data: {"test":true}
+2026-03-22 10:38:57 - Unhandled event: 
+2026-03-22 10:38:58 - Webhook received
+2026-03-22 10:38:58 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172337","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172337","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:58 - Processing: ref=TEST-1774172337, paid=500, fee=0, credit=500
+2026-03-22 10:38:58 - Transaction not found for: TEST-1774172337
+2026-03-22 10:38:58 - Webhook received
+2026-03-22 10:38:58 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172337","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172337","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:38:58 - Processing: ref=TEST-1774172337, paid=500, fee=0, credit=500
+2026-03-22 10:38:58 - Transaction not found for: TEST-1774172337
+2026-03-22 10:39:00 - Webhook received
+2026-03-22 10:39:00 - Data: {"test":true}
+2026-03-22 10:39:00 - Unhandled event: 
+2026-03-22 10:39:00 - Webhook received
+2026-03-22 10:39:00 - Data: {"test":true}
+2026-03-22 10:39:00 - Unhandled event: 
+2026-03-22 10:39:01 - Webhook received
+2026-03-22 10:39:01 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172341","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172341","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:01 - Processing: ref=TEST-1774172341, paid=500, fee=0, credit=500
+2026-03-22 10:39:01 - Transaction not found for: TEST-1774172341
+2026-03-22 10:39:01 - Webhook received
+2026-03-22 10:39:01 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172341","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172341","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:01 - Processing: ref=TEST-1774172341, paid=500, fee=0, credit=500
+2026-03-22 10:39:01 - Transaction not found for: TEST-1774172341
+2026-03-22 10:39:04 - Webhook received
+2026-03-22 10:39:04 - Data: {"test":true}
+2026-03-22 10:39:04 - Unhandled event: 
+2026-03-22 10:39:04 - Webhook received
+2026-03-22 10:39:04 - Data: {"test":true}
+2026-03-22 10:39:04 - Unhandled event: 
+2026-03-22 10:39:05 - Webhook received
+2026-03-22 10:39:05 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172344","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172344","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:05 - Processing: ref=TEST-1774172344, paid=500, fee=0, credit=500
+2026-03-22 10:39:05 - Transaction not found for: TEST-1774172344
+2026-03-22 10:39:05 - Webhook received
+2026-03-22 10:39:05 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172344","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172344","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:05 - Processing: ref=TEST-1774172344, paid=500, fee=0, credit=500
+2026-03-22 10:39:05 - Transaction not found for: TEST-1774172344
+2026-03-22 10:39:07 - Webhook received
+2026-03-22 10:39:07 - Data: {"test":true}
+2026-03-22 10:39:07 - Unhandled event: 
+2026-03-22 10:39:07 - Webhook received
+2026-03-22 10:39:07 - Data: {"test":true}
+2026-03-22 10:39:07 - Unhandled event: 
+2026-03-22 10:39:08 - Webhook received
+2026-03-22 10:39:08 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172347","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172347","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:08 - Processing: ref=TEST-1774172347, paid=500, fee=0, credit=500
+2026-03-22 10:39:08 - Transaction not found for: TEST-1774172347
+2026-03-22 10:39:08 - Webhook received
+2026-03-22 10:39:08 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172347","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172347","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:08 - Processing: ref=TEST-1774172347, paid=500, fee=0, credit=500
+2026-03-22 10:39:08 - Transaction not found for: TEST-1774172347
+2026-03-22 10:39:10 - Webhook received
+2026-03-22 10:39:10 - Data: {"test":true}
+2026-03-22 10:39:10 - Unhandled event: 
+2026-03-22 10:39:10 - Webhook received
+2026-03-22 10:39:10 - Data: {"test":true}
+2026-03-22 10:39:10 - Unhandled event: 
+2026-03-22 10:39:11 - Webhook received
+2026-03-22 10:39:11 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172350","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172350","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:11 - Processing: ref=TEST-1774172350, paid=500, fee=0, credit=500
+2026-03-22 10:39:11 - Transaction not found for: TEST-1774172350
+2026-03-22 10:39:11 - Webhook received
+2026-03-22 10:39:11 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172351","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172351","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:11 - Processing: ref=TEST-1774172351, paid=500, fee=0, credit=500
+2026-03-22 10:39:11 - Transaction not found for: TEST-1774172351
+2026-03-22 10:39:13 - Webhook received
+2026-03-22 10:39:13 - Data: {"test":true}
+2026-03-22 10:39:13 - Unhandled event: 
+2026-03-22 10:39:13 - Webhook received
+2026-03-22 10:39:13 - Data: {"test":true}
+2026-03-22 10:39:13 - Unhandled event: 
+2026-03-22 10:39:14 - Webhook received
+2026-03-22 10:39:14 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172353","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172353","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:14 - Processing: ref=TEST-1774172353, paid=500, fee=0, credit=500
+2026-03-22 10:39:14 - Transaction not found for: TEST-1774172353
+2026-03-22 10:39:14 - Webhook received
+2026-03-22 10:39:14 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172354","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172354","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:14 - Processing: ref=TEST-1774172354, paid=500, fee=0, credit=500
+2026-03-22 10:39:14 - Transaction not found for: TEST-1774172354
+2026-03-22 10:39:16 - Webhook received
+2026-03-22 10:39:16 - Data: {"test":true}
+2026-03-22 10:39:16 - Unhandled event: 
+2026-03-22 10:39:16 - Webhook received
+2026-03-22 10:39:16 - Data: {"test":true}
+2026-03-22 10:39:16 - Unhandled event: 
+2026-03-22 10:39:17 - Webhook received
+2026-03-22 10:39:17 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172357","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172357","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:17 - Processing: ref=TEST-1774172357, paid=500, fee=0, credit=500
+2026-03-22 10:39:17 - Transaction not found for: TEST-1774172357
+2026-03-22 10:39:17 - Webhook received
+2026-03-22 10:39:17 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172357","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172357","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:17 - Processing: ref=TEST-1774172357, paid=500, fee=0, credit=500
+2026-03-22 10:39:17 - Transaction not found for: TEST-1774172357
+2026-03-22 10:39:20 - Webhook received
+2026-03-22 10:39:20 - Data: {"test":true}
+2026-03-22 10:39:20 - Unhandled event: 
+2026-03-22 10:39:20 - Webhook received
+2026-03-22 10:39:20 - Data: {"test":true}
+2026-03-22 10:39:20 - Unhandled event: 
+2026-03-22 10:39:20 - Webhook received
+2026-03-22 10:39:20 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172360","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172360","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:20 - Processing: ref=TEST-1774172360, paid=500, fee=0, credit=500
+2026-03-22 10:39:20 - Transaction not found for: TEST-1774172360
+2026-03-22 10:39:20 - Webhook received
+2026-03-22 10:39:20 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172360","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172360","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:20 - Processing: ref=TEST-1774172360, paid=500, fee=0, credit=500
+2026-03-22 10:39:20 - Transaction not found for: TEST-1774172360
+2026-03-22 10:39:23 - Webhook received
+2026-03-22 10:39:23 - Data: {"test":true}
+2026-03-22 10:39:23 - Unhandled event: 
+2026-03-22 10:39:23 - Webhook received
+2026-03-22 10:39:23 - Data: {"test":true}
+2026-03-22 10:39:23 - Unhandled event: 
+2026-03-22 10:39:23 - Webhook received
+2026-03-22 10:39:23 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172363","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172363","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:23 - Processing: ref=TEST-1774172363, paid=500, fee=0, credit=500
+2026-03-22 10:39:23 - Transaction not found for: TEST-1774172363
+2026-03-22 10:39:23 - Webhook received
+2026-03-22 10:39:23 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172363","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172363","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:23 - Processing: ref=TEST-1774172363, paid=500, fee=0, credit=500
+2026-03-22 10:39:23 - Transaction not found for: TEST-1774172363
+2026-03-22 10:39:25 - Webhook received
+2026-03-22 10:39:25 - Data: {"test":true}
+2026-03-22 10:39:25 - Unhandled event: 
+2026-03-22 10:39:25 - Webhook received
+2026-03-22 10:39:25 - Data: {"test":true}
+2026-03-22 10:39:26 - Unhandled event: 
+2026-03-22 10:39:26 - Webhook received
+2026-03-22 10:39:26 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172366","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172366","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:26 - Processing: ref=TEST-1774172366, paid=500, fee=0, credit=500
+2026-03-22 10:39:26 - Transaction not found for: TEST-1774172366
+2026-03-22 10:39:26 - Webhook received
+2026-03-22 10:39:26 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172366","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172366","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:26 - Processing: ref=TEST-1774172366, paid=500, fee=0, credit=500
+2026-03-22 10:39:26 - Transaction not found for: TEST-1774172366
+2026-03-22 10:39:29 - Webhook received
+2026-03-22 10:39:29 - Data: {"test":true}
+2026-03-22 10:39:29 - Unhandled event: 
+2026-03-22 10:39:29 - Webhook received
+2026-03-22 10:39:29 - Data: {"test":true}
+2026-03-22 10:39:29 - Unhandled event: 
+2026-03-22 10:39:29 - Webhook received
+2026-03-22 10:39:29 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172369","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172369","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:29 - Processing: ref=TEST-1774172369, paid=500, fee=0, credit=500
+2026-03-22 10:39:29 - Transaction not found for: TEST-1774172369
+2026-03-22 10:39:29 - Webhook received
+2026-03-22 10:39:29 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172369","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172369","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:29 - Processing: ref=TEST-1774172369, paid=500, fee=0, credit=500
+2026-03-22 10:39:29 - Transaction not found for: TEST-1774172369
+2026-03-22 10:39:32 - Webhook received
+2026-03-22 10:39:32 - Data: {"test":true}
+2026-03-22 10:39:32 - Unhandled event: 
+2026-03-22 10:39:32 - Webhook received
+2026-03-22 10:39:32 - Data: {"test":true}
+2026-03-22 10:39:32 - Unhandled event: 
+2026-03-22 10:39:33 - Webhook received
+2026-03-22 10:39:33 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172373","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172373","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:33 - Processing: ref=TEST-1774172373, paid=500, fee=0, credit=500
+2026-03-22 10:39:33 - Transaction not found for: TEST-1774172373
+2026-03-22 10:39:33 - Webhook received
+2026-03-22 10:39:33 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172373","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172373","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:33 - Processing: ref=TEST-1774172373, paid=500, fee=0, credit=500
+2026-03-22 10:39:33 - Transaction not found for: TEST-1774172373
+2026-03-22 10:39:36 - Webhook received
+2026-03-22 10:39:36 - Data: {"test":true}
+2026-03-22 10:39:36 - Unhandled event: 
+2026-03-22 10:39:36 - Webhook received
+2026-03-22 10:39:36 - Data: {"test":true}
+2026-03-22 10:39:36 - Unhandled event: 
+2026-03-22 10:39:37 - Webhook received
+2026-03-22 10:39:37 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172376","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172376","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:37 - Processing: ref=TEST-1774172376, paid=500, fee=0, credit=500
+2026-03-22 10:39:37 - Transaction not found for: TEST-1774172376
+2026-03-22 10:39:37 - Webhook received
+2026-03-22 10:39:37 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172376","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172376","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:37 - Processing: ref=TEST-1774172376, paid=500, fee=0, credit=500
+2026-03-22 10:39:37 - Transaction not found for: TEST-1774172376
+2026-03-22 10:39:40 - Webhook received
+2026-03-22 10:39:40 - Data: {"test":true}
+2026-03-22 10:39:40 - Unhandled event: 
+2026-03-22 10:39:40 - Webhook received
+2026-03-22 10:39:40 - Data: {"test":true}
+2026-03-22 10:39:40 - Unhandled event: 
+2026-03-22 10:39:40 - Webhook received
+2026-03-22 10:39:40 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172380","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172380","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:40 - Processing: ref=TEST-1774172380, paid=500, fee=0, credit=500
+2026-03-22 10:39:40 - Transaction not found for: TEST-1774172380
+2026-03-22 10:39:40 - Webhook received
+2026-03-22 10:39:40 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172380","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172380","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:40 - Processing: ref=TEST-1774172380, paid=500, fee=0, credit=500
+2026-03-22 10:39:40 - Transaction not found for: TEST-1774172380
+2026-03-22 10:39:42 - Webhook received
+2026-03-22 10:39:42 - Data: {"test":true}
+2026-03-22 10:39:43 - Unhandled event: 
+2026-03-22 10:39:43 - Webhook received
+2026-03-22 10:39:43 - Data: {"test":true}
+2026-03-22 10:39:43 - Unhandled event: 
+2026-03-22 10:39:44 - Webhook received
+2026-03-22 10:39:44 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172383","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172383","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:44 - Processing: ref=TEST-1774172383, paid=500, fee=0, credit=500
+2026-03-22 10:39:44 - Transaction not found for: TEST-1774172383
+2026-03-22 10:39:44 - Webhook received
+2026-03-22 10:39:44 - Data: {"event":"charge.success","data":{"reference":"TEST-1774172383","amount":500,"currency":"NGN","payment_reference":"KPY-MANUAL-1774172383","status":"success","message":"Manual test from system test page","fee":0}}
+2026-03-22 10:39:44 - Processing: ref=TEST-1774172383, paid=500, fee=0, credit=500
+2026-03-22 10:39:44 - Transaction not found for: TEST-1774172383
+2026-03-22 10:43:51 - Webhook received
+2026-03-22 10:43:51 - Data: {"event":"charge.success","data":{"reference":"SPD-69BFB9AFD035F-20260322104311","payment_reference":"SPD-69BFB9AFD035F-20260322104311","currency":"NGN","amount":500,"fee":53.75,"payment_method":"bank_transfer","status":"success"}}
+2026-03-22 10:43:51 - Processing: ref=SPD-69BFB9AFD035F-20260322104311, paid=500, fee=53.75, credit=500
+2026-03-22 10:43:51 - ✅ Payment processed! User: 9a84c531-dffe-203a-6251-31764611114e, Amount: 500
+2026-03-22 11:01:58 - Webhook received
+2026-03-22 11:01:58 - Data: {"event":"charge.success","data":{"reference":"SPD-69BFBDEF894E0-20260322110119","payment_reference":"SPD-69BFBDEF894E0-20260322110119","currency":"NGN","amount":600,"fee":53.75,"payment_method":"bank_transfer","status":"success"}}
+2026-03-22 11:01:58 - Processing: ref=SPD-69BFBDEF894E0-20260322110119, paid=600, fee=53.75, credit=600
+2026-03-22 11:01:58 - ✅ Payment processed! User: 9a84c531-dffe-203a-6251-31764611114e, Amount: 600
+2026-03-22 11:09:34 - Webhook received
+2026-03-22 11:09:34 - Data: {"event":"charge.success","data":{"reference":"SPD-69BFBFB8E0FDA-20260322110856","payment_reference":"SPD-69BFBFB8E0FDA-20260322110856","currency":"NGN","amount":1000,"fee":53.75,"payment_method":"bank_transfer","status":"success"}}
+2026-03-22 11:09:34 - Processing: ref=SPD-69BFBFB8E0FDA-20260322110856, paid=1000, fee=53.75, credit=1000
+2026-03-22 11:09:34 - ✅ Payment processed! User: 9a84c531-dffe-203a-6251-31764611114e, Amount: 1000
+2026-03-22 11:23:42 - Webhook received
+2026-03-22 11:23:42 - Data: {"event":"charge.success","data":{"reference":"SPD-69BFC30383796-20260322112259","payment_reference":"SPD-69BFC30383796-20260322112259","currency":"NGN","amount":5000,"fee":53.75,"payment_method":"bank_transfer","status":"success"}}
+2026-03-22 11:23:42 - Processing: ref=SPD-69BFC30383796-20260322112259, paid=5000, fee=53.75, credit=5000
+2026-03-22 11:23:42 - ✅ Payment processed! User: 9a84c531-dffe-203a-6251-31764611114e, Amount: 5000
+2026-03-22 11:27:16 - Webhook received
+2026-03-22 11:27:16 - Data: {"event":"charge.success","data":{"reference":"SPD-69BFC3DFB0C20-20260322112639","payment_reference":"SPD-69BFC3DFB0C20-20260322112639","currency":"NGN","amount":10000,"fee":53.75,"payment_method":"bank_transfer","status":"success"}}
+2026-03-22 11:27:16 - Processing: ref=SPD-69BFC3DFB0C20-20260322112639, paid=10000, fee=53.75, credit=10000
+2026-03-22 11:27:16 - ✅ Payment processed! User: 9a84c531-dffe-203a-6251-31764611114e, Amount: 10000
+2026-03-22 11:56:16 - Webhook received
+2026-03-22 11:56:16 - Data: {"event":"charge.success","data":{"reference":"SPD-69BFCAAA91C6A-20260322115538","payment_reference":"SPD-69BFCAAA91C6A-20260322115538","currency":"NGN","amount":20000,"fee":53.75,"payment_method":"bank_transfer","status":"success"}}
+2026-03-22 11:56:16 - Processing: ref=SPD-69BFCAAA91C6A-20260322115538, paid=20000, fee=53.75, credit=20000
+2026-03-22 11:56:16 - ✅ Payment processed! User: 9a84c531-dffe-203a-6251-31764611114e, Amount: 20000
+2026-03-22 12:28:19 - Webhook received
+2026-03-22 12:28:19 - Data: {"event":"charge.success","data":{"reference":"SPD-69BFD22A028BB-20260322122738","payment_reference":"SPD-69BFD22A028BB-20260322122738","currency":"NGN","amount":3000,"fee":53.75,"payment_method":"bank_transfer","status":"success"}}
+2026-03-22 12:28:19 - Processing: ref=SPD-69BFD22A028BB-20260322122738, paid=3000, fee=53.75, credit=3000
+2026-03-22 12:28:19 - ✅ Payment processed! User: 9a84c531-dffe-203a-6251-31764611114e, Amount: 3000
+2026-03-22 14:43:20 - Webhook received
+2026-03-22 14:43:20 - Data: {"event":"charge.success","data":{"reference":"SPD-69BFF1D259E50-20260322144242","payment_reference":"SPD-69BFF1D259E50-20260322144242","currency":"NGN","amount":2000,"fee":53.75,"payment_method":"bank_transfer","status":"success"}}
+2026-03-22 14:43:20 - Processing: ref=SPD-69BFF1D259E50-20260322144242, paid=2000, fee=53.75, credit=2000
+2026-03-22 14:43:20 - ✅ Payment processed! User: 9a84c531-dffe-203a-6251-31764611114e, Amount: 2000
+2026-03-22 14:56:39 - Webhook received
+2026-03-22 14:56:39 - Data: {"event":"charge.success","data":{"reference":"SPD-69BFF4F1552DF-20260322145601","payment_reference":"SPD-69BFF4F1552DF-20260322145601","currency":"NGN","amount":3000,"fee":53.75,"payment_method":"bank_transfer","status":"success"}}
+2026-03-22 14:56:39 - Processing: ref=SPD-69BFF4F1552DF-20260322145601, paid=3000, fee=53.75, credit=3000
+2026-03-22 14:56:39 - ✅ Payment processed! User: 9a84c531-dffe-203a-6251-31764611114e, Amount: 3000
+2026-03-22 15:18:36 - Webhook received
+2026-03-22 15:18:36 - Data: {"event":"charge.success","data":{"reference":"SPD-69BFFA11580FB-20260322151753","payment_reference":"SPD-69BFFA11580FB-20260322151753","currency":"NGN","amount":100000,"fee":53.75,"payment_method":"bank_transfer","status":"success"}}
+2026-03-22 15:18:36 - Processing: ref=SPD-69BFFA11580FB-20260322151753, paid=100000, fee=53.75, credit=100000
+2026-03-22 15:18:36 - ✅ Payment processed! User: 9a84c531-dffe-203a-6251-31764611114e, Amount: 100000

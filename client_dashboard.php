@@ -2,6 +2,45 @@
 session_start();
 require_once 'SERVER/API/db-connect.php';
 
+// ========== KORAPAY PAYMENT STATUS CHECK ==========
+// Check for payment status from redirect (after KoraPay payment)
+if (isset($_GET['payment_status']) && $_GET['payment_status'] === 'completed') {
+    $reference = $_GET['reference'] ?? '';
+    
+    if (!empty($reference) && isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
+        
+        // Verify payment status from database
+        $verifyQuery = "SELECT status, amount FROM payment_gateway_transactions 
+                        WHERE transaction_reference = ? AND user_id = ?";
+        $verifyStmt = $conn->prepare($verifyQuery);
+        $verifyStmt->bind_param("ss", $reference, $user_id);
+        $verifyStmt->execute();
+        $verifyResult = $verifyStmt->get_result();
+        $transaction = $verifyResult->fetch_assoc();
+        
+        if ($transaction && $transaction['status'] === 'success') {
+            // Get updated wallet balance after deposit
+            $balanceQuery = "SELECT 
+                COALESCE(SUM(CASE WHEN transaction_type IN ('deposit', 'bonus', 'referral','ride_refund') THEN amount ELSE 0 END), 0) - 
+                COALESCE(SUM(CASE WHEN transaction_type IN ('withdrawal', 'ride_payment') THEN amount ELSE 0 END), 0) as balance 
+                FROM wallet_transactions WHERE user_id = ? AND status = 'completed'";
+            $balanceStmt = $conn->prepare($balanceQuery);
+            $balanceStmt->bind_param("s", $user_id);
+            $balanceStmt->execute();
+            $newBalance = $balanceStmt->get_result()->fetch_assoc()['balance'] ?? 0;
+            
+            // Store success message to display after page loads
+            $paymentSuccess = true;
+            $paymentAmount = $transaction['amount'];
+            $newBalanceAmount = $newBalance;
+        } elseif ($transaction && $transaction['status'] === 'failed') {
+            $paymentFailed = true;
+        }
+    }
+}
+// ========== END KORAPAY PAYMENT STATUS CHECK ==========
+
 // Check if user is logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: form.php");
@@ -404,7 +443,7 @@ if (!$userSettings) {
                 <!-- Desktop Navigation -->
                 <?php require_once './components/desktop-nav.php'; ?>
 
-                <!-- User Profile - FIXED: Removed tier badge from username -->
+                <!-- User Profile -->
                 <div class="user-profile cursor-pointer hover:bg-gray-100 transition" onclick="window.location.href='client_profile.php'">
                     <div class="profile-avatar">
                         <?php echo strtoupper(substr($user_name, 0, 1)); ?>
@@ -596,6 +635,49 @@ if (!$userSettings) {
         </div>
     </div>
 
+    <script>
+        // ========== KORAPAY PAYMENT SUCCESS NOTIFICATION ==========
+        <?php if (isset($paymentSuccess) && $paymentSuccess): ?>
+        Swal.fire({
+            icon: 'success',
+            title: 'Deposit Successful! 💰',
+            html: `
+                <div style="text-align: center;">
+                    <p style="font-size: 18px; margin-bottom: 10px;">Your wallet has been credited with</p>
+                    <p style="font-size: 28px; font-weight: bold; color: #ff5e00;">₦<?php echo number_format($paymentAmount, 2); ?></p>
+                    <p style="margin-top: 10px;">New balance: <strong>₦<?php echo number_format($newBalanceAmount, 2); ?></strong></p>
+                </div>
+            `,
+            confirmButtonColor: '#ff5e00',
+            confirmButtonText: 'Great!',
+            timer: 5000,
+            timerProgressBar: true
+        });
+        <?php elseif (isset($paymentFailed) && $paymentFailed): ?>
+        Swal.fire({
+            icon: 'error',
+            title: 'Deposit Failed',
+            text: 'Your payment could not be processed. Please try again.',
+            confirmButtonColor: '#ff5e00'
+        });
+        <?php endif; ?>
+        // ========== END KORAPAY PAYMENT NOTIFICATION ==========
+
+        // Show coming soon message
+        function showComingSoon(feature) {
+            Swal.fire({
+                icon: 'info',
+                title: 'Coming Soon!',
+                text: feature + ' feature will be available in the next update.',
+                confirmButtonColor: '#ff5e00'
+            });
+        }
+
+        // Check notifications
+        function checkNotifications() {
+            window.location.href = 'notifications.php';
+        }
+    </script>
     <script src="./JS/client_dashboard.js"></script>
 </body>
 
